@@ -1,0 +1,108 @@
+Add proper browser and mobile app icons for this web app.
+
+Do not rebuild the app.
+Do not change the app’s core UX.
+Do not change the card logic, data, routing, or state management.
+Only add favicon, iOS home screen icon support, and basic web app metadata.
+
+Goal:
+1. Add a favicon that is visible in desktop browser tabs.
+2. Add an app icon that appears when the site is opened in iOS Safari and saved to the iPhone/iPad home screen as a web app.
+3. Make the app feel polished when installed or saved to a home screen.
+
+Icon design direction:
+Create a simple premium icon for “Say It Anyway.”
+It should match the app’s design language: intimate, modern, warm, refined, slightly editorial.
+Avoid anything cheesy, childish, corporate, or overly sexual.
+Use a simple mark based on one or more of:
+- speech bubble
+- stacked cards
+- quotation mark
+- subtle heart/dialogue motif
+- initials “SIA”
+
+Use colors that fit the app:
+- warm off-white
+- soft charcoal
+- muted clay
+- deep burgundy or black cherry accent
+- optional rose-gold accent
+
+Create the following icon assets in the public directory:
+
+- /favicon.ico
+- /favicon.svg
+- /apple-touch-icon.png
+- /icon-192.png
+- /icon-512.png
+- /maskable-icon-512.png
+
+Requirements:
+- favicon.ico should work in normal desktop browser tabs.
+- favicon.svg should be linked for modern browsers.
+- apple-touch-icon.png should be 180x180 and should be used by iOS when users save the app to their home screen.
+- icon-192.png should be 192x192.
+- icon-512.png should be 512x512.
+- maskable-icon-512.png should have safe padding so it works well as a PWA maskable icon.
+- Icons should not have tiny unreadable text.
+- The mark should be legible at small sizes.
+
+Update the HTML head metadata:
+Add or verify these tags in the correct root HTML file:
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Say It Anyway" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#1f1a17" />
+
+Add or update the web app manifest:
+Create or update /manifest.webmanifest with:
+
+{
+  "name": "Say It Anyway",
+  "short_name": "Say It Anyway",
+  "description": "A better way to skip the small talk.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f0e8",
+  "theme_color": "#1f1a17",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/maskable-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
+
+Add this manifest link to the HTML head:
+
+<link rel="manifest" href="/manifest.webmanifest" />
+
+Also add:
+<meta name="mobile-web-app-capable" content="yes" />
+
+Testing:
+After implementation, tell me:
+1. Which files you created or updated.
+2. Where the HTML head metadata lives.
+3. Whether the favicon should now appear on desktop tabs.
+4. Whether the Apple touch icon should now appear when saving to iOS home screen.
+5. Any manual testing steps I should do on iPhone Safari.
+
+Do not add unrelated PWA features like offline caching or service workers unless they already exist. This task is only icons and metadata.
