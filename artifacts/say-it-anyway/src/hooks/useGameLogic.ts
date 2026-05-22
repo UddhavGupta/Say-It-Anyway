@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useEffect, useRef, useCallback, useMemo } from "react";
 import { 
   useGetRoom, 
   useUpdateRoomState, 
@@ -6,10 +6,8 @@ import {
   getGetRoomQueryKey
 } from "@workspace/api-client-react";
 import { cards, Card } from "@/data/cardData";
-import { useQueryClient } from "@tanstack/react-query";
 
 export function useGameLogic(roomCode: string) {
-  const queryClient = useQueryClient();
   const { data: room, isLoading } = useGetRoom(roomCode, {
     query: {
       refetchInterval: 2000,
@@ -18,8 +16,8 @@ export function useGameLogic(roomCode: string) {
     }
   });
 
-  const updateRoomState = useUpdateRoomState();
-  const recordHistory = useRecordCardHistory();
+  const { mutate: updateRoom } = useUpdateRoomState();
+  const { mutate: recordCard } = useRecordCardHistory();
 
   const activeMode = room?.activeMode || "classic";
   const activeLevel = room?.activeLevel || 1;
@@ -28,28 +26,31 @@ export function useGameLogic(roomCode: string) {
   const shuffledDeckOrder = room?.shuffledDeckOrder || [];
   const currentCardId = room?.currentCardId || null;
 
-  // Filter cards based on state locally
+  // Filter cards based on current mode/level/filter
   const filteredDeck = useMemo(() => {
     return cards.filter(card => {
-      if (card.is_hidden || card.is_adult) return false;
       if (card.mode !== activeMode) return false;
-      
+
+      // For classic and long_game, exclude hidden and adult cards
+      if (activeMode !== "after_dark" && (card.is_hidden || card.is_adult)) return false;
+
       if (activeMode === "classic") {
         return card.level === activeLevel;
       }
-      
+
       if (activeMode === "long_game") {
-        if (activeRelationshipFilter !== "all" && card.relationship_context !== activeRelationshipFilter && card.relationship_context !== "all") {
+        if (
+          activeRelationshipFilter !== "all" &&
+          card.relationship_context !== activeRelationshipFilter &&
+          card.relationship_context !== "all"
+        ) {
           return false;
         }
         return true;
       }
-      
-      if (activeMode === "after_dark") {
-        return true;
-      }
-      
-      return false;
+
+      // after_dark — include all cards in the mode
+      return true;
     });
   }, [activeMode, activeLevel, activeRelationshipFilter]);
 
@@ -62,19 +63,32 @@ export function useGameLogic(roomCode: string) {
     return ids;
   }, []);
 
+  // Use a ref so the effect below never re-runs just because the mutation
+  // object changed reference (React Query mutates isPending/isSuccess on each call).
+  const updateRoomRef = useRef(updateRoom);
+  useEffect(() => { updateRoomRef.current = updateRoom; });
+
+  const filteredDeckRef = useRef(filteredDeck);
+  useEffect(() => { filteredDeckRef.current = filteredDeck; });
+
   const initializedRef = useRef<string>("");
 
   useEffect(() => {
     if (!room || !roomCode) return;
     const stateKey = `${activeMode}-${activeLevel}-${activeRelationshipFilter}`;
-    
-    // If the room has no shuffled deck for this state or we just changed mode/level
-    if (shuffledDeckOrder.length === 0 && initializedRef.current !== stateKey && filteredDeck.length > 0) {
+
+    // Only shuffle once per distinct (mode, level, filter) combination, and only
+    // when the server still has an empty deck (e.g. right after a mode change).
+    if (
+      shuffledDeckOrder.length === 0 &&
+      initializedRef.current !== stateKey &&
+      filteredDeckRef.current.length > 0
+    ) {
       initializedRef.current = stateKey;
-      const newOrder = shuffleDeck(filteredDeck);
+      const newOrder = shuffleDeck(filteredDeckRef.current);
       const newCardId = newOrder[0] || null;
-      
-      updateRoomState.mutate({
+
+      updateRoomRef.current({
         code: roomCode,
         data: {
           shuffledDeckOrder: newOrder,
@@ -83,7 +97,9 @@ export function useGameLogic(roomCode: string) {
         }
       });
     }
-  }, [room, roomCode, activeMode, activeLevel, activeRelationshipFilter, shuffledDeckOrder.length, filteredDeck, shuffleDeck, updateRoomState]);
+  // shuffleDeck is stable (useCallback []). Only re-run when server state changes.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [room, roomCode, activeMode, activeLevel, activeRelationshipFilter, shuffledDeckOrder.length, shuffleDeck]);
 
   const currentCard = useMemo(() => {
     if (!currentCardId) return null;
@@ -91,11 +107,12 @@ export function useGameLogic(roomCode: string) {
   }, [currentCardId]);
 
   const changeMode = (mode: string) => {
-    updateRoomState.mutate({
+    initializedRef.current = "";
+    updateRoomRef.current({
       code: roomCode,
       data: {
         activeMode: mode,
-        shuffledDeckOrder: [], // clear to force reshuffle
+        shuffledDeckOrder: [],
         currentCardIndex: 0,
         currentCardId: null
       }
@@ -103,7 +120,8 @@ export function useGameLogic(roomCode: string) {
   };
 
   const changeLevel = (level: number) => {
-    updateRoomState.mutate({
+    initializedRef.current = "";
+    updateRoomRef.current({
       code: roomCode,
       data: {
         activeLevel: level,
@@ -115,7 +133,8 @@ export function useGameLogic(roomCode: string) {
   };
 
   const changeRelationshipFilter = (filter: string) => {
-    updateRoomState.mutate({
+    initializedRef.current = "";
+    updateRoomRef.current({
       code: roomCode,
       data: {
         activeRelationshipFilter: filter,
@@ -130,8 +149,8 @@ export function useGameLogic(roomCode: string) {
     if (currentCardIndex + 1 >= shuffledDeckOrder.length) return;
     const nextIndex = currentCardIndex + 1;
     const nextId = shuffledDeckOrder[nextIndex];
-    
-    updateRoomState.mutate({
+
+    updateRoomRef.current({
       code: roomCode,
       data: {
         currentCardIndex: nextIndex,
@@ -140,7 +159,7 @@ export function useGameLogic(roomCode: string) {
     });
 
     if (nextId) {
-      recordHistory.mutate({
+      recordCard({
         code: roomCode,
         data: {
           cardId: nextId,
@@ -156,8 +175,8 @@ export function useGameLogic(roomCode: string) {
     if (currentCardIndex <= 0) return;
     const prevIndex = currentCardIndex - 1;
     const prevId = shuffledDeckOrder[prevIndex];
-    
-    updateRoomState.mutate({
+
+    updateRoomRef.current({
       code: roomCode,
       data: {
         currentCardIndex: prevIndex,
@@ -167,8 +186,9 @@ export function useGameLogic(roomCode: string) {
   };
 
   const reshuffle = () => {
-    const newOrder = shuffleDeck(filteredDeck);
-    updateRoomState.mutate({
+    initializedRef.current = "";
+    const newOrder = shuffleDeck(filteredDeckRef.current);
+    updateRoomRef.current({
       code: roomCode,
       data: {
         shuffledDeckOrder: newOrder,
@@ -177,6 +197,21 @@ export function useGameLogic(roomCode: string) {
       }
     });
   };
+
+  const setAfterDark = useCallback((unlocked: boolean) => {
+    updateRoomRef.current({ code: roomCode, data: { afterDarkUnlocked: unlocked } });
+  }, [roomCode]);
+
+  const resetRoom = useCallback(() => {
+    const firstId = shuffledDeckOrder[0] ?? null;
+    updateRoomRef.current({
+      code: roomCode,
+      data: { currentCardIndex: 0, currentCardId: firstId }
+    });
+  // shuffledDeckOrder identity changes with every poll; use the length as a
+  // stable proxy — the first element won't change unless the deck is reshuffled.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomCode, shuffledDeckOrder[0]]);
 
   return {
     room,
@@ -194,6 +229,7 @@ export function useGameLogic(roomCode: string) {
     nextCard,
     prevCard,
     reshuffle,
-    updateRoomState
+    setAfterDark,
+    resetRoom,
   };
 }

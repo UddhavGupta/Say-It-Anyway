@@ -46,7 +46,8 @@ export default function Room() {
     nextCard,
     prevCard,
     reshuffle,
-    updateRoomState
+    setAfterDark,
+    resetRoom,
   } = useGameLogic(code || "");
 
   const { players } = usePlayerSync(code || "", playerId);
@@ -76,27 +77,18 @@ export default function Room() {
   const isEnd = totalCards > 0 && currentCardIndex >= totalCards;
 
   const handleUnlockAfterDark = () => {
-    updateRoomState.mutate({
-      code: code!,
-      data: { afterDarkUnlocked: true }
-    });
+    setAfterDark(true);
   };
 
   const handleLockAfterDark = () => {
-    updateRoomState.mutate({
-      code: code!,
-      data: { afterDarkUnlocked: false }
-    });
+    setAfterDark(false);
     if (activeMode === "after_dark") {
       changeMode("classic");
     }
   };
 
   const handleResetRoom = () => {
-    updateRoomState.mutate({
-      code: code!,
-      data: { currentCardIndex: 0 }
-    });
+    resetRoom();
   };
 
   const handlePromptUnlock = () => {
@@ -117,7 +109,7 @@ export default function Room() {
             className="p-2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Settings"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinelinejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
               <circle cx="12" cy="12" r="3"/>
             </svg>
