@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useJoinRoom, useCreateRoom } from "@workspace/api-client-react";
 import { Button } from "@/components/ui/button";
@@ -16,10 +16,6 @@ export default function Home() {
   const joinRoom = useJoinRoom();
   const createRoom = useCreateRoom();
 
-  useEffect(() => {
-    const savedName = localStorage.getItem(PLAYER_NAME_KEY);
-    if (savedName) setName(savedName);
-  }, []);
 
   const handleJoin = async (code: string) => {
     if (!name.trim()) {
