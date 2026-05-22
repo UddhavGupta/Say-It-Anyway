@@ -10,6 +10,7 @@ import PlayerList from "@/components/PlayerList";
 import SettingsModal from "@/components/SettingsModal";
 import AfterDarkUnlockModal from "@/components/AfterDarkUnlockModal";
 import HowToPlayModal from "@/components/HowToPlayModal";
+import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
 const FILTER_LABELS: Record<string, string> = {
@@ -207,6 +208,8 @@ export default function Room() {
         <div className="mt-8">
           <PlayerList players={players || []} localPlayerId={playerId} />
         </div>
+
+        <Footer />
       </main>
 
       {/* ── Modals ── */}

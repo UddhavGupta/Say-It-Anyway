@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useJoinRoom, useCreateRoom } from "@workspace/api-client-react";
 import { PLAYER_NAME_KEY, PLAYER_ID_KEY, FIXED_ROOM_CODE } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -135,11 +136,7 @@ export default function Home() {
 
       </div>
 
-      {/* Footer */}
-      <footer className="mt-10 text-center space-y-1 text-muted-foreground/40 text-xs px-6 max-w-sm z-10">
-        <p>Made for better conversations.</p>
-        <p>Personal project under testing. Not for commercial use or public distribution without prior permission.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
