@@ -14,21 +14,23 @@ export default function ModeSelector({ activeMode, afterDarkUnlocked, onModeChan
   ];
 
   return (
-    <div className="flex items-center justify-center space-x-1 p-1 bg-secondary/50 rounded-full border border-border/50 max-w-fit mx-auto backdrop-blur-sm">
-      {modes.map(mode => (
-        <button
-          key={mode.id}
-          onClick={() => onModeChange(mode.id)}
-          className={cn(
-            "px-4 py-2 text-sm sm:text-base rounded-full font-medium transition-all duration-300",
-            activeMode === mode.id 
-              ? "bg-primary text-primary-foreground shadow-sm" 
-              : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-          )}
-        >
-          {mode.label}
-        </button>
-      ))}
+    <div className="flex items-center justify-center overflow-x-auto scrollbar-none">
+      <div className="flex items-center space-x-1 p-1 bg-secondary/60 rounded-full border border-border/50 backdrop-blur-sm shrink-0">
+        {modes.map(mode => (
+          <button
+            key={mode.id}
+            onClick={() => onModeChange(mode.id)}
+            className={cn(
+              "whitespace-nowrap px-4 py-1.5 text-sm sm:text-base rounded-full font-medium transition-all duration-300",
+              activeMode === mode.id
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+            )}
+          >
+            {mode.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

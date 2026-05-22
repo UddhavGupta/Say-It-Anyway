@@ -1,0 +1,199 @@
+Polish this V1 into a more premium, more playable conversation game experience.
+
+Do not rebuild the app from scratch.
+Do not change the card dataset.
+Do not remove existing modes, filters, After Dark unlock, or card counts.
+Do not add authentication, payments, or unnecessary backend complexity.
+
+Improve the current product in the following ways:
+
+1. Landing page improvements
+
+The current landing page is clean but too sparse. Make it more emotionally compelling and more self-explanatory.
+
+Keep:
+- App name: Say It Anyway
+- Tagline: “A better way to skip the small talk.”
+
+Add a short subheading under the tagline:
+“For dates, friends, couples, and the conversations that usually take three drinks to start.”
+
+Improve the join/create room card:
+- Make it feel more premium and less default-form-like.
+- Improve spacing, button styling, hover states, and focus states.
+- Make “Create New Room” feel like the primary action.
+- Make “Join shared room: SAYIT” feel secondary/subtle.
+- Add small helper text:
+  “Create a room, share the code, and everyone plays from the same deck.”
+
+Footer:
+Keep the existing language:
+“Made for better conversations.”
+“Personal project under testing. Not for commercial use or public distribution without prior permission.”
+
+2. Room screen improvements
+
+The room screen should feel more like a game people can actually play together.
+
+Add a compact top bar:
+- Left: Say It Anyway
+- Center or right: Room code with copy button
+- Right: settings icon
+
+Room code:
+- Make the room code easier to copy.
+- Add a small “Copied” confirmation when clicked.
+- On mobile, room code should remain visible but compact.
+
+Add a small “How to play” drawer or modal:
+Copy:
+“Take turns reading the card out loud. Anyone can answer, pass, or ask the question back. Skip freely. The point is not to perform honesty. The point is to make the next honest thing easier to say.”
+
+Include button:
+“Got it”
+
+3. Card experience improvements
+
+The current card is elegant but a little too static. Add more game feel.
+
+Add a card reveal interaction:
+- When a new card loads, show it with a subtle fade/slide animation.
+- Optional: make the card appear face-down for a brief moment and then reveal on click/tap.
+- Keep this tasteful, not gimmicky.
+
+Improve card layout:
+- Reduce excessive empty space on desktop.
+- Keep the card large and premium, but make the content feel more intentionally placed.
+- Increase the max width of long prompts slightly so line breaks feel natural.
+- Keep typography elegant and readable.
+- Keep tags subtle.
+
+Add better action controls under the card:
+- Previous
+- Next
+- Shuffle
+- Skip
+- Reset
+
+Current arrows alone are too minimal. Use a clean action bar below the card.
+On mobile, controls should be thumb-friendly and not cramped.
+
+Add keyboard shortcuts for desktop:
+- Right arrow: next card
+- Left arrow: previous card
+- S: shuffle
+- Escape: close modal
+
+4. Mode and theme improvements
+
+Keep these modes:
+- Classic
+- The Long Game
+- After Dark, hidden until unlocked
+
+Classic theme:
+- Warm off-white, charcoal, muted clay
+- Calm, elegant, approachable
+
+The Long Game theme:
+- Make it slightly more mature and intimate than Classic
+- Use deep navy, parchment, muted gold, or soft espresso accents
+- It should feel like a long dinner conversation
+
+After Dark theme:
+- Keep the current dark theme, but make it more premium
+- Deep charcoal, black cherry, burgundy, muted rose-gold accents
+- Sexy and tasteful, not tacky
+
+When switching modes, the background, accent color, and card styling should change subtly.
+Do not make the app feel like three unrelated products. It should feel like one brand with three moods.
+
+5. The Long Game improvements
+
+The Long Game filter labels should be properly capitalized:
+- All Questions
+- Couples
+- Close Friends
+- Dating
+
+Add a one-line description under The Long Game when selected:
+“For people who already know the biography and want the operating manual.”
+
+6. After Dark improvements
+
+The unlock modal is good. Improve it slightly.
+
+Modal title:
+“Unlock After Dark?”
+
+Copy:
+“After Dark includes spicy prompts intended for consenting adults. Play respectfully. Anyone can skip any card, anytime.”
+
+Add another line:
+“No pressure. No explanations needed.”
+
+Buttons:
+- Cancel
+- Unlock After Dark
+
+Once unlocked:
+- Keep the small line:
+“Skip freely. No explanations needed.”
+- Add a “Lock After Dark” option inside settings.
+
+7. Settings modal improvements
+
+Settings should include:
+- How to Play
+- Copy Room Code
+- Reset Room
+- Lock After Dark, only if After Dark is unlocked
+- Developer stats/card counts, collapsed by default
+- About / testing disclaimer
+
+Developer stats should show:
+- Total cards: 850
+- Classic: 450
+- Read the Room: 150
+- Beneath the Surface: 150
+- Say It Anyway: 150
+- The Long Game: 200
+- After Dark: 200
+
+8. Mobile responsiveness
+
+Make the mobile version feel excellent.
+
+Mobile requirements:
+- Landing page should fit comfortably without awkward scrolling.
+- Inputs and buttons should be large enough to tap.
+- Room screen should prioritize the card.
+- Top bar should not feel crowded.
+- Mode selector should be horizontally scrollable if needed.
+- Action buttons should be easy to tap.
+- Card text should remain readable and well-spaced.
+
+9. Empty and edge states
+
+Add polished states for:
+- No cards available
+- End of deck
+- Invalid room code
+- Missing display name
+- After Dark locked
+- Copied room code
+
+10. Do not overbuild
+
+Do not add:
+- User accounts
+- Profiles
+- Payments
+- Social sharing
+- Analytics
+- AI-generated cards
+- Service workers/offline mode
+- Large backend changes
+
+Goal:
+Make the app feel like a beautiful, shareable V1 that someone could open on their phone at dinner, on a date, or with close friends and immediately understand how to play.

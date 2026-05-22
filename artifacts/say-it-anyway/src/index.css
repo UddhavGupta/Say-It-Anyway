@@ -42,7 +42,7 @@
 
   --font-sans: var(--app-font-sans);
   --font-serif: var(--app-font-serif);
-  
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -50,31 +50,31 @@
 }
 
 :root {
-  /* Classic / Default Mode: Warm, editorial, candlelit */
-  --background: 40 33% 97%; /* Warm off-white/sand */
-  --foreground: 20 14% 15%; /* Soft charcoal */
+  /* ── Classic / Default: Warm, editorial, candlelit ── */
+  --background: 40 33% 97%;
+  --foreground: 20 14% 15%;
   --border: 30 15% 85%;
   --input: 30 15% 85%;
   --ring: 20 14% 15%;
 
-  --card: 45 40% 95%; /* Slightly lighter sand */
+  --card: 45 38% 96%;
   --card-foreground: 20 14% 15%;
-  --card-border: 30 15% 85%;
+  --card-border: 30 15% 86%;
 
-  --popover: 45 40% 95%;
+  --popover: 45 38% 96%;
   --popover-foreground: 20 14% 15%;
-  --popover-border: 30 15% 85%;
+  --popover-border: 30 15% 86%;
 
   --primary: 20 14% 15%;
   --primary-foreground: 40 33% 97%;
-  
-  --secondary: 30 15% 90%;
+
+  --secondary: 30 15% 91%;
   --secondary-foreground: 20 14% 15%;
 
-  --muted: 30 15% 90%;
-  --muted-foreground: 20 10% 40%;
+  --muted: 30 15% 91%;
+  --muted-foreground: 20 10% 42%;
 
-  --accent: 30 15% 90%;
+  --accent: 30 15% 91%;
   --accent-foreground: 20 14% 15%;
 
   --destructive: 0 60% 50%;
@@ -85,62 +85,70 @@
   --radius: 0.75rem;
 }
 
-/* After Dark Mode */
+/* ── After Dark: Deep charcoal · black cherry · muted rose-gold ── */
 .theme-after-dark {
-  --background: 0 0% 10%; /* Deep charcoal/almost black */
-  --foreground: 40 33% 94%; /* Warm sand for text */
-  --border: 0 0% 20%;
-  --input: 0 0% 20%;
-  --ring: 40 33% 94%;
+  --background: 0 0% 7%;
+  --foreground: 35 18% 90%;
+  --border: 340 8% 18%;
+  --input: 340 8% 18%;
+  --ring: 340 35% 48%;
 
-  --card: 0 0% 13%; 
-  --card-foreground: 40 33% 94%;
-  --card-border: 0 0% 20%;
+  --card: 340 6% 10%;
+  --card-foreground: 35 18% 90%;
+  --card-border: 340 10% 20%;
 
-  --popover: 0 0% 13%;
-  --popover-foreground: 40 33% 94%;
-  --popover-border: 0 0% 20%;
+  --popover: 340 6% 10%;
+  --popover-foreground: 35 18% 90%;
+  --popover-border: 340 10% 20%;
 
-  --primary: 40 33% 94%;
-  --primary-foreground: 0 0% 10%;
+  /* Muted burgundy/black-cherry — active mode tab, primary buttons */
+  --primary: 340 35% 42%;
+  --primary-foreground: 35 18% 92%;
 
-  --secondary: 0 0% 20%;
-  --secondary-foreground: 40 33% 94%;
+  --secondary: 340 8% 16%;
+  --secondary-foreground: 35 18% 90%;
 
-  --muted: 0 0% 18%;
-  --muted-foreground: 40 20% 70%;
+  --muted: 340 8% 16%;
+  --muted-foreground: 30 12% 62%;
 
-  --accent: 0 0% 20%;
-  --accent-foreground: 40 33% 94%;
+  --accent: 340 8% 16%;
+  --accent-foreground: 35 18% 90%;
+
+  --destructive: 0 60% 40%;
+  --destructive-foreground: 35 18% 90%;
 }
 
-/* The Long Game Mode */
+/* ── The Long Game: Parchment · deep navy · muted gold ── */
 .theme-long-game {
-  --background: 24 20% 93%; /* Muted clay/parchment */
-  --foreground: 220 30% 20%; /* Deep navy/charcoal */
-  --border: 24 15% 80%;
-  --input: 24 15% 80%;
-  --ring: 220 30% 20%;
+  --background: 30 28% 92%;
+  --foreground: 222 38% 16%;
+  --border: 26 18% 80%;
+  --input: 26 18% 80%;
+  --ring: 222 38% 16%;
 
-  --card: 24 25% 95%;
-  --card-foreground: 220 30% 20%;
-  --card-border: 24 15% 80%;
+  --card: 34 32% 96%;
+  --card-foreground: 222 38% 16%;
+  --card-border: 26 18% 82%;
 
-  --popover: 24 25% 95%;
-  --popover-foreground: 220 30% 20%;
-  --popover-border: 24 15% 80%;
+  --popover: 34 32% 96%;
+  --popover-foreground: 222 38% 16%;
+  --popover-border: 26 18% 82%;
 
-  --primary: 220 30% 20%;
-  --primary-foreground: 24 20% 93%;
+  /* Deep navy — active mode tab, primary buttons */
+  --primary: 222 38% 16%;
+  --primary-foreground: 30 28% 92%;
 
-  --secondary: 24 15% 85%;
-  --secondary-foreground: 220 30% 20%;
+  --secondary: 26 18% 85%;
+  --secondary-foreground: 222 38% 16%;
 
-  --muted: 24 15% 85%;
-  --muted-foreground: 220 15% 45%;
+  --muted: 26 18% 85%;
+  --muted-foreground: 222 18% 42%;
 
-  --accent: 24 15% 85%;
-  --accent-foreground: 220 30% 20%;
+  --accent: 26 18% 85%;
+  --accent-foreground: 222 38% 16%;
+
+  --destructive: 0 55% 45%;
+  --destructive-foreground: 30 28% 92%;
 }
 
 @layer base {
@@ -148,7 +156,8 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground transition-colors duration-700;
+    @apply font-sans antialiased bg-background text-foreground;
+    transition: background-color 0.6s ease, color 0.4s ease;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif tracking-tight;

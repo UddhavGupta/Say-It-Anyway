@@ -1,0 +1,79 @@
+Add a polished global footer to all screens.
+
+Do not rebuild the app.
+Do not change card logic, mode logic, data, state management, routing, or the main UX.
+Only add a reusable footer component and place it consistently across the app.
+
+Footer content:
+Left side:
+© Uddhav Gupta 2026
+
+Right side:
+Three icon links:
+1. Website
+   URL: https://guptau.com
+2. LinkedIn
+   URL: https://www.linkedin.com/in/guptauddhav/
+3. GitHub
+   URL: https://github.com/uddhavgupta
+
+Requirements:
+- Create a reusable Footer component if one does not already exist.
+- The footer should appear on all major screens:
+  - Home screen
+  - Room/game screen
+  - About/settings screens if applicable
+- Make the footer visually subtle and premium.
+- It should match the app’s current design language: warm, modern, refined, intimate, not corporate.
+- Use small, tasteful icons for Website, LinkedIn, and GitHub.
+- If lucide-react is installed, use appropriate icons:
+  - Globe or ExternalLink for Website
+  - Linkedin for LinkedIn if available, otherwise use a clean text/icon fallback
+  - Github for GitHub
+- Links should open in a new tab using target="_blank".
+- Add rel="noopener noreferrer" to all external links.
+- Add accessible aria-labels:
+  - “Visit Uddhav Gupta’s website”
+  - “Visit Uddhav Gupta on LinkedIn”
+  - “Visit Uddhav Gupta on GitHub”
+
+Layout:
+Desktop:
+- Footer should be a thin horizontal row.
+- Left aligned copyright.
+- Right aligned social/profile icons.
+- Use spacing, opacity, and hover states.
+- Footer should not distract from the main card.
+
+Mobile:
+- Footer should remain clean and not crowd the game.
+- Use a compact layout.
+- If needed, stack copyright above the icons.
+- Keep tap targets large enough.
+- Do not let the footer overlap cards or bottom controls.
+
+Styling:
+- Use muted text color.
+- Add subtle hover states for the icons.
+- No loud borders.
+- No heavy background.
+- No oversized branding.
+- Footer should feel like a quiet creator credit, not a marketing banner.
+
+Also preserve the existing personal project disclaimer:
+“Personal project under testing. Not for commercialization or public distribution without prior permission.”
+
+If that disclaimer is already in the footer, incorporate it cleanly so the footer does not feel crowded. For example:
+Left side:
+© Uddhav Gupta 2026
+
+Center or secondary line:
+Personal project under testing. Not for commercialization or public distribution without prior permission.
+
+Right side:
+Website, LinkedIn, GitHub icons.
+
+After implementation, summarize:
+1. Which files were created or changed.
+2. Where the footer component is used.
+3. How the footer behaves on mobile versus desktop.

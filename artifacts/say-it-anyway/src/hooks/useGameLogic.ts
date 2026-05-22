@@ -185,6 +185,16 @@ export function useGameLogic(roomCode: string) {
     });
   };
 
+  const skipCard = () => {
+    if (currentCardIndex + 1 >= shuffledDeckOrder.length) return;
+    const nextIndex = currentCardIndex + 1;
+    const nextId = shuffledDeckOrder[nextIndex];
+    updateRoomRef.current({
+      code: roomCode,
+      data: { currentCardIndex: nextIndex, currentCardId: nextId }
+    });
+  };
+
   const reshuffle = () => {
     initializedRef.current = "";
     const newOrder = shuffleDeck(filteredDeckRef.current);
@@ -228,6 +238,7 @@ export function useGameLogic(roomCode: string) {
     changeRelationshipFilter,
     nextCard,
     prevCard,
+    skipCard,
     reshuffle,
     setAfterDark,
     resetRoom,
