@@ -1,0 +1,278 @@
+Build a polished responsive web app for an original digital conversation card game called “Say It Anyway.” This is a personal project, currently under testing, and is not meant to be commercialized, publicly distributed, copied, or disseminated without prior permission from the project owner. Include this language clearly in the app footer and in an About or Info modal: “Personal project under testing. Not for commercial use or public distribution without prior permission.”
+
+Important positioning:
+This must be an original product. Do not copy branding, trade dress, visual style, card wording, names, or proprietary content from any existing conversation card game. The app can use the general idea of digital prompt cards, but the content, interaction design, and branding should be original.
+
+Core concept:
+Users join a shared digital prompt-card session. Multiple people should be able to access and play the same session at the same time from laptops, phones, and tablets. Everyone in the same room sees the same active mode, card, level or filter, deck order, and room state in real time.
+
+Use the attached CSV file as the source of truth for all card content. The CSV schema is:
+id,mode,level,level_name,prompt,tags,intensity,relationship_context,is_hidden,is_adult
+
+The CSV contains 850 cards:
+- Classic: 450 cards
+  - Read the Room: 150 cards
+  - Beneath the Surface: 150 cards
+  - Say It Anyway: 150 cards
+- The Long Game: 200 cards
+- After Dark: 200 cards
+
+Do not generate replacement placeholder cards if the CSV is present. Preserve all IDs, prompts, modes, levels, tags, relationship_context values, is_hidden values, and is_adult values exactly. Treat tags as pipe-separated values and convert them into arrays in the app.
+
+Product architecture:
+The app has three game modes:
+
+1. Classic
+Description: The default general-purpose conversation game. Good for acquaintances, friends, dates, and small groups.
+Includes three levels:
+- Read the Room: low-pressure, playful, observant, funny, easy-entry prompts.
+- Beneath the Surface: deeper personal stories, identity, ambition, family, friendship, values, patterns, and self-awareness.
+- Say It Anyway: vulnerable, direct, emotionally honest, reflective prompts.
+
+2. The Long Game
+Description: Advanced prompts for people who already have real context with each other. This is for long-term couples, close friends, and people who have been on enough dates that basic get-to-know-you questions feel boring.
+Includes 200 cards.
+This mode is not adult by default. It should be mature and relationship-oriented, but still safe for non-sexual conversations.
+The Long Game should have optional filters:
+- All
+- Couples
+- Close Friends
+- Dating
+
+3. After Dark
+Description: Hidden adults-only spicy mode.
+Includes 200 cards.
+This mode should be hidden by default and should not appear in the visible mode selector until unlocked.
+After Dark content is for consenting adults. It should remain tasteful, modern, and emotionally intelligent. Do not make it crude, pornographic, coercive, exploitative, or graphic.
+
+Room/session logic:
+Support two ways to join:
+
+1. Fixed Code Shared Room
+There should be a fixed default room code, for example “SAYIT”. If a user enters this fixed code, they join the same canonical shared room. Anyone using this fixed code should see the same synced game state.
+
+2. Create New Session
+Users can click “Create Room” to generate a unique 6-character alphanumeric room code. Exclude confusing characters like O, 0, I, and 1. Show the generated room code clearly with a “Copy Code” button. Other players can join by entering that code.
+
+Before joining a room:
+- Ask the user for a display name.
+- Store display name locally so they do not have to re-enter it every time.
+- Do not require login for V1.
+- Do not require payment for V1.
+
+Real-time backend:
+Use Supabase if available. Create the app with a Supabase-ready architecture.
+
+Suggested Supabase tables:
+
+rooms:
+- id
+- code
+- created_at
+- is_fixed_room
+- active_mode
+- active_level
+- active_relationship_filter
+- current_card_id
+- current_card_index
+- shuffled_deck_order
+- after_dark_unlocked boolean default false
+- created_by_player_name
+- updated_at
+
+players:
+- id
+- room_id
+- display_name
+- joined_at
+- last_seen_at
+
+room_state:
+- room_id
+- active_mode
+- active_level
+- active_relationship_filter
+- current_card_id
+- current_card_index
+- shuffled_deck_order
+- after_dark_unlocked boolean default false
+- updated_at
+- updated_by_player_name
+
+card_history:
+- id
+- room_id
+- card_id
+- mode
+- level
+- shown_at
+- advanced_by_player_name
+
+Use Supabase Realtime subscriptions so that when one person taps Next Card, Previous Card, Shuffle, Reset, changes mode, changes level, or unlocks After Dark, everyone in the same room immediately sees the same state.
+
+If Supabase is not configured, build a high-quality local mock version first, but structure the code so Supabase can be connected later. Add comments clearly showing where Supabase calls and realtime subscriptions belong.
+
+Card data layer:
+For V1, import the CSV into a local TypeScript data file called cardData.ts. Use cardData.ts to power the game. The code should also be structured so the same CSV can later be migrated into a Supabase cards table.
+
+Card filtering:
+- Classic mode filters by level.
+- The Long Game filters by relationship_context: all, couples, close_friends, dating.
+- After Dark only appears after after_dark_unlocked is true.
+- Hidden and adult cards should never appear in Classic or The Long Game.
+
+Deck behavior:
+- Cards should be shuffled within each selected mode and level/filter per room.
+- The shuffled order should persist for that room.
+- If a player refreshes or rejoins, they should see the current shared card.
+- If the deck reaches the end, show “You’ve reached the end of this deck” and offer to reshuffle.
+- Include Next Card, Previous Card, Shuffle Deck, Reset Room, Skip Card, and Copy Room Code controls.
+- Skip Card should advance the card without judgment. For After Dark, show a subtle reminder: “Skip freely. No explanations needed.”
+
+After Dark unlock behavior:
+After Dark should be intentionally hidden.
+Allow unlocking through a subtle Settings control and/or by typing the unlock phrase “AFTERDARK”.
+When a user attempts to unlock After Dark, show an adults-only confirmation modal:
+“After Dark includes spicy prompts intended for consenting adults. Play respectfully. Anyone can skip any card, anytime.”
+Buttons:
+- Unlock After Dark
+- Cancel
+
+Once unlocked:
+- Add After Dark to the mode selector for everyone in that room.
+- Store after_dark_unlocked per room.
+- Add a “Lock After Dark” option in room settings.
+- If the room is reset, After Dark can stay unlocked unless the user explicitly chooses Lock After Dark.
+
+User flow:
+Home screen:
+- App name: Say It Anyway
+- Tagline: “A better way to skip the small talk.”
+- Display name input if no name is saved.
+- Room code input: “Enter room code”
+- Button: Join Room
+- Button: Create New Room
+- Small quick action: Join fixed room: SAYIT
+- Personal project disclaimer in footer.
+
+Room screen:
+- Show room code with Copy Code button.
+- Show connected players list.
+- Show active mode selector.
+- In Classic mode, show level selector:
+  - Read the Room
+  - Beneath the Surface
+  - Say It Anyway
+- In The Long Game mode, show relationship filter:
+  - All
+  - Couples
+  - Close Friends
+  - Dating
+- In After Dark mode, show the adult reminder and Skip Card language.
+- Show one large flashcard in the center.
+- Flashcard should display level or mode name, prompt text, and subtle tag pills.
+- Show card progress, for example 12 / 150.
+- Include buttons: Previous Card, Next Card, Skip Card, Shuffle Deck, Reset Room, Copy Room Code.
+
+Design language:
+The app should feel premium, intimate, aesthetic, and highly usable. Not childish, not corporate, not gimmicky. It should feel like something someone would actually open at a dinner party, on a date, with close friends, or on a couch with a partner.
+
+Use a warm editorial design system:
+- Elegant typography with a tasteful display font for headings and a clean sans-serif for UI/body.
+- Large centered cards with generous spacing.
+- Soft rounded corners.
+- Subtle shadows and glass or paper-like surfaces.
+- Smooth card transitions: fade, slight lift, or gentle flip.
+- Clear hierarchy.
+- Thumb-friendly mobile controls.
+- Excellent contrast and readability.
+- No clutter.
+- Avoid generic SaaS dashboard aesthetics.
+
+Theme directions by mode:
+
+Classic theme:
+- Warm off-white, sand, soft charcoal, muted clay or ink accents.
+- Friendly, inviting, easy to use.
+- Should feel safe for friends, family, classmates, and mixed groups.
+
+The Long Game theme:
+- Slightly deeper and more intimate.
+- Use warm neutrals, soft olive, deep navy, muted burgundy, or parchment tones.
+- Should feel mature, thoughtful, and relationship-oriented.
+- This can have a more refined couples/friendship edition feel.
+
+After Dark theme:
+- Distinct but still tasteful.
+- Deep charcoal, espresso, oxblood, aubergine, or low-lit lounge tones.
+- Subtle glow or warmer accent.
+- Should feel spicy, adult, and elegant, not trashy or loud.
+
+Responsive requirements:
+The app must work beautifully on:
+- iPhone-sized mobile screens
+- Android mobile screens
+- iPad/tablet screens
+- laptop and desktop browsers
+
+Mobile layout:
+- Card takes most of the screen.
+- Buttons are large and thumb-friendly.
+- Room code, mode controls, and player list collapse cleanly.
+- No tiny controls.
+- Avoid cramped text.
+
+Desktop/tablet layout:
+- Center the card prominently.
+- Use a tasteful sidebar or top bar for players and room controls.
+- Preserve a focused, intimate feel.
+
+Accessibility and usability:
+- Use readable font sizes.
+- Use strong enough contrast.
+- Make controls keyboard accessible.
+- Add clear loading, empty, and error states.
+- Avoid relying only on color to communicate mode or status.
+
+Technical stack:
+Use:
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase-ready architecture
+
+Suggested components:
+- App
+- HomeScreen
+- JoinRoomForm
+- CreateRoomButton
+- PlayerNameModal
+- RoomScreen
+- ModeSelector
+- LevelSelector
+- RelationshipFilter
+- PromptCard
+- RoomControls
+- PlayerList
+- CopyCodeButton
+- CardProgress
+- AfterDarkUnlockModal
+- SettingsModal
+- DisclaimerFooter
+- useRoomState hook
+- cardData.ts generated from CSV
+
+Error and empty states:
+- Invalid code
+- Room not found
+- Missing display name
+- Connection issue
+- Loading room
+- No cards left in deck
+- Supabase not configured yet
+
+Footer:
+“Made for better conversations.”
+Also include: “Personal project under testing. Not for commercial use or public distribution without prior permission.”
+
+Build this as a real V1 that I can share with a small test group tonight.

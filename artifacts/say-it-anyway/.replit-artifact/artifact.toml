@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Say It Anyway"
+version = "1.0.0"
+id = "artifacts/say-it-anyway"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25416
+
+[services.development]
+run = "pnpm --filter @workspace/say-it-anyway run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/say-it-anyway", "run", "build" ]
+publicDir = "artifacts/say-it-anyway/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25416"
+BASE_PATH = "/"

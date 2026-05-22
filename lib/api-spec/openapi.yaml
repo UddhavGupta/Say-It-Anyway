@@ -3,13 +3,19 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Say It Anyway API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: rooms
+    description: Room operations
+  - name: players
+    description: Player operations
+  - name: history
+    description: Card history operations
 paths:
   /healthz:
     get:
@@ -24,6 +30,199 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /rooms:
+    post:
+      operationId: createRoom
+      tags: [rooms]
+      summary: Create a new room
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoomInput"
+      responses:
+        "201":
+          description: Room created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+
+  /rooms/{code}:
+    get:
+      operationId: getRoom
+      tags: [rooms]
+      summary: Get room by code
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Room found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        "404":
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /rooms/{code}/state:
+    patch:
+      operationId: updateRoomState
+      tags: [rooms]
+      summary: Update room state
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoomStateUpdate"
+      responses:
+        "200":
+          description: Room state updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        "404":
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /rooms/{code}/players:
+    get:
+      operationId: getPlayers
+      tags: [players]
+      summary: List active players in a room
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Players list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Player"
+        "404":
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      operationId: joinRoom
+      tags: [players]
+      summary: Join or update presence in a room
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerInput"
+      responses:
+        "200":
+          description: Joined room
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomJoinResult"
+        "404":
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /rooms/{code}/players/{playerId}/heartbeat:
+    post:
+      operationId: playerHeartbeat
+      tags: [players]
+      summary: Update player last-seen timestamp
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Heartbeat recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /rooms/{code}/history:
+    post:
+      operationId: recordCardHistory
+      tags: [history]
+      summary: Record a card shown in the room
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardHistoryInput"
+      responses:
+        "201":
+          description: Card history recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardHistory"
+        "404":
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +233,174 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    Room:
+      type: object
+      required:
+        - id
+        - code
+        - createdAt
+        - isFixedRoom
+        - activeMode
+        - activeLevel
+        - activeRelationshipFilter
+        - currentCardId
+        - currentCardIndex
+        - shuffledDeckOrder
+        - afterDarkUnlocked
+        - createdByPlayerName
+        - updatedAt
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        createdAt:
+          type: string
+        isFixedRoom:
+          type: boolean
+        activeMode:
+          type: string
+        activeLevel:
+          type: ["integer", "null"]
+        activeRelationshipFilter:
+          type: string
+        currentCardId:
+          type: ["string", "null"]
+        currentCardIndex:
+          type: integer
+        shuffledDeckOrder:
+          type: array
+          items:
+            type: string
+        afterDarkUnlocked:
+          type: boolean
+        createdByPlayerName:
+          type: string
+        updatedAt:
+          type: string
+
+    RoomInput:
+      type: object
+      required:
+        - createdByPlayerName
+      properties:
+        code:
+          type: string
+          description: Custom code (for fixed SAYIT room). If omitted, one is generated.
+        createdByPlayerName:
+          type: string
+        isFixedRoom:
+          type: boolean
+
+    RoomStateUpdate:
+      type: object
+      properties:
+        activeMode:
+          type: string
+        activeLevel:
+          type: ["integer", "null"]
+        activeRelationshipFilter:
+          type: string
+        currentCardId:
+          type: ["string", "null"]
+        currentCardIndex:
+          type: integer
+        shuffledDeckOrder:
+          type: array
+          items:
+            type: string
+        afterDarkUnlocked:
+          type: boolean
+        updatedByPlayerName:
+          type: string
+
+    Player:
+      type: object
+      required:
+        - id
+        - roomId
+        - displayName
+        - joinedAt
+        - lastSeenAt
+      properties:
+        id:
+          type: string
+        roomId:
+          type: string
+        displayName:
+          type: string
+        joinedAt:
+          type: string
+        lastSeenAt:
+          type: string
+
+    PlayerInput:
+      type: object
+      required:
+        - displayName
+      properties:
+        displayName:
+          type: string
+        playerId:
+          type: string
+          description: If provided, update existing player; otherwise create new
+
+    RoomJoinResult:
+      type: object
+      required:
+        - room
+        - player
+      properties:
+        room:
+          $ref: "#/components/schemas/Room"
+        player:
+          $ref: "#/components/schemas/Player"
+
+    CardHistoryInput:
+      type: object
+      required:
+        - cardId
+        - mode
+        - advancedByPlayerName
+      properties:
+        cardId:
+          type: string
+        mode:
+          type: string
+        level:
+          type: ["integer", "null"]
+        advancedByPlayerName:
+          type: string
+
+    CardHistory:
+      type: object
+      required:
+        - id
+        - roomId
+        - cardId
+        - mode
+        - shownAt
+        - advancedByPlayerName
+      properties:
+        id:
+          type: string
+        roomId:
+          type: string
+        cardId:
+          type: string
+        mode:
+          type: string
+        level:
+          type: ["integer", "null"]
+        shownAt:
+          type: string
+        advancedByPlayerName:
+          type: string

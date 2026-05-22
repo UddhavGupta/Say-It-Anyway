@@ -1,0 +1,851 @@
+id,mode,level,level_name,prompt,tags,intensity,relationship_context,is_hidden,is_adult
+classic_l1_001,classic,1,Read the Room,What is the first thing you noticed about the person to your left?,playful|low_stakes|perception,1,all,false,false
+classic_l1_002,classic,1,Read the Room,What is a tiny thing that instantly makes someone more likable?,playful|low_stakes,1,all,false,false
+classic_l1_003,classic,1,Read the Room,What is your most harmless red flag?,playful|low_stakes|red flags,1,all,false,false
+classic_l1_004,classic,1,Read the Room,What is a compliment you secretly love receiving?,playful|low_stakes|love|compliments,1,all,false,false
+classic_l1_005,classic,1,Read the Room,What is a hill you will die on that does not matter at all?,playful|low_stakes,1,all,false,false
+classic_l1_006,classic,1,Read the Room,What is something you always notice in a room before everyone else does?,playful|low_stakes|perception,1,all,false,false
+classic_l1_007,classic,1,Read the Room,What is the most accurate first impression people usually have of you?,playful|low_stakes|first impressions,1,all,false,false
+classic_l1_008,classic,1,Read the Room,What is the least accurate first impression people usually have of you?,playful|low_stakes|first impressions,1,all,false,false
+classic_l1_009,classic,1,Read the Room,What is a song that immediately changes your mood?,playful|low_stakes|change,1,all,false,false
+classic_l1_010,classic,1,Read the Room,What is a restaurant order that tells you a lot about someone?,playful|low_stakes,1,all,false,false
+classic_l1_011,classic,1,Read the Room,What is something you are weirdly good at?,playful|low_stakes,1,all,false,false
+classic_l1_012,classic,1,Read the Room,What is something you are weirdly bad at?,playful|low_stakes,1,all,false,false
+classic_l1_013,classic,1,Read the Room,What is your most irrational pet peeve?,playful|low_stakes,1,all,false,false
+classic_l1_014,classic,1,Read the Room,What is a small luxury you will defend forever?,playful|low_stakes,1,all,false,false
+classic_l1_015,classic,1,Read the Room,What is a phrase you say too often?,playful|low_stakes,1,all,false,false
+classic_l1_016,classic,1,Read the Room,What is the most charming habit a person can have?,playful|low_stakes,1,all,false,false
+classic_l1_017,classic,1,Read the Room,What is a green flag you notice quickly?,playful|low_stakes|perception|green flags,1,all,false,false
+classic_l1_018,classic,1,Read the Room,What is a social situation you secretly enjoy more than you admit?,playful|low_stakes,1,all,false,false
+classic_l1_019,classic,1,Read the Room,What is a social situation you secretly dread?,playful|low_stakes,1,all,false,false
+classic_l1_020,classic,1,Read the Room,What is something that makes a house feel like a home?,playful|low_stakes,1,all,false,false
+classic_l1_021,classic,1,Read the Room,What is a movie you would happily rewatch anytime?,playful|low_stakes,1,all,false,false
+classic_l1_022,classic,1,Read the Room,"What is a book, show, or movie you wish more people understood the way you do?",playful|low_stakes,1,all,false,false
+classic_l1_023,classic,1,Read the Room,What is a food opinion that might get you judged?,playful|low_stakes,1,all,false,false
+classic_l1_024,classic,1,Read the Room,What is something you loved as a kid that still holds up?,playful|low_stakes|love,1,all,false,false
+classic_l1_025,classic,1,Read the Room,What is something you used to hate that you now appreciate?,playful|low_stakes,1,all,false,false
+classic_l1_026,classic,1,Read the Room,What is your most specific comfort activity?,playful|low_stakes|comfort,1,all,false,false
+classic_l1_027,classic,1,Read the Room,What is a habit that makes someone seem grounded?,playful|low_stakes,1,all,false,false
+classic_l1_028,classic,1,Read the Room,What is your ideal low-pressure Saturday?,playful|low_stakes,1,all,false,false
+classic_l1_029,classic,1,Read the Room,What is something that can make a bad day 20 percent better?,playful|low_stakes,1,all,false,false
+classic_l1_030,classic,1,Read the Room,What is a smell that immediately takes you somewhere?,playful|low_stakes,1,all,false,false
+classic_l1_031,classic,1,Read the Room,What is the most underrated form of kindness?,playful|low_stakes,1,all,false,false
+classic_l1_032,classic,1,Read the Room,What is something people overcomplicate?,playful|low_stakes,1,all,false,false
+classic_l1_033,classic,1,Read the Room,What is something people underappreciate?,playful|low_stakes,1,all,false,false
+classic_l1_034,classic,1,Read the Room,What is a small detail that can ruin an otherwise good vibe?,playful|low_stakes,1,all,false,false
+classic_l1_035,classic,1,Read the Room,What is a small detail that can save an otherwise average vibe?,playful|low_stakes,1,all,false,false
+classic_l1_036,classic,1,Read the Room,What is the best kind of person to sit next to at dinner?,playful|low_stakes,1,all,false,false
+classic_l1_037,classic,1,Read the Room,What is the worst kind of person to sit next to at dinner?,playful|low_stakes,1,all,false,false
+classic_l1_038,classic,1,Read the Room,What is a topic you could talk about for too long?,playful|low_stakes,1,all,false,false
+classic_l1_039,classic,1,Read the Room,What is a topic you pretend to understand better than you do?,playful|low_stakes,1,all,false,false
+classic_l1_040,classic,1,Read the Room,What is something you would put in a museum of your life so far?,playful|low_stakes,1,all,false,false
+classic_l1_041,classic,1,Read the Room,What is a childhood snack you would bring back immediately?,playful|low_stakes,1,all,false,false
+classic_l1_042,classic,1,Read the Room,What is the most you-coded object you own?,playful|low_stakes,1,all,false,false
+classic_l1_043,classic,1,Read the Room,What is a place where you feel unusually comfortable?,playful|low_stakes|comfort,1,all,false,false
+classic_l1_044,classic,1,Read the Room,What is a place where you feel slightly out of character?,playful|low_stakes,1,all,false,false
+classic_l1_045,classic,1,Read the Room,What is something you like that surprises people?,playful|low_stakes,1,all,false,false
+classic_l1_046,classic,1,Read the Room,"What is something people assume you like, but you really do not?",playful|low_stakes,1,all,false,false
+classic_l1_047,classic,1,Read the Room,What is a personality trait you admire instantly?,playful|low_stakes,1,all,false,false
+classic_l1_048,classic,1,Read the Room,What is a skill everyone should learn at least a little bit?,playful|low_stakes,1,all,false,false
+classic_l1_049,classic,1,Read the Room,What is your most reliable tell when you are having a good time?,playful|low_stakes,1,all,false,false
+classic_l1_050,classic,1,Read the Room,What is your most reliable tell when you are ready to leave?,playful|low_stakes,1,all,false,false
+classic_l1_051,classic,1,Read the Room,What is the best compliment someone can give your taste?,playful|low_stakes|compliments,1,all,false,false
+classic_l1_052,classic,1,Read the Room,What is something that makes someone seem instantly fun?,playful|low_stakes,1,all,false,false
+classic_l1_053,classic,1,Read the Room,What is something that makes someone seem instantly exhausting?,playful|low_stakes,1,all,false,false
+classic_l1_054,classic,1,Read the Room,What is a simple thing that makes you feel put together?,playful|low_stakes,1,all,false,false
+classic_l1_055,classic,1,Read the Room,What is a tiny decision that can change your whole day?,playful|low_stakes|change,1,all,false,false
+classic_l1_056,classic,1,Read the Room,What is the most unnecessary thing you care about deeply?,playful|low_stakes,1,all,false,false
+classic_l1_057,classic,1,Read the Room,What is a harmless thing you are a snob about?,playful|low_stakes,1,all,false,false
+classic_l1_058,classic,1,Read the Room,What is a very specific kind of weather you love?,playful|low_stakes|love,1,all,false,false
+classic_l1_059,classic,1,Read the Room,What is a weirdly perfect time of day?,playful|low_stakes,1,all,false,false
+classic_l1_060,classic,1,Read the Room,What is something that should be more socially acceptable?,playful|low_stakes,1,all,false,false
+classic_l1_061,classic,1,Read the Room,What is something that should be less socially acceptable?,playful|low_stakes,1,all,false,false
+classic_l1_062,classic,1,Read the Room,What is a harmless lie people tell themselves?,playful|low_stakes,1,all,false,false
+classic_l1_063,classic,1,Read the Room,"What is a trend you understand, even if it is not for you?",playful|low_stakes,1,all,false,false
+classic_l1_064,classic,1,Read the Room,What is a trend you cannot understand at all?,playful|low_stakes,1,all,false,false
+classic_l1_065,classic,1,Read the Room,What is one thing your younger self would be impressed by?,playful|low_stakes,1,all,false,false
+classic_l1_066,classic,1,Read the Room,What is one thing your younger self would find hilarious about you now?,playful|low_stakes,1,all,false,false
+classic_l1_067,classic,1,Read the Room,What is a rule you had in your family that now seems funny?,playful|low_stakes|family,1,all,false,false
+classic_l1_068,classic,1,Read the Room,What is a family habit you did not realize was unusual until later?,playful|low_stakes|family,1,all,false,false
+classic_l1_069,classic,1,Read the Room,What is the most useful thing you learned by accident?,playful|low_stakes,1,all,false,false
+classic_l1_070,classic,1,Read the Room,What is something you are better at in theory than in practice?,playful|low_stakes,1,all,false,false
+classic_l1_071,classic,1,Read the Room,What is something you are better at in practice than in theory?,playful|low_stakes,1,all,false,false
+classic_l1_072,classic,1,Read the Room,What is your most specific sign that you trust someone?,playful|low_stakes|trust,1,all,false,false
+classic_l1_073,classic,1,Read the Room,What is something you notice about people’s communication style?,playful|low_stakes|communication|perception,1,all,false,false
+classic_l1_074,classic,1,Read the Room,What is a question you like being asked?,playful|low_stakes,1,all,false,false
+classic_l1_075,classic,1,Read the Room,What is a question you are tired of being asked?,playful|low_stakes,1,all,false,false
+classic_l1_076,classic,1,Read the Room,What is a tiny thing that makes you feel seen?,playful|low_stakes,1,all,false,false
+classic_l1_077,classic,1,Read the Room,What is something you have strong opinions about for no good reason?,playful|low_stakes,1,all,false,false
+classic_l1_078,classic,1,Read the Room,What is the best kind of group chat energy?,playful|low_stakes,1,all,false,false
+classic_l1_079,classic,1,Read the Room,What is the worst kind of group chat energy?,playful|low_stakes,1,all,false,false
+classic_l1_080,classic,1,Read the Room,What is a hobby you respect but probably will not pick up?,playful|low_stakes,1,all,false,false
+classic_l1_081,classic,1,Read the Room,What is a hobby you think more people should try?,playful|low_stakes,1,all,false,false
+classic_l1_082,classic,1,Read the Room,What is something you own that has earned its place in your life?,playful|low_stakes,1,all,false,false
+classic_l1_083,classic,1,Read the Room,What is something you bought that was absolutely worth it?,playful|low_stakes,1,all,false,false
+classic_l1_084,classic,1,Read the Room,What is something you bought that was absolutely not worth it?,playful|low_stakes,1,all,false,false
+classic_l1_085,classic,1,Read the Room,What is a place you think everyone should experience once?,playful|low_stakes,1,all,false,false
+classic_l1_086,classic,1,Read the Room,What is the most memorable meal you have had recently?,playful|low_stakes,1,all,false,false
+classic_l1_087,classic,1,Read the Room,What is the most memorable conversation you have had recently?,playful|low_stakes,1,all,false,false
+classic_l1_088,classic,1,Read the Room,What is a tiny ritual you have before something important?,playful|low_stakes,1,all,false,false
+classic_l1_089,classic,1,Read the Room,What is something you do when you need to reset?,playful|low_stakes,1,all,false,false
+classic_l1_090,classic,1,Read the Room,What is the most underrated kind of confidence?,playful|low_stakes|confidence,1,all,false,false
+classic_l1_091,classic,1,Read the Room,What is the most overrated kind of confidence?,playful|low_stakes|confidence,1,all,false,false
+classic_l1_092,classic,1,Read the Room,What is something that makes someone feel safe to be around?,playful|low_stakes,1,all,false,false
+classic_l1_093,classic,1,Read the Room,What is something that makes someone feel interesting to be around?,playful|low_stakes,1,all,false,false
+classic_l1_094,classic,1,Read the Room,What is your most specific sign that a night is going well?,playful|low_stakes,1,all,false,false
+classic_l1_095,classic,1,Read the Room,What is a memory you wish you had a photo of?,playful|low_stakes|memory,1,all,false,false
+classic_l1_096,classic,1,Read the Room,What is a photo you wish had a better story behind it?,playful|low_stakes,1,all,false,false
+classic_l1_097,classic,1,Read the Room,What is something you would happily become known for?,playful|low_stakes,1,all,false,false
+classic_l1_098,classic,1,Read the Room,What is something you do not want to become known for?,playful|low_stakes,1,all,false,false
+classic_l1_099,classic,1,Read the Room,What is a phrase your friends would associate with you?,playful|low_stakes|friendship,1,all,false,false
+classic_l1_100,classic,1,Read the Room,"What is an outfit, object, or habit that feels like your brand?",playful|low_stakes,1,all,false,false
+classic_l1_101,classic,1,Read the Room,What is something that makes you feel instantly nostalgic?,playful|low_stakes|nostalgia,1,all,false,false
+classic_l1_102,classic,1,Read the Room,"What is something you always pack, even if you probably do not need it?",playful|low_stakes,1,all,false,false
+classic_l1_103,classic,1,Read the Room,What is your most unreasonable travel preference?,playful|low_stakes,1,all,false,false
+classic_l1_104,classic,1,Read the Room,What is a city or place that fits your personality surprisingly well?,playful|low_stakes,1,all,false,false
+classic_l1_105,classic,1,Read the Room,What is a city or place that did not match your expectations?,playful|low_stakes,1,all,false,false
+classic_l1_106,classic,1,Read the Room,What is a tiny thing someone did that stayed with you?,playful|low_stakes,1,all,false,false
+classic_l1_107,classic,1,Read the Room,What is the best kind of surprise?,playful|low_stakes,1,all,false,false
+classic_l1_108,classic,1,Read the Room,What is the worst kind of surprise?,playful|low_stakes,1,all,false,false
+classic_l1_109,classic,1,Read the Room,What is something that is only fun with the right people?,playful|low_stakes,1,all,false,false
+classic_l1_110,classic,1,Read the Room,What is something that is better alone?,playful|low_stakes,1,all,false,false
+classic_l1_111,classic,1,Read the Room,What is something that is better with a group?,playful|low_stakes,1,all,false,false
+classic_l1_112,classic,1,Read the Room,What is a low-stakes thing you take seriously?,playful|low_stakes,1,all,false,false
+classic_l1_113,classic,1,Read the Room,What is a high-stakes thing you stay surprisingly calm about?,playful|low_stakes,1,all,false,false
+classic_l1_114,classic,1,Read the Room,What is a small risk you think more people should take?,playful|low_stakes,1,all,false,false
+classic_l1_115,classic,1,Read the Room,What is something you can learn about someone from how they handle a delay?,playful|low_stakes,1,all,false,false
+classic_l1_116,classic,1,Read the Room,What is something you can learn about someone from how they treat waitstaff?,playful|low_stakes,1,all,false,false
+classic_l1_117,classic,1,Read the Room,What is something you can learn about someone from how they make plans?,playful|low_stakes,1,all,false,false
+classic_l1_118,classic,1,Read the Room,What is something you can learn about someone from how they apologize for being late?,playful|low_stakes|repair,1,all,false,false
+classic_l1_119,classic,1,Read the Room,What is a small sign that someone has good taste?,playful|low_stakes,1,all,false,false
+classic_l1_120,classic,1,Read the Room,What is a small sign that someone is emotionally generous?,playful|low_stakes,1,all,false,false
+classic_l1_121,classic,1,Read the Room,What is the easiest way to make you laugh?,playful|low_stakes,1,all,false,false
+classic_l1_122,classic,1,Read the Room,What is the easiest way to lose your interest?,playful|low_stakes,1,all,false,false
+classic_l1_123,classic,1,Read the Room,What is something you like more when it is imperfect?,playful|low_stakes,1,all,false,false
+classic_l1_124,classic,1,Read the Room,What is something you only enjoy when it is done perfectly?,playful|low_stakes,1,all,false,false
+classic_l1_125,classic,1,Read the Room,What is a memory that feels like a scene from a movie?,playful|low_stakes|memory,1,all,false,false
+classic_l1_126,classic,1,Read the Room,"What is a recent moment that made you think, this is nice?",playful|low_stakes,1,all,false,false
+classic_l1_127,classic,1,Read the Room,What is a moment from this week worth remembering?,playful|low_stakes,1,all,false,false
+classic_l1_128,classic,1,Read the Room,What is something you are trying to enjoy more slowly?,playful|low_stakes,1,all,false,false
+classic_l1_129,classic,1,Read the Room,What is something you wish people would stop rushing?,playful|low_stakes,1,all,false,false
+classic_l1_130,classic,1,Read the Room,What is a compliment you gave someone recently?,playful|low_stakes|compliments,1,all,false,false
+classic_l1_131,classic,1,Read the Room,What is a compliment you should give more often?,playful|low_stakes|compliments,1,all,false,false
+classic_l1_132,classic,1,Read the Room,What is something that makes a conversation feel alive?,playful|low_stakes,1,all,false,false
+classic_l1_133,classic,1,Read the Room,What is something that makes a conversation die instantly?,playful|low_stakes,1,all,false,false
+classic_l1_134,classic,1,Read the Room,What is your most specific definition of a great host?,playful|low_stakes,1,all,false,false
+classic_l1_135,classic,1,Read the Room,What is your most specific definition of a great guest?,playful|low_stakes,1,all,false,false
+classic_l1_136,classic,1,Read the Room,"What is a game, activity, or tradition that brings out your best side?",playful|low_stakes,1,all,false,false
+classic_l1_137,classic,1,Read the Room,"What is a game, activity, or tradition that brings out your worst side?",playful|low_stakes,1,all,false,false
+classic_l1_138,classic,1,Read the Room,What is the most underrated question to ask someone new?,playful|low_stakes,1,all,false,false
+classic_l1_139,classic,1,Read the Room,What is a personal fun fact that does not sound like a resume bullet?,playful|low_stakes,1,all,false,false
+classic_l1_140,classic,1,Read the Room,What is something you want to be lightly roasted for?,playful|low_stakes,1,all,false,false
+classic_l1_141,classic,1,Read the Room,What is something you are not taking seriously enough?,playful|low_stakes,1,all,false,false
+classic_l1_142,classic,1,Read the Room,What is something you are taking too seriously?,playful|low_stakes,1,all,false,false
+classic_l1_143,classic,1,Read the Room,What is the clearest sign that someone is comfortable with themselves?,playful|low_stakes|comfort,1,all,false,false
+classic_l1_144,classic,1,Read the Room,What is a tiny thing that makes you feel like an adult?,playful|low_stakes,1,all,false,false
+classic_l1_145,classic,1,Read the Room,What is a tiny thing that makes you feel like a kid again?,playful|low_stakes,1,all,false,false
+classic_l1_146,classic,1,Read the Room,What is a moment when you realized you had good instincts?,playful|low_stakes,1,all,false,false
+classic_l1_147,classic,1,Read the Room,What is a moment when your instincts were hilariously wrong?,playful|low_stakes,1,all,false,false
+classic_l1_148,classic,1,Read the Room,What is something you would put on your personal menu?,playful|low_stakes,1,all,false,false
+classic_l1_149,classic,1,Read the Room,What is something you hope never goes out of style?,playful|low_stakes|hope,1,all,false,false
+classic_l1_150,classic,1,Read the Room,What is something that has gotten better with age?,playful|low_stakes,1,all,false,false
+classic_l2_001,classic,2,Beneath the Surface,What is a pattern in your life you are finally starting to understand?,self_awareness|personal|patterns,2,all,false,false
+classic_l2_002,classic,2,Beneath the Surface,What is something you are ambitious about but rarely say out loud?,self_awareness|personal,2,all,false,false
+classic_l2_003,classic,2,Beneath the Surface,What is a version of yourself you are trying to outgrow?,self_awareness|personal,2,all,false,false
+classic_l2_004,classic,2,Beneath the Surface,What is a version of yourself you are trying to protect?,self_awareness|personal,2,all,false,false
+classic_l2_005,classic,2,Beneath the Surface,What is something you learned about love from your family?,self_awareness|personal|family|love,2,all,false,false
+classic_l2_006,classic,2,Beneath the Surface,What is something you learned about conflict from your family?,self_awareness|personal|family|conflict,2,all,false,false
+classic_l2_007,classic,2,Beneath the Surface,What is something you learned about money from your family?,self_awareness|personal|family|money,2,all,false,false
+classic_l2_008,classic,2,Beneath the Surface,What is something you learned about success before you were old enough to question it?,self_awareness|personal,2,all,false,false
+classic_l2_009,classic,2,Beneath the Surface,What is a belief you inherited that you are now rethinking?,self_awareness|personal,2,all,false,false
+classic_l2_010,classic,2,Beneath the Surface,What is a belief you earned the hard way?,self_awareness|personal,2,all,false,false
+classic_l2_011,classic,2,Beneath the Surface,What is a strength that started as a coping mechanism?,self_awareness|personal,2,all,false,false
+classic_l2_012,classic,2,Beneath the Surface,What is a weakness that people sometimes mistake for confidence?,self_awareness|personal|confidence,2,all,false,false
+classic_l2_013,classic,2,Beneath the Surface,What is something you are better at hiding than most people realize?,self_awareness|personal,2,all,false,false
+classic_l2_014,classic,2,Beneath the Surface,What is something you wish you were worse at noticing?,self_awareness|personal,2,all,false,false
+classic_l2_015,classic,2,Beneath the Surface,What is a compliment that would mean a lot because it would be true?,self_awareness|personal|compliments,2,all,false,false
+classic_l2_016,classic,2,Beneath the Surface,What is a criticism that stings because it might be true?,self_awareness|personal,2,all,false,false
+classic_l2_017,classic,2,Beneath the Surface,What is something you are learning to ask for more directly?,self_awareness|personal,2,all,false,false
+classic_l2_018,classic,2,Beneath the Surface,What is something you tend to give before anyone asks?,self_awareness|personal,2,all,false,false
+classic_l2_019,classic,2,Beneath the Surface,What is a kind of attention you enjoy more than you admit?,self_awareness|personal,2,all,false,false
+classic_l2_020,classic,2,Beneath the Surface,What is a kind of attention that makes you uncomfortable?,self_awareness|personal|comfort,2,all,false,false
+classic_l2_021,classic,2,Beneath the Surface,What is something you are proud of that did not look impressive from the outside?,self_awareness|personal,2,all,false,false
+classic_l2_022,classic,2,Beneath the Surface,What is something that looked impressive but did not feel satisfying?,self_awareness|personal,2,all,false,false
+classic_l2_023,classic,2,Beneath the Surface,What is a decision that changed your standards?,self_awareness|personal|change,2,all,false,false
+classic_l2_024,classic,2,Beneath the Surface,What is a moment that changed your taste in people?,self_awareness|personal|change,2,all,false,false
+classic_l2_025,classic,2,Beneath the Surface,What is a friendship that taught you something about yourself?,self_awareness|personal|friendship,2,all,false,false
+classic_l2_026,classic,2,Beneath the Surface,What is a friendship you miss but would not necessarily revive?,self_awareness|personal|friendship,2,all,false,false
+classic_l2_027,classic,2,Beneath the Surface,What is a relationship pattern you do not want to repeat?,self_awareness|personal|relationships|patterns,2,all,false,false
+classic_l2_028,classic,2,Beneath the Surface,What is a relationship pattern you are proud to have changed?,self_awareness|personal|relationships|change|patterns,2,all,false,false
+classic_l2_029,classic,2,Beneath the Surface,What is something you tend to overexplain?,self_awareness|personal,2,all,false,false
+classic_l2_030,classic,2,Beneath the Surface,What is something you tend to undercommunicate?,self_awareness|personal,2,all,false,false
+classic_l2_031,classic,2,Beneath the Surface,What is a situation where you are more sensitive than people expect?,self_awareness|personal,2,all,false,false
+classic_l2_032,classic,2,Beneath the Surface,What is a situation where you are tougher than people expect?,self_awareness|personal,2,all,false,false
+classic_l2_033,classic,2,Beneath the Surface,What is something you need when you are stressed but rarely ask for?,self_awareness|personal|stress,2,all,false,false
+classic_l2_034,classic,2,Beneath the Surface,What is something you do when you are stressed that other people might misread?,self_awareness|personal|stress,2,all,false,false
+classic_l2_035,classic,2,Beneath the Surface,What is a fear that has gotten quieter with age?,self_awareness|personal|fear,2,all,false,false
+classic_l2_036,classic,2,Beneath the Surface,What is a fear that has gotten louder with age?,self_awareness|personal|fear,2,all,false,false
+classic_l2_037,classic,2,Beneath the Surface,What is a dream you are embarrassed by because you want it badly?,self_awareness|personal,2,all,false,false
+classic_l2_038,classic,2,Beneath the Surface,What is a dream you let go of for a good reason?,self_awareness|personal,2,all,false,false
+classic_l2_039,classic,2,Beneath the Surface,What is something you are still trying to forgive yourself for?,self_awareness|personal|forgiveness,2,all,false,false
+classic_l2_040,classic,2,Beneath the Surface,What is something you handled better than your past self could have?,self_awareness|personal|past,2,all,false,false
+classic_l2_041,classic,2,Beneath the Surface,What is something you wish people understood about your pace?,self_awareness|personal,2,all,false,false
+classic_l2_042,classic,2,Beneath the Surface,What is something you wish people understood about your silence?,self_awareness|personal,2,all,false,false
+classic_l2_043,classic,2,Beneath the Surface,What is something you wish people understood about your intensity?,self_awareness|personal,2,all,false,false
+classic_l2_044,classic,2,Beneath the Surface,What is something you wish people understood about your humor?,self_awareness|personal,2,all,false,false
+classic_l2_045,classic,2,Beneath the Surface,What is a tradeoff you are currently making that most people cannot see?,self_awareness|personal,2,all,false,false
+classic_l2_046,classic,2,Beneath the Surface,What is a responsibility you carry quietly?,self_awareness|personal,2,all,false,false
+classic_l2_047,classic,2,Beneath the Surface,What is a role you often play in groups?,self_awareness|personal,2,all,false,false
+classic_l2_048,classic,2,Beneath the Surface,What is a role you are tired of playing in groups?,self_awareness|personal,2,all,false,false
+classic_l2_049,classic,2,Beneath the Surface,What is a version of success that would actually fit your life?,self_awareness|personal,2,all,false,false
+classic_l2_050,classic,2,Beneath the Surface,What is a version of success you are trying not to chase anymore?,self_awareness|personal,2,all,false,false
+classic_l2_051,classic,2,Beneath the Surface,What is something you used to confuse with confidence?,self_awareness|personal|confidence,2,all,false,false
+classic_l2_052,classic,2,Beneath the Surface,What is something you used to confuse with love?,self_awareness|personal|love,2,all,false,false
+classic_l2_053,classic,2,Beneath the Surface,What is something you used to confuse with loyalty?,self_awareness|personal,2,all,false,false
+classic_l2_054,classic,2,Beneath the Surface,What is something you used to confuse with peace?,self_awareness|personal,2,all,false,false
+classic_l2_055,classic,2,Beneath the Surface,What is something that makes you feel chosen?,self_awareness|personal,2,all,false,false
+classic_l2_056,classic,2,Beneath the Surface,What is something that makes you feel dismissed?,self_awareness|personal,2,all,false,false
+classic_l2_057,classic,2,Beneath the Surface,What is something that makes you feel respected?,self_awareness|personal,2,all,false,false
+classic_l2_058,classic,2,Beneath the Surface,What is something that makes you feel underestimated?,self_awareness|personal,2,all,false,false
+classic_l2_059,classic,2,Beneath the Surface,What is a boundary you are getting better at naming?,self_awareness|personal|boundaries,2,all,false,false
+classic_l2_060,classic,2,Beneath the Surface,What is a boundary you still struggle to enforce?,self_awareness|personal|boundaries,2,all,false,false
+classic_l2_061,classic,2,Beneath the Surface,What is something you need more permission to want?,self_awareness|personal,2,all,false,false
+classic_l2_062,classic,2,Beneath the Surface,What is something you need less permission to stop doing?,self_awareness|personal,2,all,false,false
+classic_l2_063,classic,2,Beneath the Surface,What is a place where you feel most like yourself?,self_awareness|personal,2,all,false,false
+classic_l2_064,classic,2,Beneath the Surface,What is a place where you feel least like yourself?,self_awareness|personal,2,all,false,false
+classic_l2_065,classic,2,Beneath the Surface,What is a moment when you realized you had changed?,self_awareness|personal|change,2,all,false,false
+classic_l2_066,classic,2,Beneath the Surface,What is a moment when you realized someone else had changed?,self_awareness|personal|change,2,all,false,false
+classic_l2_067,classic,2,Beneath the Surface,What is something about adulthood that surprised you?,self_awareness|personal,2,all,false,false
+classic_l2_068,classic,2,Beneath the Surface,What is something about adulthood you are still resisting?,self_awareness|personal,2,all,false,false
+classic_l2_069,classic,2,Beneath the Surface,What is a lesson you keep relearning in different costumes?,self_awareness|personal,2,all,false,false
+classic_l2_070,classic,2,Beneath the Surface,What is a mistake you would only make once?,self_awareness|personal,2,all,false,false
+classic_l2_071,classic,2,Beneath the Surface,What is a mistake you have made more than once because it was comfortable?,self_awareness|personal|comfort,2,all,false,false
+classic_l2_072,classic,2,Beneath the Surface,What is something you have high standards for because you know what low standards cost?,self_awareness|personal,2,all,false,false
+classic_l2_073,classic,2,Beneath the Surface,What is something you are finally allowed to enjoy without proving anything?,self_awareness|personal,2,all,false,false
+classic_l2_074,classic,2,Beneath the Surface,What is something you are still trying to prove?,self_awareness|personal,2,all,false,false
+classic_l2_075,classic,2,Beneath the Surface,What is the kindest thing you have done that nobody saw?,self_awareness|personal,2,all,false,false
+classic_l2_076,classic,2,Beneath the Surface,What is something generous you need to stop doing automatically?,self_awareness|personal,2,all,false,false
+classic_l2_077,classic,2,Beneath the Surface,What is a kind of person you are learning not to chase?,self_awareness|personal,2,all,false,false
+classic_l2_078,classic,2,Beneath the Surface,What is a kind of person you are learning to appreciate more?,self_awareness|personal,2,all,false,false
+classic_l2_079,classic,2,Beneath the Surface,What is something you are drawn to that is not always good for you?,self_awareness|personal,2,all,false,false
+classic_l2_080,classic,2,Beneath the Surface,What is something good for you that you are learning to be drawn to?,self_awareness|personal,2,all,false,false
+classic_l2_081,classic,2,Beneath the Surface,What is a moment when your body knew before your mind did?,self_awareness|personal,2,all,false,false
+classic_l2_082,classic,2,Beneath the Surface,What is a moment when your mind talked you out of something your body knew?,self_awareness|personal,2,all,false,false
+classic_l2_083,classic,2,Beneath the Surface,What is a choice that made your life smaller for a while?,self_awareness|personal|choices,2,all,false,false
+classic_l2_084,classic,2,Beneath the Surface,What is a choice that made your life bigger?,self_awareness|personal|choices,2,all,false,false
+classic_l2_085,classic,2,Beneath the Surface,What is something you want your friends to hold you accountable for?,self_awareness|personal|friendship,2,all,false,false
+classic_l2_086,classic,2,Beneath the Surface,What is something you do not want to be judged for while you are still figuring it out?,self_awareness|personal,2,all,false,false
+classic_l2_087,classic,2,Beneath the Surface,What is something you are becoming less apologetic about?,self_awareness|personal|repair,2,all,false,false
+classic_l2_088,classic,2,Beneath the Surface,What is something you are becoming more careful with?,self_awareness|personal,2,all,false,false
+classic_l2_089,classic,2,Beneath the Surface,What is something that drains you faster than people realize?,self_awareness|personal,2,all,false,false
+classic_l2_090,classic,2,Beneath the Surface,What is something that restores you faster than people realize?,self_awareness|personal,2,all,false,false
+classic_l2_091,classic,2,Beneath the Surface,What is a kind of intimacy that has nothing to do with romance?,self_awareness|personal|intimacy,2,all,false,false
+classic_l2_092,classic,2,Beneath the Surface,What is a kind of loneliness that can happen around people?,self_awareness|personal,2,all,false,false
+classic_l2_093,classic,2,Beneath the Surface,What is something you wish you could explain to your younger self in one sentence?,self_awareness|personal,2,all,false,false
+classic_l2_094,classic,2,Beneath the Surface,What is something your younger self understood that you are trying to remember?,self_awareness|personal,2,all,false,false
+classic_l2_095,classic,2,Beneath the Surface,What is a place in your life where you are choosing depth over novelty?,self_awareness|personal,2,all,false,false
+classic_l2_096,classic,2,Beneath the Surface,What is a place in your life where you need novelty again?,self_awareness|personal,2,all,false,false
+classic_l2_097,classic,2,Beneath the Surface,What is a relationship you are grateful ended when it did?,self_awareness|personal|relationships|gratitude,2,all,false,false
+classic_l2_098,classic,2,Beneath the Surface,What is a relationship you are grateful survived a hard season?,self_awareness|personal|relationships|gratitude,2,all,false,false
+classic_l2_099,classic,2,Beneath the Surface,What is something you admire in others because you had to build it yourself?,self_awareness|personal,2,all,false,false
+classic_l2_100,classic,2,Beneath the Surface,What is something you envy in others because it still feels far away?,self_awareness|personal,2,all,false,false
+classic_l2_101,classic,2,Beneath the Surface,What is a compliment you are learning to believe?,self_awareness|personal|compliments,2,all,false,false
+classic_l2_102,classic,2,Beneath the Surface,What is a criticism you are learning not to internalize?,self_awareness|personal,2,all,false,false
+classic_l2_103,classic,2,Beneath the Surface,What is something you do when you are trying not to need anyone?,self_awareness|personal,2,all,false,false
+classic_l2_104,classic,2,Beneath the Surface,What is something you do when you are secretly hoping someone notices?,self_awareness|personal|perception,2,all,false,false
+classic_l2_105,classic,2,Beneath the Surface,What is an expectation you put on yourself that no one else can see?,self_awareness|personal,2,all,false,false
+classic_l2_106,classic,2,Beneath the Surface,What is an expectation you put on others that you are trying to own?,self_awareness|personal,2,all,false,false
+classic_l2_107,classic,2,Beneath the Surface,What is something you are learning about timing?,self_awareness|personal,2,all,false,false
+classic_l2_108,classic,2,Beneath the Surface,What is something you are learning about patience?,self_awareness|personal,2,all,false,false
+classic_l2_109,classic,2,Beneath the Surface,What is something you are learning about letting go?,self_awareness|personal,2,all,false,false
+classic_l2_110,classic,2,Beneath the Surface,What is something you are learning about wanting more?,self_awareness|personal,2,all,false,false
+classic_l2_111,classic,2,Beneath the Surface,What is an insecurity that has become less powerful because you named it?,self_awareness|personal,2,all,false,false
+classic_l2_112,classic,2,Beneath the Surface,What is an insecurity that still wins sometimes?,self_awareness|personal,2,all,false,false
+classic_l2_113,classic,2,Beneath the Surface,What is a value you would like to make more visible in your daily life?,self_awareness|personal,2,all,false,false
+classic_l2_114,classic,2,Beneath the Surface,What is a value you claim but do not always practice?,self_awareness|personal,2,all,false,false
+classic_l2_115,classic,2,Beneath the Surface,What is something you respect more now because you have tried to do it?,self_awareness|personal,2,all,false,false
+classic_l2_116,classic,2,Beneath the Surface,What is something you judge less now because you have lived more?,self_awareness|personal,2,all,false,false
+classic_l2_117,classic,2,Beneath the Surface,What is a choice you made that only makes sense if you know the whole story?,self_awareness|personal|choices,2,all,false,false
+classic_l2_118,classic,2,Beneath the Surface,What is a chapter of your life that deserved a better ending?,self_awareness|personal,2,all,false,false
+classic_l2_119,classic,2,Beneath the Surface,What is a chapter of your life that ended exactly when it needed to?,self_awareness|personal,2,all,false,false
+classic_l2_120,classic,2,Beneath the Surface,What is something you are saving for the right season?,self_awareness|personal,2,all,false,false
+classic_l2_121,classic,2,Beneath the Surface,What is something you are delaying out of fear?,self_awareness|personal|fear,2,all,false,false
+classic_l2_122,classic,2,Beneath the Surface,What is a conversation you are avoiding because it would change things?,self_awareness|personal|change,2,all,false,false
+classic_l2_123,classic,2,Beneath the Surface,What is a conversation you are craving because it would clarify things?,self_awareness|personal,2,all,false,false
+classic_l2_124,classic,2,Beneath the Surface,What is something you want to be remembered for by the people closest to you?,self_awareness|personal,2,all,false,false
+classic_l2_125,classic,2,Beneath the Surface,What is something you hope people never reduce you to?,self_awareness|personal|hope,2,all,false,false
+classic_l2_126,classic,2,Beneath the Surface,What is a way you have become more honest with yourself?,self_awareness|personal|honesty,2,all,false,false
+classic_l2_127,classic,2,Beneath the Surface,What is a way you still lie to yourself politely?,self_awareness|personal,2,all,false,false
+classic_l2_128,classic,2,Beneath the Surface,What is something that feels simple now but took years to learn?,self_awareness|personal,2,all,false,false
+classic_l2_129,classic,2,Beneath the Surface,What is something that still feels complicated even though it should be simple?,self_awareness|personal,2,all,false,false
+classic_l2_130,classic,2,Beneath the Surface,What is one thing your friends get right about you?,self_awareness|personal|friendship,2,all,false,false
+classic_l2_131,classic,2,Beneath the Surface,What is one thing your friends still misunderstand about you?,self_awareness|personal|friendship,2,all,false,false
+classic_l2_132,classic,2,Beneath the Surface,What is something you want to stop performing?,self_awareness|personal,2,all,false,false
+classic_l2_133,classic,2,Beneath the Surface,What is something you want to start expressing more freely?,self_awareness|personal,2,all,false,false
+classic_l2_134,classic,2,Beneath the Surface,What is a moment when you felt truly respected?,self_awareness|personal,2,all,false,false
+classic_l2_135,classic,2,Beneath the Surface,What is a moment when you felt quietly dismissed?,self_awareness|personal,2,all,false,false
+classic_l2_136,classic,2,Beneath the Surface,What is a kind of care you receive easily?,self_awareness|personal,2,all,false,false
+classic_l2_137,classic,2,Beneath the Surface,What is a kind of care you struggle to receive?,self_awareness|personal,2,all,false,false
+classic_l2_138,classic,2,Beneath the Surface,What is something that has softened you?,self_awareness|personal,2,all,false,false
+classic_l2_139,classic,2,Beneath the Surface,What is something that has sharpened you?,self_awareness|personal,2,all,false,false
+classic_l2_140,classic,2,Beneath the Surface,What is a sign that you are becoming more yourself?,self_awareness|personal,2,all,false,false
+classic_l2_141,classic,2,Beneath the Surface,What is a sign that you are abandoning yourself?,self_awareness|personal,2,all,false,false
+classic_l2_142,classic,2,Beneath the Surface,What is something you are trying to make room for?,self_awareness|personal,2,all,false,false
+classic_l2_143,classic,2,Beneath the Surface,What is something you are trying to make peace with?,self_awareness|personal,2,all,false,false
+classic_l2_144,classic,2,Beneath the Surface,What is something you want to be braver about this year?,self_awareness|personal,2,all,false,false
+classic_l2_145,classic,2,Beneath the Surface,What is something you want to be gentler about this year?,self_awareness|personal,2,all,false,false
+classic_l2_146,classic,2,Beneath the Surface,What is something you know now that you could not have known without living through it?,self_awareness|personal,2,all,false,false
+classic_l2_147,classic,2,Beneath the Surface,What is something you are learning to want without feeling guilty?,self_awareness|personal,2,all,false,false
+classic_l2_148,classic,2,Beneath the Surface,What is something you are learning to stop explaining to people who are not trying to understand?,self_awareness|personal,2,all,false,false
+classic_l2_149,classic,2,Beneath the Surface,What is a part of your personality that became useful before it became healthy?,self_awareness|personal,2,all,false,false
+classic_l2_150,classic,2,Beneath the Surface,What is something you are trying to trust yourself about?,self_awareness|personal|trust,2,all,false,false
+classic_l3_001,classic,3,Say It Anyway,What is something you wish people understood about you without you having to explain it?,vulnerability|reflection,3,all,false,false
+classic_l3_002,classic,3,Say It Anyway,What is a truth about yourself that is easier to say in the dark than in daylight?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_003,classic,3,Say It Anyway,What is something you want to be asked but rarely are?,vulnerability|reflection,3,all,false,false
+classic_l3_004,classic,3,Say It Anyway,What is something you are afraid people would misread if they saw the whole thing?,vulnerability|reflection,3,all,false,false
+classic_l3_005,classic,3,Say It Anyway,What is one part of you that deserves more tenderness?,vulnerability|reflection,3,all,false,false
+classic_l3_006,classic,3,Say It Anyway,What is one part of you that deserves more discipline?,vulnerability|reflection,3,all,false,false
+classic_l3_007,classic,3,Say It Anyway,What is a goodbye you never fully processed?,vulnerability|reflection,3,all,false,false
+classic_l3_008,classic,3,Say It Anyway,"What is an apology you still owe, even if you may never give it?",vulnerability|reflection|repair,3,all,false,false
+classic_l3_009,classic,3,Say It Anyway,"What is an apology you are still waiting for, even if you may never get it?",vulnerability|reflection|repair,3,all,false,false
+classic_l3_010,classic,3,Say It Anyway,What is a person you wish had seen who you became?,vulnerability|reflection,3,all,false,false
+classic_l3_011,classic,3,Say It Anyway,What is a person you hope never gets to define who you became?,vulnerability|reflection|hope,3,all,false,false
+classic_l3_012,classic,3,Say It Anyway,What is something you lost that changed your standards?,vulnerability|reflection|change,3,all,false,false
+classic_l3_013,classic,3,Say It Anyway,What is something you gained that changed your identity?,vulnerability|reflection|change,3,all,false,false
+classic_l3_014,classic,3,Say It Anyway,What is the loneliest kind of success?,vulnerability|reflection,3,all,false,false
+classic_l3_015,classic,3,Say It Anyway,What is the safest kind of love?,vulnerability|reflection|love,3,all,false,false
+classic_l3_016,classic,3,Say It Anyway,What is the hardest thing about being known?,vulnerability|reflection,3,all,false,false
+classic_l3_017,classic,3,Say It Anyway,What is the hardest thing about not being known?,vulnerability|reflection,3,all,false,false
+classic_l3_018,classic,3,Say It Anyway,What is something you do when you are afraid of being too much?,vulnerability|reflection,3,all,false,false
+classic_l3_019,classic,3,Say It Anyway,What is something you do when you are afraid of not being enough?,vulnerability|reflection,3,all,false,false
+classic_l3_020,classic,3,Say It Anyway,What is a truth you have been trying to make sound smaller?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_021,classic,3,Say It Anyway,What is a truth you have been trying to make sound acceptable?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_022,classic,3,Say It Anyway,What is something you wish someone would fight for in you?,vulnerability|reflection,3,all,false,false
+classic_l3_023,classic,3,Say It Anyway,What is something you wish someone would not give up on in you?,vulnerability|reflection,3,all,false,false
+classic_l3_024,classic,3,Say It Anyway,What is a memory that still has a hold on you?,vulnerability|reflection|memory,3,all,false,false
+classic_l3_025,classic,3,Say It Anyway,What is a memory you are ready to loosen your grip on?,vulnerability|reflection|memory,3,all,false,false
+classic_l3_026,classic,3,Say It Anyway,What is a pattern you can explain but still have not fully changed?,vulnerability|reflection|change|patterns,3,all,false,false
+classic_l3_027,classic,3,Say It Anyway,What is a need you learned to call inconvenient?,vulnerability|reflection,3,all,false,false
+classic_l3_028,classic,3,Say It Anyway,What is a need you are no longer willing to apologize for?,vulnerability|reflection|repair,3,all,false,false
+classic_l3_029,classic,3,Say It Anyway,What is something you are grieving that other people might not recognize as grief?,vulnerability|reflection,3,all,false,false
+classic_l3_030,classic,3,Say It Anyway,What is something you are proud of that cost you more than people know?,vulnerability|reflection,3,all,false,false
+classic_l3_031,classic,3,Say It Anyway,What is something you survived but have not fully integrated?,vulnerability|reflection,3,all,false,false
+classic_l3_032,classic,3,Say It Anyway,What is a sentence you wish someone had said to you at the right time?,vulnerability|reflection,3,all,false,false
+classic_l3_033,classic,3,Say It Anyway,What is a sentence you wish you had said when you had the chance?,vulnerability|reflection,3,all,false,false
+classic_l3_034,classic,3,Say It Anyway,What is a fear you rarely let yourself finish saying?,vulnerability|reflection|fear,3,all,false,false
+classic_l3_035,classic,3,Say It Anyway,What is a hope you rarely let yourself finish saying?,vulnerability|reflection|hope,3,all,false,false
+classic_l3_036,classic,3,Say It Anyway,What is something beautiful you almost missed because you were trying to be impressive?,vulnerability|reflection,3,all,false,false
+classic_l3_037,classic,3,Say It Anyway,What is something real you almost lost because you were trying to be unbothered?,vulnerability|reflection,3,all,false,false
+classic_l3_038,classic,3,Say It Anyway,What is something you are learning to receive without deflecting?,vulnerability|reflection,3,all,false,false
+classic_l3_039,classic,3,Say It Anyway,What is something you are learning to give without overextending?,vulnerability|reflection,3,all,false,false
+classic_l3_040,classic,3,Say It Anyway,What is a way you want to be loved more accurately?,vulnerability|reflection|love,3,all,false,false
+classic_l3_041,classic,3,Say It Anyway,What is a way you want to love more courageously?,vulnerability|reflection|love,3,all,false,false
+classic_l3_042,classic,3,Say It Anyway,What is one thing you appreciate about someone here that you have not said clearly enough?,vulnerability|reflection,3,all,false,false
+classic_l3_043,classic,3,Say It Anyway,What is one thing someone here might not know they have taught you?,vulnerability|reflection,3,all,false,false
+classic_l3_044,classic,3,Say It Anyway,What is one thing you want to thank someone for before life gets too busy again?,vulnerability|reflection,3,all,false,false
+classic_l3_045,classic,3,Say It Anyway,What is one thing you wish people noticed when you are doing your best?,vulnerability|reflection|perception,3,all,false,false
+classic_l3_046,classic,3,Say It Anyway,What is one thing you wish people noticed when you are not okay?,vulnerability|reflection|perception,3,all,false,false
+classic_l3_047,classic,3,Say It Anyway,What is a version of you that needed more protection?,vulnerability|reflection,3,all,false,false
+classic_l3_048,classic,3,Say It Anyway,What is a version of you that needed more challenge?,vulnerability|reflection,3,all,false,false
+classic_l3_049,classic,3,Say It Anyway,What is something you have outgrown but still miss?,vulnerability|reflection,3,all,false,false
+classic_l3_050,classic,3,Say It Anyway,What is something you have chosen that still scares you?,vulnerability|reflection,3,all,false,false
+classic_l3_051,classic,3,Say It Anyway,What is a promise you made to yourself quietly?,vulnerability|reflection,3,all,false,false
+classic_l3_052,classic,3,Say It Anyway,What is a promise to yourself you keep breaking?,vulnerability|reflection,3,all,false,false
+classic_l3_053,classic,3,Say It Anyway,What is something you are scared to want because wanting it gives it power?,vulnerability|reflection,3,all,false,false
+classic_l3_054,classic,3,Say It Anyway,What is something you pretend not to care about because caring feels risky?,vulnerability|reflection,3,all,false,false
+classic_l3_055,classic,3,Say It Anyway,What is a part of your story you are tired of explaining?,vulnerability|reflection,3,all,false,false
+classic_l3_056,classic,3,Say It Anyway,What is a part of your story you wish someone would ask about gently?,vulnerability|reflection,3,all,false,false
+classic_l3_057,classic,3,Say It Anyway,What is something you are trying not to become?,vulnerability|reflection,3,all,false,false
+classic_l3_058,classic,3,Say It Anyway,What is something you hope you are slowly becoming?,vulnerability|reflection|hope,3,all,false,false
+classic_l3_059,classic,3,Say It Anyway,What is the most loving thing someone could understand about your flaws?,vulnerability|reflection,3,all,false,false
+classic_l3_060,classic,3,Say It Anyway,What is the most honest thing someone could tell you right now?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_061,classic,3,Say It Anyway,"What is a truth you need to hear from yourself, not from someone else?",vulnerability|reflection|honesty,3,all,false,false
+classic_l3_062,classic,3,Say It Anyway,What is something you miss about a past version of your life?,vulnerability|reflection|past,3,all,false,false
+classic_l3_063,classic,3,Say It Anyway,"What is something you do not miss at all, even if it looked good from the outside?",vulnerability|reflection,3,all,false,false
+classic_l3_064,classic,3,Say It Anyway,What is an ending that made room for you?,vulnerability|reflection,3,all,false,false
+classic_l3_065,classic,3,Say It Anyway,What is an ending that still feels unfinished?,vulnerability|reflection,3,all,false,false
+classic_l3_066,classic,3,Say It Anyway,What is something you have not forgiven because forgiving would make it feel final?,vulnerability|reflection|forgiveness,3,all,false,false
+classic_l3_067,classic,3,Say It Anyway,What is something you forgave before you fully understood the cost?,vulnerability|reflection,3,all,false,false
+classic_l3_068,classic,3,Say It Anyway,What is a way you protect yourself that also keeps good things out?,vulnerability|reflection,3,all,false,false
+classic_l3_069,classic,3,Say It Anyway,What is a way you open up that sometimes costs too much?,vulnerability|reflection,3,all,false,false
+classic_l3_070,classic,3,Say It Anyway,What is a kind of love you are learning not to beg for?,vulnerability|reflection|love,3,all,false,false
+classic_l3_071,classic,3,Say It Anyway,What is a kind of love you are learning to recognize faster?,vulnerability|reflection|love,3,all,false,false
+classic_l3_072,classic,3,Say It Anyway,"What is something you need to say plainly, without making it prettier?",vulnerability|reflection,3,all,false,false
+classic_l3_073,classic,3,Say It Anyway,"What is something you need to hear plainly, without being defensive?",vulnerability|reflection,3,all,false,false
+classic_l3_074,classic,3,Say It Anyway,What is one place in your life where you are tired of pretending you are fine?,vulnerability|reflection,3,all,false,false
+classic_l3_075,classic,3,Say It Anyway,What is one place in your life where you are more fine than people assume?,vulnerability|reflection,3,all,false,false
+classic_l3_076,classic,3,Say It Anyway,What is a question you are afraid would reveal too much about what you want?,vulnerability|reflection,3,all,false,false
+classic_l3_077,classic,3,Say It Anyway,What is an answer you are afraid would disappoint someone?,vulnerability|reflection,3,all,false,false
+classic_l3_078,classic,3,Say It Anyway,What is something you wish had been easier for you?,vulnerability|reflection,3,all,false,false
+classic_l3_079,classic,3,Say It Anyway,What is something you are grateful was difficult because it made you who you are?,vulnerability|reflection|gratitude,3,all,false,false
+classic_l3_080,classic,3,Say It Anyway,What is a moment when you felt deeply chosen?,vulnerability|reflection,3,all,false,false
+classic_l3_081,classic,3,Say It Anyway,What is a moment when you felt quietly replaced?,vulnerability|reflection,3,all,false,false
+classic_l3_082,classic,3,Say It Anyway,What is one thing you want to be brave enough to ask for?,vulnerability|reflection,3,all,false,false
+classic_l3_083,classic,3,Say It Anyway,What is one thing you want to be brave enough to decline?,vulnerability|reflection,3,all,false,false
+classic_l3_084,classic,3,Say It Anyway,What is a relationship you want to honor even if it changed?,vulnerability|reflection|relationships|change,3,all,false,false
+classic_l3_085,classic,3,Say It Anyway,What is a relationship you need to stop romanticizing?,vulnerability|reflection|relationships|romance,3,all,false,false
+classic_l3_086,classic,3,Say It Anyway,What is something you hope your future self forgives you for?,vulnerability|reflection|forgiveness|future|hope,3,all,false,false
+classic_l3_087,classic,3,Say It Anyway,What is something you hope your future self thanks you for?,vulnerability|reflection|future|hope,3,all,false,false
+classic_l3_088,classic,3,Say It Anyway,"What is one way you want your life to feel, not just look?",vulnerability|reflection,3,all,false,false
+classic_l3_089,classic,3,Say It Anyway,What is one way your life looks better than it feels?,vulnerability|reflection,3,all,false,false
+classic_l3_090,classic,3,Say It Anyway,What is one way your life feels better than it looks?,vulnerability|reflection,3,all,false,false
+classic_l3_091,classic,3,Say It Anyway,What is a secret you keep from yourself by staying busy?,vulnerability|reflection,3,all,false,false
+classic_l3_092,classic,3,Say It Anyway,What is something you are finally willing to stop minimizing?,vulnerability|reflection,3,all,false,false
+classic_l3_093,classic,3,Say It Anyway,What is something you are finally willing to stop chasing?,vulnerability|reflection,3,all,false,false
+classic_l3_094,classic,3,Say It Anyway,What is a truth about your heart that your calendar does not show?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_095,classic,3,Say It Anyway,What is a truth about your ambition that your resume does not show?,vulnerability|reflection|ambition|honesty,3,all,false,false
+classic_l3_096,classic,3,Say It Anyway,What is a kind of peace you are no longer willing to trade away?,vulnerability|reflection,3,all,false,false
+classic_l3_097,classic,3,Say It Anyway,What is a kind of chaos you used to mistake for aliveness?,vulnerability|reflection,3,all,false,false
+classic_l3_098,classic,3,Say It Anyway,What is a moment when someone saw you correctly?,vulnerability|reflection,3,all,false,false
+classic_l3_099,classic,3,Say It Anyway,What is a moment when someone got you completely wrong?,vulnerability|reflection,3,all,false,false
+classic_l3_100,classic,3,Say It Anyway,What is the difference between being admired and being understood?,vulnerability|reflection,3,all,false,false
+classic_l3_101,classic,3,Say It Anyway,What is the difference between being needed and being loved?,vulnerability|reflection|love,3,all,false,false
+classic_l3_102,classic,3,Say It Anyway,What is one person you wish you could meet again as who you are now?,vulnerability|reflection,3,all,false,false
+classic_l3_103,classic,3,Say It Anyway,What is one person you are glad only knew an older version of you?,vulnerability|reflection,3,all,false,false
+classic_l3_104,classic,3,Say It Anyway,What is something you are afraid to be honest about because it might require action?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_105,classic,3,Say It Anyway,What is something you already know but keep asking other people to confirm?,vulnerability|reflection,3,all,false,false
+classic_l3_106,classic,3,Say It Anyway,What is a hurt you have turned into competence?,vulnerability|reflection,3,all,false,false
+classic_l3_107,classic,3,Say It Anyway,What is a hope you have turned into a joke?,vulnerability|reflection|hope,3,all,false,false
+classic_l3_108,classic,3,Say It Anyway,What is something you would say if you knew nobody would interrupt?,vulnerability|reflection,3,all,false,false
+classic_l3_109,classic,3,Say It Anyway,What is something you would stop saying if you knew you were already enough?,vulnerability|reflection,3,all,false,false
+classic_l3_110,classic,3,Say It Anyway,What is a way you punish yourself that looks productive?,vulnerability|reflection,3,all,false,false
+classic_l3_111,classic,3,Say It Anyway,What is a way you avoid your feelings that looks responsible?,vulnerability|reflection,3,all,false,false
+classic_l3_112,classic,3,Say It Anyway,What is one thing you want more of before life gets too serious?,vulnerability|reflection,3,all,false,false
+classic_l3_113,classic,3,Say It Anyway,What is one thing you want less of before life gets too short?,vulnerability|reflection,3,all,false,false
+classic_l3_114,classic,3,Say It Anyway,What is a truth you trust your closest people to hold gently?,vulnerability|reflection|trust|honesty,3,all,false,false
+classic_l3_115,classic,3,Say It Anyway,What is a truth you are still learning to hold gently yourself?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_116,classic,3,Say It Anyway,What is a compliment you struggle to accept because it touches something tender?,vulnerability|reflection|compliments,3,all,false,false
+classic_l3_117,classic,3,Say It Anyway,What is a criticism you struggle to reject because it touches something old?,vulnerability|reflection,3,all,false,false
+classic_l3_118,classic,3,Say It Anyway,What is something you want to believe about love but are still testing?,vulnerability|reflection|love,3,all,false,false
+classic_l3_119,classic,3,Say It Anyway,What is something you want to believe about yourself but are still testing?,vulnerability|reflection,3,all,false,false
+classic_l3_120,classic,3,Say It Anyway,What is a way you want to be remembered in someone’s ordinary day?,vulnerability|reflection,3,all,false,false
+classic_l3_121,classic,3,Say It Anyway,What is a way someone has stayed with you without knowing it?,vulnerability|reflection,3,all,false,false
+classic_l3_122,classic,3,Say It Anyway,What is something you need to stop making an argument for?,vulnerability|reflection,3,all,false,false
+classic_l3_123,classic,3,Say It Anyway,What is something you need to stop making an apology for?,vulnerability|reflection|repair,3,all,false,false
+classic_l3_124,classic,3,Say It Anyway,What is one way you are harder to love than people expect?,vulnerability|reflection|love,3,all,false,false
+classic_l3_125,classic,3,Say It Anyway,What is one way you are easier to love than people expect?,vulnerability|reflection|love,3,all,false,false
+classic_l3_126,classic,3,Say It Anyway,What is one thing you want to say to the person you were five years ago?,vulnerability|reflection,3,all,false,false
+classic_l3_127,classic,3,Say It Anyway,What is one thing you hope the person you are now never forgets?,vulnerability|reflection|hope,3,all,false,false
+classic_l3_128,classic,3,Say It Anyway,What is a question you would only answer honestly with the right people?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_129,classic,3,Say It Anyway,What is an emotion you are better at naming now?,vulnerability|reflection,3,all,false,false
+classic_l3_130,classic,3,Say It Anyway,What is an emotion you still try to intellectualize?,vulnerability|reflection,3,all,false,false
+classic_l3_131,classic,3,Say It Anyway,What is a longing you have learned to live beside?,vulnerability|reflection,3,all,false,false
+classic_l3_132,classic,3,Say It Anyway,What is a longing you are finally ready to honor?,vulnerability|reflection,3,all,false,false
+classic_l3_133,classic,3,Say It Anyway,What is one thing you wish someone would notice before you have to ask?,vulnerability|reflection|perception,3,all,false,false
+classic_l3_134,classic,3,Say It Anyway,What is one thing you wish you could offer more freely?,vulnerability|reflection,3,all,false,false
+classic_l3_135,classic,3,Say It Anyway,What is a wound that no longer gets to run the whole room?,vulnerability|reflection,3,all,false,false
+classic_l3_136,classic,3,Say It Anyway,What is a joy you want to take more seriously?,vulnerability|reflection,3,all,false,false
+classic_l3_137,classic,3,Say It Anyway,What is one truth you want to leave this table having said?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_138,classic,3,Say It Anyway,What is one thing you want the people here to know about how to care for you better?,vulnerability|reflection,3,all,false,false
+classic_l3_139,classic,3,Say It Anyway,What is one truth you have been waiting for the right person to ask about?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_140,classic,3,Say It Anyway,What is something you want to be forgiven for by someone who may never know the full story?,vulnerability|reflection|forgiveness,3,all,false,false
+classic_l3_141,classic,3,Say It Anyway,What is something you are scared will always matter more to you than it does to other people?,vulnerability|reflection,3,all,false,false
+classic_l3_142,classic,3,Say It Anyway,What is one way you want to be held accountable without being shamed?,vulnerability|reflection,3,all,false,false
+classic_l3_143,classic,3,Say It Anyway,What is one way you want to be comforted without being fixed?,vulnerability|reflection|comfort,3,all,false,false
+classic_l3_144,classic,3,Say It Anyway,What is a part of you that still believes it has to earn rest?,vulnerability|reflection,3,all,false,false
+classic_l3_145,classic,3,Say It Anyway,What is a part of you that is ready to stop auditioning for love?,vulnerability|reflection|love,3,all,false,false
+classic_l3_146,classic,3,Say It Anyway,What is one thing you have been brave about that nobody clapped for?,vulnerability|reflection,3,all,false,false
+classic_l3_147,classic,3,Say It Anyway,What is one thing you are finally willing to admit hurt you?,vulnerability|reflection,3,all,false,false
+classic_l3_148,classic,3,Say It Anyway,What is one thing you hope someone remembers about you after tonight?,vulnerability|reflection|hope,3,all,false,false
+classic_l3_149,classic,3,Say It Anyway,What is a truth you are ready to stop dressing up as a joke?,vulnerability|reflection|honesty,3,all,false,false
+classic_l3_150,classic,3,Say It Anyway,What is one thing you would say if you trusted that it would be received gently?,vulnerability|reflection|trust,3,all,false,false
+long_001,long_game,,The Long Game,What is something about me that has changed since you first knew me?,relationships|advanced|change,3,all,false,false
+long_002,long_game,,The Long Game,What is something about you that I may not have noticed changed?,relationships|advanced|change|perception,3,couples,false,false
+long_003,long_game,,The Long Game,"What is one pattern between us that is funny, frustrating, and probably true?",relationships|advanced|patterns,2,close_friends,false,false
+long_004,long_game,,The Long Game,When do you feel closest to me?,relationships|advanced,3,dating,false,false
+long_005,long_game,,The Long Game,When do you feel most misunderstood by me?,relationships|advanced,3,all,false,false
+long_006,long_game,,The Long Game,What is one small thing I do that means more than I realize?,relationships|advanced,2,all,false,false
+long_007,long_game,,The Long Game,What is one small thing I do that affects you more than I realize?,relationships|advanced,3,couples,false,false
+long_008,long_game,,The Long Game,What is something we used to do that you miss?,relationships|advanced,3,close_friends,false,false
+long_009,long_game,,The Long Game,What is something we do now that you hope we keep doing years from now?,relationships|advanced|hope,2,dating,false,false
+long_010,long_game,,The Long Game,What is one way our relationship has gotten easier over time?,relationships|advanced,3,all,false,false
+long_011,long_game,,The Long Game,What is one way our relationship has gotten harder over time?,relationships|advanced,3,all,false,false
+long_012,long_game,,The Long Game,What is something we avoid talking about because it would be inconvenient?,relationships|advanced,2,couples,false,false
+long_013,long_game,,The Long Game,What is something we talk about too much without actually resolving?,relationships|advanced,3,close_friends,false,false
+long_014,long_game,,The Long Game,What is something you think I need more of in this season of life?,relationships|advanced,3,dating,false,false
+long_015,long_game,,The Long Game,What is something you think I need less of in this season of life?,relationships|advanced,2,all,false,false
+long_016,long_game,,The Long Game,What is a way I show up for you that I might not give myself credit for?,relationships|advanced,3,all,false,false
+long_017,long_game,,The Long Game,What is a way you wish I showed up differently?,relationships|advanced,3,couples,false,false
+long_018,long_game,,The Long Game,What is something you think I misunderstand about myself?,relationships|advanced,2,close_friends,false,false
+long_019,long_game,,The Long Game,What is something you think I understand about you better than most people?,relationships|advanced,3,dating,false,false
+long_020,long_game,,The Long Game,What is one expectation you have of me that you have never fully said?,relationships|advanced,3,all,false,false
+long_021,long_game,,The Long Game,What is one expectation you think I have of you that we should name?,relationships|advanced,2,all,false,false
+long_022,long_game,,The Long Game,What is something that makes you feel chosen by me?,relationships|advanced,3,couples,false,false
+long_023,long_game,,The Long Game,What is something that makes you feel like an afterthought?,relationships|advanced,3,close_friends,false,false
+long_024,long_game,,The Long Game,What is a disagreement we handled better than we used to?,relationships|advanced,2,dating,false,false
+long_025,long_game,,The Long Game,What is a disagreement we still do not handle well?,relationships|advanced,3,all,false,false
+long_026,long_game,,The Long Game,What is your first sign that I am stressed?,relationships|advanced|stress,3,all,false,false
+long_027,long_game,,The Long Game,What is my first sign that you are stressed?,relationships|advanced|stress,2,couples,false,false
+long_028,long_game,,The Long Game,What do you need from me when you are overwhelmed?,relationships|advanced,3,close_friends,false,false
+long_029,long_game,,The Long Game,What do I seem to need when I am overwhelmed?,relationships|advanced,3,dating,false,false
+long_030,long_game,,The Long Game,What is one ritual we should protect?,relationships|advanced,2,all,false,false
+long_031,long_game,,The Long Game,What is one ritual we should retire?,relationships|advanced,3,all,false,false
+long_032,long_game,,The Long Game,What is something about our dynamic that outsiders probably do not understand?,relationships|advanced,3,couples,false,false
+long_033,long_game,,The Long Game,What is something outsiders might see clearly that we miss?,relationships|advanced,2,close_friends,false,false
+long_034,long_game,,The Long Game,What is a memory of us that feels underrated?,relationships|advanced|memory,3,dating,false,false
+long_035,long_game,,The Long Game,What is a memory of us that explains a lot?,relationships|advanced|memory,3,all,false,false
+long_036,long_game,,The Long Game,What is something you are proud of us for surviving?,relationships|advanced,2,all,false,false
+long_037,long_game,,The Long Game,What is something you are proud of us for building?,relationships|advanced,3,couples,false,false
+long_038,long_game,,The Long Game,What is a way we have made each other softer?,relationships|advanced,3,close_friends,false,false
+long_039,long_game,,The Long Game,What is a way we have made each other sharper?,relationships|advanced,2,dating,false,false
+long_040,long_game,,The Long Game,What is a topic where you want more honesty from me?,relationships|advanced|honesty,3,all,false,false
+long_041,long_game,,The Long Game,What is a topic where you want more gentleness from me?,relationships|advanced,3,all,false,false
+long_042,long_game,,The Long Game,What is a way we are similar that helps us?,relationships|advanced,2,couples,false,false
+long_043,long_game,,The Long Game,What is a way we are similar that hurts us?,relationships|advanced,3,close_friends,false,false
+long_044,long_game,,The Long Game,What is a difference between us that has become useful?,relationships|advanced,3,dating,false,false
+long_045,long_game,,The Long Game,What is a difference between us that still creates friction?,relationships|advanced,2,all,false,false
+long_046,long_game,,The Long Game,What is something I do when I care that I might not realize is obvious?,relationships|advanced,3,all,false,false
+long_047,long_game,,The Long Game,What is something you do when you care that I might not recognize?,relationships|advanced,3,couples,false,false
+long_048,long_game,,The Long Game,What is something you would like us to laugh about more?,relationships|advanced,2,close_friends,false,false
+long_049,long_game,,The Long Game,What is something you would like us to take more seriously?,relationships|advanced,3,dating,false,false
+long_050,long_game,,The Long Game,What is something you wish we celebrated better?,relationships|advanced,3,all,false,false
+long_051,long_game,,The Long Game,What is something you wish we recovered from faster?,relationships|advanced,2,all,false,false
+long_052,long_game,,The Long Game,What is a way I have grown that deserves more credit?,relationships|advanced,3,couples,false,false
+long_053,long_game,,The Long Game,What is a way you have grown that you want me to recognize?,relationships|advanced,3,close_friends,false,false
+long_054,long_game,,The Long Game,What is something I used to need from you that I may not need anymore?,relationships|advanced,2,dating,false,false
+long_055,long_game,,The Long Game,What is something you used to need from me that may have changed?,relationships|advanced|change,3,all,false,false
+long_056,long_game,,The Long Game,What is one thing you want us to be better at before life gets busier?,relationships|advanced,3,all,false,false
+long_057,long_game,,The Long Game,What is one thing you want us to be better at before life gets more complicated?,relationships|advanced,2,couples,false,false
+long_058,long_game,,The Long Game,What is something you hope never becomes normal between us?,relationships|advanced|hope,3,close_friends,false,false
+long_059,long_game,,The Long Game,What is something you hope becomes more normal between us?,relationships|advanced|hope,3,dating,false,false
+long_060,long_game,,The Long Game,What is one thing we should stop leaving to chance?,relationships|advanced,2,all,false,false
+long_061,long_game,,The Long Game,What is one thing we should leave more room for?,relationships|advanced,3,all,false,false
+long_062,long_game,,The Long Game,What is something I say that lands differently than I intend?,relationships|advanced,3,couples,false,false
+long_063,long_game,,The Long Game,What is something you say that you wish I understood differently?,relationships|advanced,2,close_friends,false,false
+long_064,long_game,,The Long Game,What is a moment when you felt I really had your back?,relationships|advanced,3,dating,false,false
+long_065,long_game,,The Long Game,What is a moment when you wish I had your back more clearly?,relationships|advanced,3,all,false,false
+long_066,long_game,,The Long Game,What is something I do that helps you trust me?,relationships|advanced|trust,2,all,false,false
+long_067,long_game,,The Long Game,What is something that makes trust harder between us?,relationships|advanced|trust,3,couples,false,false
+long_068,long_game,,The Long Game,What is one repair we have done well?,relationships|advanced,3,close_friends,false,false
+long_069,long_game,,The Long Game,What is one repair we still owe each other?,relationships|advanced,2,dating,false,false
+long_070,long_game,,The Long Game,What is something you forgive me for more than I know?,relationships|advanced|forgiveness,3,all,false,false
+long_071,long_game,,The Long Game,What is something you hope I forgive you for more than you know?,relationships|advanced|forgiveness|hope,3,all,false,false
+long_072,long_game,,The Long Game,What is a way we can make conflict less scary?,relationships|advanced|conflict,2,couples,false,false
+long_073,long_game,,The Long Game,What is a way we can make honesty less expensive?,relationships|advanced|honesty,3,close_friends,false,false
+long_074,long_game,,The Long Game,What is something we should not let politeness hide?,relationships|advanced,3,dating,false,false
+long_075,long_game,,The Long Game,What is something we should not let pride hide?,relationships|advanced,2,all,false,false
+long_076,long_game,,The Long Game,What is one way we are better together than apart?,relationships|advanced,3,all,false,false
+long_077,long_game,,The Long Game,What is one way we need to preserve independence?,relationships|advanced,3,couples,false,false
+long_078,long_game,,The Long Game,What is something about my future that you genuinely believe in?,relationships|advanced|future,2,couples,false,false
+long_079,long_game,,The Long Game,What is something about your future that you want me to believe in more visibly?,relationships|advanced|future,3,couples,false,false
+long_080,long_game,,The Long Game,What is one ambition of mine you want to understand better?,relationships|advanced|ambition,3,all,false,false
+long_081,long_game,,The Long Game,What is one ambition of yours you want me to understand better?,relationships|advanced|ambition,2,all,false,false
+long_082,long_game,,The Long Game,"What is something about money, work, or lifestyle we should talk about more honestly?",relationships|advanced|money|work|honesty,3,couples,false,false
+long_083,long_game,,The Long Game,What is something about family or background that still shapes us more than we admit?,relationships|advanced|family,3,couples,false,false
+long_084,long_game,,The Long Game,What is a lesson from your family that affects how you relate to me?,relationships|advanced|family,2,couples,false,false
+long_085,long_game,,The Long Game,What is a lesson from my family that you notice in how I relate to you?,relationships|advanced|family|perception,3,couples,false,false
+long_086,long_game,,The Long Game,What is one way you like being cared for that I might overlook?,relationships|advanced,3,all,false,false
+long_087,long_game,,The Long Game,What is one way I like being cared for that you think I understate?,relationships|advanced,2,couples,false,false
+long_088,long_game,,The Long Game,What is a version of us you hope we do not become?,relationships|advanced|hope,3,close_friends,false,false
+long_089,long_game,,The Long Game,What is a version of us you hope we grow into?,relationships|advanced|hope,3,dating,false,false
+long_090,long_game,,The Long Game,What is one thing we should make easier for each other?,relationships|advanced,2,all,false,false
+long_091,long_game,,The Long Game,What is one thing we should challenge each other on more?,relationships|advanced,3,all,false,false
+long_092,long_game,,The Long Game,What is something I can do this month that would make you feel supported?,relationships|advanced,3,couples,false,false
+long_093,long_game,,The Long Game,What is something you can do this month that would make me feel supported?,relationships|advanced,2,close_friends,false,false
+long_094,long_game,,The Long Game,What is a conversation we should have before it becomes urgent?,relationships|advanced,3,dating,false,false
+long_095,long_game,,The Long Game,What is a decision we should not make on autopilot?,relationships|advanced,3,all,false,false
+long_096,long_game,,The Long Game,What is something you are afraid might change between us?,relationships|advanced|change,2,all,false,false
+long_097,long_game,,The Long Game,What is something you hope changes between us?,relationships|advanced|hope|change,3,couples,false,false
+long_098,long_game,,The Long Game,What is one thing we each pretend is fine because it is easier?,relationships|advanced,3,close_friends,false,false
+long_099,long_game,,The Long Game,What is something we are stronger at than we realize?,relationships|advanced,2,dating,false,false
+long_100,long_game,,The Long Game,What is something we are weaker at than we admit?,relationships|advanced,3,all,false,false
+long_101,long_game,,The Long Game,What is one way I can love or support you more accurately?,relationships|advanced|love,3,all,false,false
+long_102,long_game,,The Long Game,What is one way you can love or support me more accurately?,relationships|advanced|love,2,couples,false,false
+long_103,long_game,,The Long Game,What is one thing you wish I would ask you more often?,relationships|advanced,3,close_friends,false,false
+long_104,long_game,,The Long Game,What is one thing you wish I would stop asking like a routine question?,relationships|advanced,3,dating,false,false
+long_105,long_game,,The Long Game,What is a way we make each other feel safe?,relationships|advanced,2,all,false,false
+long_106,long_game,,The Long Game,What is a way we accidentally make each other feel guarded?,relationships|advanced,3,all,false,false
+long_107,long_game,,The Long Game,What is a moment when you felt proud to know me?,relationships|advanced,3,couples,false,false
+long_108,long_game,,The Long Game,What is a moment when you felt grateful I knew you?,relationships|advanced|gratitude,2,close_friends,false,false
+long_109,long_game,,The Long Game,What is one thing about us that still feels rare?,relationships|advanced,3,dating,false,false
+long_110,long_game,,The Long Game,What is one thing about us that needs maintenance?,relationships|advanced,3,all,false,false
+long_111,long_game,,The Long Game,What is something we should protect from other people’s opinions?,relationships|advanced,2,all,false,false
+long_112,long_game,,The Long Game,What is something we should be willing to hear from people who care about us?,relationships|advanced,3,couples,false,false
+long_113,long_game,,The Long Game,What is a habit of mine you have come to understand better over time?,relationships|advanced,3,close_friends,false,false
+long_114,long_game,,The Long Game,What is a habit of yours you want me to understand with more generosity?,relationships|advanced,2,dating,false,false
+long_115,long_game,,The Long Game,What is a story about us you think we tell ourselves too often?,relationships|advanced,3,all,false,false
+long_116,long_game,,The Long Game,What is a better story we could tell about us?,relationships|advanced,3,all,false,false
+long_117,long_game,,The Long Game,What is something you think I am still learning how to receive?,relationships|advanced,2,couples,false,false
+long_118,long_game,,The Long Game,What is something you are still learning how to receive from me?,relationships|advanced,3,close_friends,false,false
+long_119,long_game,,The Long Game,What is one way we have become more honest?,relationships|advanced|honesty,3,dating,false,false
+long_120,long_game,,The Long Game,What is one way we still perform for each other?,relationships|advanced,2,all,false,false
+long_121,long_game,,The Long Game,What is something that would make our ordinary days better?,relationships|advanced,3,all,false,false
+long_122,long_game,,The Long Game,What is something that would make our hard days less lonely?,relationships|advanced,3,couples,false,false
+long_123,long_game,,The Long Game,"What is a promise we should renew, not because it is broken but because it matters?",relationships|advanced,2,close_friends,false,false
+long_124,long_game,,The Long Game,What is a promise we should stop making if we cannot keep it well?,relationships|advanced,3,dating,false,false
+long_125,long_game,,The Long Game,What is a way we can make appreciation less rare?,relationships|advanced,3,all,false,false
+long_126,long_game,,The Long Game,What is a way we can make resentment less likely?,relationships|advanced,2,all,false,false
+long_127,long_game,,The Long Game,What is something I should know about how you experience distance?,relationships|advanced,3,couples,false,false
+long_128,long_game,,The Long Game,What is something I should know about how you experience closeness?,relationships|advanced,3,close_friends,false,false
+long_129,long_game,,The Long Game,What is one thing you need from me when we are not at our best?,relationships|advanced,2,dating,false,false
+long_130,long_game,,The Long Game,What is one thing you want me to remember when you are not at your best?,relationships|advanced,3,all,false,false
+long_131,long_game,,The Long Game,What is one way I have surprised you over time?,relationships|advanced,3,all,false,false
+long_132,long_game,,The Long Game,What is one way you have surprised yourself in this relationship?,relationships|advanced,2,couples,false,false
+long_133,long_game,,The Long Game,What is something we got right early without realizing it?,relationships|advanced,3,close_friends,false,false
+long_134,long_game,,The Long Game,What is something we got wrong early that we can laugh about now?,relationships|advanced,3,dating,false,false
+long_135,long_game,,The Long Game,What is one question we should ask each other every year?,relationships|advanced,2,all,false,false
+long_136,long_game,,The Long Game,What is one question we should ask each other every month?,relationships|advanced,3,all,false,false
+long_137,long_game,,The Long Game,What is one question we should ask each other after a hard week?,relationships|advanced,3,couples,false,false
+long_138,long_game,,The Long Game,What is one question we should ask before making a big decision?,relationships|advanced,2,close_friends,false,false
+long_139,long_game,,The Long Game,"What is one boundary that would make us closer, not farther apart?",relationships|advanced|boundaries,3,dating,false,false
+long_140,long_game,,The Long Game,What is one boundary we already respect well?,relationships|advanced|boundaries,3,all,false,false
+long_141,long_game,,The Long Game,What is a way we can be more direct without being careless?,relationships|advanced,2,all,false,false
+long_142,long_game,,The Long Game,What is a way we can be more tender without avoiding the truth?,relationships|advanced|honesty,3,couples,false,false
+long_143,long_game,,The Long Game,What is something you admire about how I handle pressure?,relationships|advanced,3,close_friends,false,false
+long_144,long_game,,The Long Game,What is something you worry about in how I handle pressure?,relationships|advanced,2,dating,false,false
+long_145,long_game,,The Long Game,What is something you admire about how I care for people?,relationships|advanced,3,all,false,false
+long_146,long_game,,The Long Game,What is something you wish I understood about how you care for people?,relationships|advanced,3,all,false,false
+long_147,long_game,,The Long Game,What is a way our friendship or relationship has shaped your standards?,relationships|advanced|friendship,2,close_friends,false,false
+long_148,long_game,,The Long Game,What is a way knowing me has changed what you notice in people?,relationships|advanced|change|perception,3,close_friends,false,false
+long_149,long_game,,The Long Game,What is something you want us to experience together before we get too used to routine?,relationships|advanced,3,dating,false,false
+long_150,long_game,,The Long Game,What is something you want us to become better at saying no to?,relationships|advanced,2,all,false,false
+long_151,long_game,,The Long Game,What is something you want us to become better at saying yes to?,relationships|advanced,3,all,false,false
+long_152,long_game,,The Long Game,What is one thing we can do to keep curiosity alive?,relationships|advanced,3,couples,false,false
+long_153,long_game,,The Long Game,What is one thing we can do to keep playfulness alive?,relationships|advanced,2,close_friends,false,false
+long_154,long_game,,The Long Game,What is one thing we can do to keep respect visible?,relationships|advanced,3,dating,false,false
+long_155,long_game,,The Long Game,What is one thing we can do to keep tenderness from becoming assumed?,relationships|advanced,3,all,false,false
+long_156,long_game,,The Long Game,"What is one thing we can do to keep attraction, admiration, or delight from becoming background noise?",relationships|advanced|attraction,2,couples,false,false
+long_157,long_game,,The Long Game,What is something you want me to notice about the person you are becoming?,relationships|advanced|perception,3,couples,false,false
+long_158,long_game,,The Long Game,What is something you want to notice more about the person I am becoming?,relationships|advanced|perception,3,close_friends,false,false
+long_159,long_game,,The Long Game,What is one way we can make room for both change and consistency?,relationships|advanced|change,2,dating,false,false
+long_160,long_game,,The Long Game,What is one thing I know about you that you are glad I know?,relationships|advanced,3,all,false,false
+long_161,long_game,,The Long Game,What is one thing you know about me that you think I forget you know?,relationships|advanced,3,all,false,false
+long_162,long_game,,The Long Game,What is something you want us to stop keeping score about?,relationships|advanced,2,couples,false,false
+long_163,long_game,,The Long Game,What is something you want us to start tracking with more care?,relationships|advanced,3,close_friends,false,false
+long_164,long_game,,The Long Game,What is a way we unintentionally compete with each other?,relationships|advanced,3,dating,false,false
+long_165,long_game,,The Long Game,What is a way we genuinely make each other better?,relationships|advanced,2,all,false,false
+long_166,long_game,,The Long Game,What is something you want to ask me but hesitate because you think you know the answer?,relationships|advanced,3,all,false,false
+long_167,long_game,,The Long Game,What is something you want me to ask you because the answer has changed?,relationships|advanced|change,3,couples,false,false
+long_168,long_game,,The Long Game,What is a part of our relationship that feels mature?,relationships|advanced,2,close_friends,false,false
+long_169,long_game,,The Long Game,What is a part of our relationship that still feels younger than it should?,relationships|advanced,3,dating,false,false
+long_170,long_game,,The Long Game,What is one thing we should thank our past selves for?,relationships|advanced|past,3,all,false,false
+long_171,long_game,,The Long Game,What is one thing our future selves might ask us to handle now?,relationships|advanced|future,2,couples,false,false
+long_172,long_game,,The Long Game,What is something you want to repair before it becomes a story we repeat?,relationships|advanced,3,couples,false,false
+long_173,long_game,,The Long Game,What is something you want to honor before it becomes something we take for granted?,relationships|advanced,3,close_friends,false,false
+long_174,long_game,,The Long Game,What is a moment when I made your life easier?,relationships|advanced,2,dating,false,false
+long_175,long_game,,The Long Game,What is a moment when I made your life more complicated but in a way that mattered?,relationships|advanced,3,all,false,false
+long_176,long_game,,The Long Game,What is one place where you want more patience from me?,relationships|advanced,3,all,false,false
+long_177,long_game,,The Long Game,What is one place where you want more courage from me?,relationships|advanced,2,couples,false,false
+long_178,long_game,,The Long Game,What is one place where I may need more patience from you?,relationships|advanced,3,close_friends,false,false
+long_179,long_game,,The Long Game,What is one place where I may need more courage from you?,relationships|advanced,3,dating,false,false
+long_180,long_game,,The Long Game,What is something you think we are avoiding because we do not want to disappoint each other?,relationships|advanced,2,all,false,false
+long_181,long_game,,The Long Game,What is something you think we should say out loud before it turns into resentment?,relationships|advanced,3,all,false,false
+long_182,long_game,,The Long Game,What is something you would like to be able to joke about without it becoming a fight?,relationships|advanced,3,couples,false,false
+long_183,long_game,,The Long Game,What is something you would like to talk about seriously without it becoming heavy?,relationships|advanced,2,close_friends,false,false
+long_184,long_game,,The Long Game,What is one thing you hope we are still proud of ten years from now?,relationships|advanced|hope,3,dating,false,false
+long_185,long_game,,The Long Game,What is one thing you hope we have outgrown ten years from now?,relationships|advanced|hope,3,all,false,false
+long_186,long_game,,The Long Game,What is the most accurate thing you could say about us in one sentence?,relationships|advanced,2,all,false,false
+long_187,long_game,,The Long Game,What is the kindest thing you could say about us in one sentence?,relationships|advanced,3,couples,false,false
+long_188,long_game,,The Long Game,What is one thing you want to understand about me better than you do today?,relationships|advanced,3,close_friends,false,false
+long_189,long_game,,The Long Game,What is one thing you want me to understand about you better than I do today?,relationships|advanced,2,dating,false,false
+long_190,long_game,,The Long Game,What is a way I have become part of your ordinary life that still means something?,relationships|advanced,3,all,false,false
+long_191,long_game,,The Long Game,What is a way you have become part of my ordinary life that I should appreciate more?,relationships|advanced,3,all,false,false
+long_192,long_game,,The Long Game,What is something you want us to protect when things are good?,relationships|advanced,2,couples,false,false
+long_193,long_game,,The Long Game,What is something you want us to remember when things are hard?,relationships|advanced,3,close_friends,false,false
+long_194,long_game,,The Long Game,What is one thing we should do after this conversation because talking is not enough?,relationships|advanced,3,dating,false,false
+long_195,long_game,,The Long Game,What is one thing we should revisit because the old answer may no longer be true?,relationships|advanced,2,all,false,false
+long_196,long_game,,The Long Game,What is one part of our dynamic that deserves more gratitude than analysis?,relationships|advanced|gratitude,3,all,false,false
+long_197,long_game,,The Long Game,What is one part of our dynamic that deserves more analysis than avoidance?,relationships|advanced,3,couples,false,false
+long_198,long_game,,The Long Game,What is something we should make explicit before assumptions do the job badly?,relationships|advanced,2,close_friends,false,false
+long_199,long_game,,The Long Game,What is one way we can stay generous with each other when we are tired?,relationships|advanced,3,dating,false,false
+long_200,long_game,,The Long Game,What is one way we can make room for the versions of us we have not become yet?,relationships|advanced,3,all,false,false
+afterdark_001,after_dark,4,After Dark,What is something you find attractive that you rarely admit out loud?,adult|spicy|attraction,4,all,true,true
+afterdark_002,after_dark,4,After Dark,What kind of confidence is most attractive to you?,adult|spicy|attraction|confidence,4,all,true,true
+afterdark_003,after_dark,4,After Dark,What is the difference between someone being hot and someone having chemistry with you?,adult|spicy|chemistry,4,all,true,true
+afterdark_004,after_dark,4,After Dark,When do you feel most desirable?,adult|spicy,4,all,true,true
+afterdark_005,after_dark,4,After Dark,What is a green flag that instantly makes someone more attractive?,adult|spicy|attraction|green flags,4,all,true,true
+afterdark_006,after_dark,4,After Dark,What is something romantic that would probably work embarrassingly well on you?,adult|spicy|work|romance,4,all,true,true
+afterdark_007,after_dark,4,After Dark,What is a non-obvious turn-on for you?,adult|spicy,4,all,true,true
+afterdark_008,after_dark,4,After Dark,What is a non-obvious turn-off for you?,adult|spicy,4,all,true,true
+afterdark_009,after_dark,4,After Dark,What is something you wish people were better at communicating in intimate situations?,adult|spicy|intimacy,4,all,true,true
+afterdark_010,after_dark,4,After Dark,"What is one boundary that makes intimacy better, not worse?",adult|spicy|boundaries|intimacy,4,all,true,true
+afterdark_011,after_dark,4,After Dark,What is a flirtation style that actually works on you?,adult|spicy|work|flirtation,4,all,true,true
+afterdark_012,after_dark,4,After Dark,What is a flirtation style that makes you want to leave immediately?,adult|spicy|flirtation,4,all,true,true
+afterdark_013,after_dark,4,After Dark,What makes someone feel safe enough to be bold with?,adult|spicy,4,all,true,true
+afterdark_014,after_dark,4,After Dark,What makes someone feel exciting enough to take seriously?,adult|spicy,4,all,true,true
+afterdark_015,after_dark,4,After Dark,What is something you want someone to notice before making a move?,adult|spicy|perception,4,all,true,true
+afterdark_016,after_dark,4,After Dark,What is something that makes a kiss memorable?,adult|spicy|physicality,4,all,true,true
+afterdark_017,after_dark,4,After Dark,What is something that makes physical chemistry disappear quickly?,adult|spicy|chemistry,4,all,true,true
+afterdark_018,after_dark,4,After Dark,What is something that makes physical chemistry build slowly?,adult|spicy|chemistry,4,all,true,true
+afterdark_019,after_dark,4,After Dark,What is a compliment about attraction that would actually land with you?,adult|spicy|attraction|compliments,4,all,true,true
+afterdark_020,after_dark,4,After Dark,What is a compliment that would make you suspicious?,adult|spicy|compliments,4,all,true,true
+afterdark_021,after_dark,4,After Dark,What is a romantic gesture that sounds cheesy but would work on you?,adult|spicy|work|romance,4,all,true,true
+afterdark_022,after_dark,4,After Dark,What is a romantic gesture that sounds good in theory but not for you?,adult|spicy|romance,4,all,true,true
+afterdark_023,after_dark,4,After Dark,What is your most underrated attractive quality?,adult|spicy|attraction,4,all,true,true
+afterdark_024,after_dark,4,After Dark,What is your most overrated attractive quality?,adult|spicy|attraction,4,all,true,true
+afterdark_025,after_dark,4,After Dark,What is something people might misread about your dating style?,adult|spicy|dating,4,all,true,true
+afterdark_026,after_dark,4,After Dark,What is something people might underestimate about your romantic side?,adult|spicy|romance,4,all,true,true
+afterdark_027,after_dark,4,After Dark,What is a situation where you become more flirtatious than usual?,adult|spicy|flirtation,4,all,true,true
+afterdark_028,after_dark,4,After Dark,What is a situation where you become more guarded than usual?,adult|spicy,4,all,true,true
+afterdark_029,after_dark,4,After Dark,What is something that makes someone feel instantly more mature romantically?,adult|spicy|romance,4,all,true,true
+afterdark_030,after_dark,4,After Dark,What is something that makes someone feel instantly less mature romantically?,adult|spicy|romance,4,all,true,true
+afterdark_031,after_dark,4,After Dark,What is the hottest form of emotional intelligence?,adult|spicy,4,all,true,true
+afterdark_032,after_dark,4,After Dark,What is the least sexy communication habit?,adult|spicy|sex|communication,4,all,true,true
+afterdark_033,after_dark,4,After Dark,What is a question you wish people asked before assuming what you want?,adult|spicy,4,all,true,true
+afterdark_034,after_dark,4,After Dark,What is a question you wish more people asked after intimacy?,adult|spicy|intimacy,4,all,true,true
+afterdark_035,after_dark,4,After Dark,What is something that makes you feel respected while flirting?,adult|spicy|flirtation,4,all,true,true
+afterdark_036,after_dark,4,After Dark,What is something that makes flirting feel performative?,adult|spicy|flirtation,4,all,true,true
+afterdark_037,after_dark,4,After Dark,What is a kind of eye contact that works on you?,adult|spicy|work,4,all,true,true
+afterdark_038,after_dark,4,After Dark,What is a kind of attention that feels too intense too quickly?,adult|spicy,4,all,true,true
+afterdark_039,after_dark,4,After Dark,What is something you want to be teased about playfully?,adult|spicy,4,all,true,true
+afterdark_040,after_dark,4,After Dark,What is something you do not want anyone to tease you about?,adult|spicy,4,all,true,true
+afterdark_041,after_dark,4,After Dark,What is the difference between playful tension and actual pressure?,adult|spicy,4,all,true,true
+afterdark_042,after_dark,4,After Dark,What is the difference between confidence and entitlement?,adult|spicy|confidence,4,all,true,true
+afterdark_043,after_dark,4,After Dark,What is the difference between desire and validation-seeking?,adult|spicy|desire,4,all,true,true
+afterdark_044,after_dark,4,After Dark,What is the difference between mystery and avoidance?,adult|spicy,4,all,true,true
+afterdark_045,after_dark,4,After Dark,What is something that makes slow-burn attraction powerful?,adult|spicy|attraction,4,all,true,true
+afterdark_046,after_dark,4,After Dark,What is something that makes instant attraction dangerous?,adult|spicy|attraction,4,all,true,true
+afterdark_047,after_dark,4,After Dark,What is a romantic risk you respect even when it does not work?,adult|spicy|work|romance,4,all,true,true
+afterdark_048,after_dark,4,After Dark,What is a romantic risk you think people take too casually?,adult|spicy|romance,4,all,true,true
+afterdark_049,after_dark,4,After Dark,What is something you have become more honest about wanting?,adult|spicy|honesty,4,all,true,true
+afterdark_050,after_dark,4,After Dark,What is something you have become less willing to tolerate?,adult|spicy,4,all,true,true
+afterdark_051,after_dark,4,After Dark,What is a dating lesson you wish you had learned earlier?,adult|spicy|dating,4,all,true,true
+afterdark_052,after_dark,4,After Dark,What is an intimacy lesson you wish more people learned earlier?,adult|spicy|intimacy,4,all,true,true
+afterdark_053,after_dark,4,After Dark,What is a moment when someone made you feel genuinely wanted?,adult|spicy,4,all,true,true
+afterdark_054,after_dark,4,After Dark,What is a moment when someone made you feel like a prize instead of a person?,adult|spicy,4,all,true,true
+afterdark_055,after_dark,4,After Dark,What is a small act of consideration that feels surprisingly attractive?,adult|spicy|attraction,4,all,true,true
+afterdark_056,after_dark,4,After Dark,What is a small act of care that makes intimacy easier?,adult|spicy|intimacy,4,all,true,true
+afterdark_057,after_dark,4,After Dark,What is a small act of care that people mistake for romance but is not enough?,adult|spicy,4,all,true,true
+afterdark_058,after_dark,4,After Dark,What is something you need to feel emotionally safe with someone?,adult|spicy,4,all,true,true
+afterdark_059,after_dark,4,After Dark,What is something you need to feel physically comfortable with someone?,adult|spicy|comfort,4,all,true,true
+afterdark_060,after_dark,4,After Dark,What is something you wish a partner could ask without making it awkward?,adult|spicy,4,all,true,true
+afterdark_061,after_dark,4,After Dark,What is something you wish you could ask without making it awkward?,adult|spicy,4,all,true,true
+afterdark_062,after_dark,4,After Dark,What is something you are shy about even when you seem confident?,adult|spicy,4,all,true,true
+afterdark_063,after_dark,4,After Dark,What is something you are confident about even if you do not say it?,adult|spicy,4,all,true,true
+afterdark_064,after_dark,4,After Dark,What is a kind of boldness you admire?,adult|spicy,4,all,true,true
+afterdark_065,after_dark,4,After Dark,What is a kind of boldness that makes you uncomfortable?,adult|spicy|comfort,4,all,true,true
+afterdark_066,after_dark,4,After Dark,What is something you think people get wrong about desire?,adult|spicy|desire,4,all,true,true
+afterdark_067,after_dark,4,After Dark,What is something you think people get wrong about commitment?,adult|spicy,4,all,true,true
+afterdark_068,after_dark,4,After Dark,What is something you think people get wrong about casual dating?,adult|spicy|dating,4,all,true,true
+afterdark_069,after_dark,4,After Dark,What is something you think people get wrong about long-term attraction?,adult|spicy|attraction,4,all,true,true
+afterdark_070,after_dark,4,After Dark,What is a reason someone becomes more attractive over time?,adult|spicy|attraction,4,all,true,true
+afterdark_071,after_dark,4,After Dark,What is a reason someone becomes less attractive over time?,adult|spicy|attraction,4,all,true,true
+afterdark_072,after_dark,4,After Dark,"What is an outfit, scent, or detail that can quietly change the mood?",adult|spicy|change,4,all,true,true
+afterdark_073,after_dark,4,After Dark,What is a mood that makes you feel more open to romance?,adult|spicy,4,all,true,true
+afterdark_074,after_dark,4,After Dark,What is a mood that makes you want distance instead?,adult|spicy,4,all,true,true
+afterdark_075,after_dark,4,After Dark,What is a line between privacy and secrecy in dating?,adult|spicy|dating,4,all,true,true
+afterdark_076,after_dark,4,After Dark,What is a line between independence and emotional distance?,adult|spicy,4,all,true,true
+afterdark_077,after_dark,4,After Dark,What is a line between being desired and being objectified?,adult|spicy|desire,4,all,true,true
+afterdark_078,after_dark,4,After Dark,What is a line between spontaneous and inconsiderate?,adult|spicy,4,all,true,true
+afterdark_079,after_dark,4,After Dark,What is something you would want someone to know before dating you seriously?,adult|spicy|dating,4,all,true,true
+afterdark_080,after_dark,4,After Dark,What is something you would want someone to know before getting physically close to you?,adult|spicy,4,all,true,true
+afterdark_081,after_dark,4,After Dark,What is something that helps you relax on a date?,adult|spicy|dating,4,all,true,true
+afterdark_082,after_dark,4,After Dark,What is something that makes you overthink on a date?,adult|spicy|dating,4,all,true,true
+afterdark_083,after_dark,4,After Dark,What is a date idea that would make you feel genuinely understood?,adult|spicy|dating,4,all,true,true
+afterdark_084,after_dark,4,After Dark,"What is a date idea that would make you think, they get me?",adult|spicy|dating,4,all,true,true
+afterdark_085,after_dark,4,After Dark,"What is a date idea that would make you think, they absolutely do not get me?",adult|spicy|dating,4,all,true,true
+afterdark_086,after_dark,4,After Dark,What is something you find attractive in someone’s voice?,adult|spicy|attraction,4,all,true,true
+afterdark_087,after_dark,4,After Dark,"What is something you find attractive in someone’s hands, posture, or presence?",adult|spicy|attraction,4,all,true,true
+afterdark_088,after_dark,4,After Dark,What is something you find attractive in how someone listens?,adult|spicy|attraction,4,all,true,true
+afterdark_089,after_dark,4,After Dark,What is something you find attractive in how someone disagrees?,adult|spicy|attraction,4,all,true,true
+afterdark_090,after_dark,4,After Dark,What is a way someone can make consent feel natural instead of awkward?,adult|spicy|consent,4,all,true,true
+afterdark_091,after_dark,4,After Dark,What is a way someone can check in without killing the mood?,adult|spicy,4,all,true,true
+afterdark_092,after_dark,4,After Dark,What is a way someone can make space for a no without taking it personally?,adult|spicy,4,all,true,true
+afterdark_093,after_dark,4,After Dark,What is a way someone can make a yes feel more enthusiastic?,adult|spicy,4,all,true,true
+afterdark_094,after_dark,4,After Dark,What is something you wish more people understood about pacing?,adult|spicy,4,all,true,true
+afterdark_095,after_dark,4,After Dark,What is something you wish more people understood about anticipation?,adult|spicy,4,all,true,true
+afterdark_096,after_dark,4,After Dark,"What is something you wish more people understood about aftercare, even outside of sex?",adult|spicy|sex,4,all,true,true
+afterdark_097,after_dark,4,After Dark,What is something you wish more people understood about emotional timing?,adult|spicy,4,all,true,true
+afterdark_098,after_dark,4,After Dark,What is a time when patience made someone more attractive?,adult|spicy|attraction,4,all,true,true
+afterdark_099,after_dark,4,After Dark,What is a time when impatience made someone less attractive?,adult|spicy|attraction,4,all,true,true
+afterdark_100,after_dark,4,After Dark,What is a kind of chemistry that is fun but not sustainable?,adult|spicy|chemistry,4,all,true,true
+afterdark_101,after_dark,4,After Dark,What is a kind of chemistry that is quieter but more promising?,adult|spicy|chemistry,4,all,true,true
+afterdark_102,after_dark,4,After Dark,What is a sign that someone is good at making another person comfortable?,adult|spicy|comfort,4,all,true,true
+afterdark_103,after_dark,4,After Dark,What is a sign that someone is mostly trying to impress themselves?,adult|spicy,4,all,true,true
+afterdark_104,after_dark,4,After Dark,What is something that makes you feel pursued in a good way?,adult|spicy,4,all,true,true
+afterdark_105,after_dark,4,After Dark,What is something that makes you feel pressured in a bad way?,adult|spicy,4,all,true,true
+afterdark_106,after_dark,4,After Dark,What is your most underrated dating green flag?,adult|spicy|dating|green flags,4,all,true,true
+afterdark_107,after_dark,4,After Dark,What is your most underrated dating yellow flag?,adult|spicy|dating,4,all,true,true
+afterdark_108,after_dark,4,After Dark,What is a red flag you have learned not to negotiate with?,adult|spicy|red flags,4,all,true,true
+afterdark_109,after_dark,4,After Dark,What is a yellow flag that depends entirely on context?,adult|spicy,4,all,true,true
+afterdark_110,after_dark,4,After Dark,What is a romantic opinion you have that might divide the room?,adult|spicy|romance,4,all,true,true
+afterdark_111,after_dark,4,After Dark,What is a sexual or intimacy opinion you have that is more thoughtful than spicy?,adult|spicy|sex|intimacy,4,all,true,true
+afterdark_112,after_dark,4,After Dark,What is something you used to think was attractive but now find exhausting?,adult|spicy|attraction,4,all,true,true
+afterdark_113,after_dark,4,After Dark,What is something you used to find intimidating but now find attractive?,adult|spicy|dating|attraction,4,all,true,true
+afterdark_114,after_dark,4,After Dark,What is a way someone can be direct without being crude?,adult|spicy,4,all,true,true
+afterdark_115,after_dark,4,After Dark,What is a way someone can be playful without being unserious?,adult|spicy,4,all,true,true
+afterdark_116,after_dark,4,After Dark,What is a way someone can be sensual without being performative?,adult|spicy,4,all,true,true
+afterdark_117,after_dark,4,After Dark,What is a way someone can be vulnerable without forcing intimacy?,adult|spicy|intimacy|vulnerability,4,all,true,true
+afterdark_118,after_dark,4,After Dark,What is something you want more people to understand about your boundaries?,adult|spicy,4,all,true,true
+afterdark_119,after_dark,4,After Dark,What is something you want more people to understand about your desire?,adult|spicy|desire,4,all,true,true
+afterdark_120,after_dark,4,After Dark,What is something you want more people to understand about your comfort zone?,adult|spicy|comfort,4,all,true,true
+afterdark_121,after_dark,4,After Dark,What is something you want more people to understand about how you build trust?,adult|spicy|trust,4,all,true,true
+afterdark_122,after_dark,4,After Dark,What is a romantic assumption people make that annoys you?,adult|spicy|romance,4,all,true,true
+afterdark_123,after_dark,4,After Dark,What is a sexual assumption people make that annoys you?,adult|spicy|sex,4,all,true,true
+afterdark_124,after_dark,4,After Dark,What is a dating script you are tired of?,adult|spicy|dating,4,all,true,true
+afterdark_125,after_dark,4,After Dark,What is a dating script you secretly enjoy?,adult|spicy|dating,4,all,true,true
+afterdark_126,after_dark,4,After Dark,What is something that makes texting feel flirtatious instead of logistical?,adult|spicy|flirtation,4,all,true,true
+afterdark_127,after_dark,4,After Dark,What is something that makes texting feel exhausting instead of exciting?,adult|spicy,4,all,true,true
+afterdark_128,after_dark,4,After Dark,What is a message that would make you smile because it is bold but respectful?,adult|spicy,4,all,true,true
+afterdark_129,after_dark,4,After Dark,What is a message that would make you lose interest immediately?,adult|spicy,4,all,true,true
+afterdark_130,after_dark,4,After Dark,What is something you appreciate when someone plans a date?,adult|spicy|dating,4,all,true,true
+afterdark_131,after_dark,4,After Dark,What is something you appreciate when someone follows up after a date?,adult|spicy|dating,4,all,true,true
+afterdark_132,after_dark,4,After Dark,What is something that makes you want a second date?,adult|spicy|dating,4,all,true,true
+afterdark_133,after_dark,4,After Dark,What is something that makes you know there should not be a second date?,adult|spicy|dating,4,all,true,true
+afterdark_134,after_dark,4,After Dark,What is a type of romantic attention you crave when you are honest with yourself?,adult|spicy|romance|honesty,4,all,true,true
+afterdark_135,after_dark,4,After Dark,"What is a type of romantic attention you do not actually want, even if it sounds flattering?",adult|spicy|romance,4,all,true,true
+afterdark_136,after_dark,4,After Dark,What is something that makes you feel emotionally naked?,adult|spicy,4,all,true,true
+afterdark_137,after_dark,4,After Dark,What is something that makes you feel physically at ease?,adult|spicy,4,all,true,true
+afterdark_138,after_dark,4,After Dark,What is a question that could make a date go from polite to real?,adult|spicy|dating,4,all,true,true
+afterdark_139,after_dark,4,After Dark,What is a question that could make a date go from real to dangerous in a good way?,adult|spicy|dating,4,all,true,true
+afterdark_140,after_dark,4,After Dark,What is a question that is too intimate too soon?,adult|spicy|intimacy,4,all,true,true
+afterdark_141,after_dark,4,After Dark,What is a question that people avoid for too long?,adult|spicy,4,all,true,true
+afterdark_142,after_dark,4,After Dark,What is something you want to know about someone before desire gets involved?,adult|spicy|desire,4,all,true,true
+afterdark_143,after_dark,4,After Dark,What is something you want to know about someone before commitment gets involved?,adult|spicy,4,all,true,true
+afterdark_144,after_dark,4,After Dark,What is something you want someone to know about your history without needing all the details?,adult|spicy,4,all,true,true
+afterdark_145,after_dark,4,After Dark,What is something you want someone to know about your standards before things get confusing?,adult|spicy,4,all,true,true
+afterdark_146,after_dark,4,After Dark,"What is a fantasy in the broad sense: a feeling, dynamic, or scene you find compelling?",adult|spicy,4,all,true,true
+afterdark_147,after_dark,4,After Dark,What is a romantic dynamic you are drawn to in movies but would question in real life?,adult|spicy|romance,4,all,true,true
+afterdark_148,after_dark,4,After Dark,What is a romantic dynamic you used to dismiss but now understand?,adult|spicy|romance,4,all,true,true
+afterdark_149,after_dark,4,After Dark,What is an intimacy dynamic that only works with trust?,adult|spicy|work|trust|intimacy,4,all,true,true
+afterdark_150,after_dark,4,After Dark,What is something that makes a person feel magnetic to you?,adult|spicy,4,all,true,true
+afterdark_151,after_dark,4,After Dark,What is something that makes a person feel safe to you?,adult|spicy,4,all,true,true
+afterdark_152,after_dark,4,After Dark,What is something that makes a person feel addictive but maybe not good for you?,adult|spicy,4,all,true,true
+afterdark_153,after_dark,4,After Dark,What is something that makes a person feel genuinely good for you?,adult|spicy,4,all,true,true
+afterdark_154,after_dark,4,After Dark,What is a small sign that someone is attentive in bed without being explicit?,adult|spicy,4,all,true,true
+afterdark_155,after_dark,4,After Dark,What is a small sign that someone is selfish in intimacy without being explicit?,adult|spicy|intimacy,4,all,true,true
+afterdark_156,after_dark,4,After Dark,What is something that makes communication about sex easier?,adult|spicy|sex|communication,4,all,true,true
+afterdark_157,after_dark,4,After Dark,What is something that makes communication about sex harder?,adult|spicy|sex|communication,4,all,true,true
+afterdark_158,after_dark,4,After Dark,What is something you wish people could say without shame?,adult|spicy,4,all,true,true
+afterdark_159,after_dark,4,After Dark,What is something you wish people could hear without ego?,adult|spicy,4,all,true,true
+afterdark_160,after_dark,4,After Dark,What is a way you like to be reassured when things get vulnerable?,adult|spicy|vulnerability,4,all,true,true
+afterdark_161,after_dark,4,After Dark,What is a way you like to reassure someone else when things get vulnerable?,adult|spicy|vulnerability,4,all,true,true
+afterdark_162,after_dark,4,After Dark,What is something that helps you stay present instead of performing?,adult|spicy,4,all,true,true
+afterdark_163,after_dark,4,After Dark,What is something that makes intimacy feel like a performance?,adult|spicy|intimacy,4,all,true,true
+afterdark_164,after_dark,4,After Dark,What is a kind of romantic confidence that does not need to announce itself?,adult|spicy|romance|confidence,4,all,true,true
+afterdark_165,after_dark,4,After Dark,What is a kind of sexual confidence that comes from kindness?,adult|spicy|sex|confidence,4,all,true,true
+afterdark_166,after_dark,4,After Dark,What is something you find attractive because it suggests self-control?,adult|spicy|attraction,4,all,true,true
+afterdark_167,after_dark,4,After Dark,What is something you find attractive because it suggests imagination?,adult|spicy|attraction,4,all,true,true
+afterdark_168,after_dark,4,After Dark,What is something you find attractive because it suggests patience?,adult|spicy|attraction,4,all,true,true
+afterdark_169,after_dark,4,After Dark,What is something you find attractive because it suggests courage?,adult|spicy|attraction,4,all,true,true
+afterdark_170,after_dark,4,After Dark,What is a harmlessly spicy truth about your taste?,adult|spicy|honesty,4,all,true,true
+afterdark_171,after_dark,4,After Dark,What is a spicy question you would answer only if everyone else answered too?,adult|spicy,4,all,true,true
+afterdark_172,after_dark,4,After Dark,What is a question that would reveal your dating standards quickly?,adult|spicy|dating,4,all,true,true
+afterdark_173,after_dark,4,After Dark,What is a question that would reveal your intimacy standards quickly?,adult|spicy|intimacy,4,all,true,true
+afterdark_174,after_dark,4,After Dark,What is a question that would reveal whether someone can handle honesty?,adult|spicy|honesty,4,all,true,true
+afterdark_175,after_dark,4,After Dark,What is a question that would reveal whether someone can handle tenderness?,adult|spicy,4,all,true,true
+afterdark_176,after_dark,4,After Dark,What is something you would rather discuss before things get physical?,adult|spicy,4,all,true,true
+afterdark_177,after_dark,4,After Dark,What is something you would rather learn naturally than discuss directly?,adult|spicy,4,all,true,true
+afterdark_178,after_dark,4,After Dark,"What is a way someone can make you feel beautiful, handsome, or desired without saying the obvious?",adult|spicy|desire,4,all,true,true
+afterdark_179,after_dark,4,After Dark,What is a way someone can make you feel seen instead of just wanted?,adult|spicy,4,all,true,true
+afterdark_180,after_dark,4,After Dark,What is a way someone can make you feel wanted without making you feel managed?,adult|spicy,4,all,true,true
+afterdark_181,after_dark,4,After Dark,What is a way someone can make you feel free while still making you feel chosen?,adult|spicy,4,all,true,true
+afterdark_182,after_dark,4,After Dark,What is something you want to be more playful about?,adult|spicy,4,all,true,true
+afterdark_183,after_dark,4,After Dark,What is something you want to be more honest about?,adult|spicy|honesty,4,all,true,true
+afterdark_184,after_dark,4,After Dark,What is something you want to be more patient about?,adult|spicy,4,all,true,true
+afterdark_185,after_dark,4,After Dark,What is something you want to be more unapologetic about?,adult|spicy|repair,4,all,true,true
+afterdark_186,after_dark,4,After Dark,What is an attraction pattern you understand better now?,adult|spicy|attraction|patterns,4,all,true,true
+afterdark_187,after_dark,4,After Dark,What is an attraction pattern you still do not fully trust?,adult|spicy|trust|attraction|patterns,4,all,true,true
+afterdark_188,after_dark,4,After Dark,What is a mistake people make when trying to be sexy?,adult|spicy|sex,4,all,true,true
+afterdark_189,after_dark,4,After Dark,What is a mistake people make when trying to be romantic?,adult|spicy|romance,4,all,true,true
+afterdark_190,after_dark,4,After Dark,What is a mistake people make when trying to seem chill?,adult|spicy,4,all,true,true
+afterdark_191,after_dark,4,After Dark,What is a mistake people make when trying to seem mysterious?,adult|spicy,4,all,true,true
+afterdark_192,after_dark,4,After Dark,What is something you wish you could tell your future partner earlier?,adult|spicy|future,4,all,true,true
+afterdark_193,after_dark,4,After Dark,What is something you hope a future partner will notice without being told?,adult|spicy|future|hope|perception,4,all,true,true
+afterdark_194,after_dark,4,After Dark,What is something you hope a future partner will ask directly?,adult|spicy|future|hope,4,all,true,true
+afterdark_195,after_dark,4,After Dark,What is something you hope a future partner will never make you feel embarrassed for wanting?,adult|spicy|future|hope,4,all,true,true
+afterdark_196,after_dark,4,After Dark,What is a romantic or intimate standard you are done lowering?,adult|spicy|intimacy|romance,4,all,true,true
+afterdark_197,after_dark,4,After Dark,What is a romantic or intimate standard you are still learning how to communicate?,adult|spicy|intimacy|romance,4,all,true,true
+afterdark_198,after_dark,4,After Dark,What is a reason you might pull away even when you are interested?,adult|spicy,4,all,true,true
+afterdark_199,after_dark,4,After Dark,What is a reason you might lean in even when you are nervous?,adult|spicy,4,all,true,true
+afterdark_200,after_dark,4,After Dark,What is a move that is attractive only when the person has earned the moment?,adult|spicy|attraction,4,all,true,true
