@@ -247,6 +247,7 @@ export default function SettingsModal({
 
             {/* After Dark */}
             <div className="py-3 border-b border-border">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-2">18+ · After Dark</p>
               {afterDarkUnlocked ? (
                 <Button
                   variant="ghost"
