@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import HowToPlayModal from "@/components/HowToPlayModal";
 import ConfirmModal from "@/components/ConfirmModal";
@@ -93,7 +92,6 @@ export default function SettingsModal({
   onEnableTk, onOpenTkSetup, onDisableTk,
   onTkPassTurn, onTkResetTurns, onTkShuffleOrder,
 }: SettingsModalProps) {
-  const [secretCode,    setSecretCode]    = useState("");
   const [copied,        setCopied]        = useState(false);
   const [statsOpen,     setStatsOpen]     = useState(false);
   const [howToPlayOpen, setHowToPlayOpen] = useState(false);
@@ -103,16 +101,6 @@ export default function SettingsModal({
     navigator.clipboard.writeText(roomCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleSecretCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value.toUpperCase();
-    setSecretCode(val);
-    if (val === "AFTERDARK" && !afterDarkUnlocked) {
-      setSecretCode("");
-      onUnlockAfterDark();
-      onOpenChange(false);
-    }
   };
 
   const askConfirm = (cfg: ConfirmState) => setConfirm(cfg);
@@ -379,15 +367,13 @@ export default function SettingsModal({
                   <span className="text-base">🔒</span> Lock After Dark
                 </Button>
               ) : (
-                <div className="space-y-2">
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Unlock After Dark</p>
-                  <Input
-                    placeholder="Enter secret code..."
-                    value={secretCode}
-                    onChange={handleSecretCode}
-                    className="bg-background text-center tracking-widest uppercase"
-                  />
-                </div>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
+                  onClick={() => { onOpenChange(false); onUnlockAfterDark(); }}
+                >
+                  <span className="text-base">🔞</span> Unlock After Dark
+                </Button>
               )}
             </div>
 
