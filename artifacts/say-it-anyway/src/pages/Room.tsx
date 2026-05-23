@@ -437,7 +437,7 @@ export default function Room() {
 
           {activeMode === "long_game" && (
             <div className="space-y-3">
-              <p className="text-center text-xs text-muted-foreground/70 italic">
+              <p className="text-center text-xs text-muted-foreground/70 italic text-balance">
                 For people who already know the biography and want the operating manual.
               </p>
               <div className="flex items-center justify-center gap-2 overflow-x-auto scrollbar-none pb-1 px-2">
