@@ -194,6 +194,14 @@ const RELEASES: Release[] = [
       "Turn Keeper is local and session-based on this device — it is not synced across multiple devices.",
     ],
   },
+  {
+    version: "v16",
+    title: "Privacy Fix & After Dark Age Gate",
+    items: [
+      "Fixed Private Mode — it now correctly prevents cards from being added to Recently Played when enabled.",
+      "Replaced the After Dark secret code with birthday-based age verification. Users must confirm they are 18 or older before unlocking.",
+    ],
+  },
 ];
 
 const ARCHITECTURE = [
