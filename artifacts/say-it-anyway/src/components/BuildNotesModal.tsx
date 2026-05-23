@@ -202,6 +202,15 @@ const RELEASES: Release[] = [
       "Replaced the After Dark secret code with birthday-based age verification. Users must confirm they are 18 or older before unlocking.",
     ],
   },
+  {
+    version: "v17",
+    title: "Save as Web App",
+    items: [
+      "Added a collapsible install guide on the home page for saving Say It Anyway to your home screen.",
+      "Covers iPhone/iPad (Safari) and Android (Chrome) with step-by-step instructions.",
+      "The guide is collapsed by default so the home page stays on one screen.",
+    ],
+  },
 ];
 
 const ARCHITECTURE = [
