@@ -71,6 +71,16 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <div className="text-center mb-4 sm:mb-7">
+        {/* Mini card stack */}
+        <div className="relative w-10 h-14 mx-auto mb-3" aria-hidden="true">
+          <div className="absolute inset-0 rounded-lg bg-card border border-border/50 shadow-sm"
+            style={{ transform: "rotate(-4deg) translateY(3px)", opacity: 0.5 }} />
+          <div className="absolute inset-0 rounded-lg bg-card border border-border/50 shadow-sm"
+            style={{ transform: "rotate(2.5deg) translateY(1.5px)", opacity: 0.72 }} />
+          <div className="absolute inset-0 rounded-lg bg-card border border-border/60 shadow-sm flex items-center justify-center">
+            <span className="font-serif text-lg text-foreground/22" style={{ lineHeight: 1 }}>&ldquo;</span>
+          </div>
+        </div>
         <h1 className="text-3xl sm:text-5xl font-serif font-medium tracking-tight text-primary mb-1">
           Say It Anyway
         </h1>
