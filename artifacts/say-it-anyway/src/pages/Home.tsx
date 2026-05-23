@@ -69,12 +69,12 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-[100dvh] w-full flex flex-col items-center justify-center px-4 py-4 sm:p-8 bg-background">
+    <div className="min-h-[100dvh] w-full flex flex-col items-center justify-center px-4 py-2 sm:p-8 bg-background">
 
       {/* ── Hero ── */}
-      <div className="text-center mb-4 sm:mb-7">
+      <div className="text-center mb-2 sm:mb-7">
         {/* Mini card stack */}
-        <div className="relative w-10 h-14 mx-auto mb-3" aria-hidden="true">
+        <div className="relative w-10 h-14 mx-auto mb-2" aria-hidden="true">
           <div className="absolute inset-0 rounded-lg bg-card border border-border/50 shadow-sm"
             style={{ transform: "rotate(-4deg) translateY(3px)", opacity: 0.5 }} />
           <div className="absolute inset-0 rounded-lg bg-card border border-border/50 shadow-sm"
@@ -90,7 +90,7 @@ export default function Home() {
       </div>
 
       {/* ── Two-panel layout ── */}
-      <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-3 items-start">
+      <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-2 items-start">
 
         {/* ── PRIMARY ── */}
         <div className="bg-card border border-border/60 rounded-2xl shadow-sm p-4 sm:p-6 space-y-3">
@@ -182,7 +182,7 @@ export default function Home() {
       </div>
 
       {/* ── Home screen tip ── */}
-      <div className="w-full max-w-2xl mt-5 mb-1">
+      <div className="w-full max-w-2xl mt-2 mb-1">
         <div className="rounded-2xl border border-border/40 bg-secondary/20 px-5 py-3">
           <button
             onClick={() => setInstallOpen(v => !v)}
