@@ -1,11 +1,45 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
-import { 
-  useGetRoom, 
-  useUpdateRoomState, 
+import { useEffect, useRef, useCallback, useMemo, useState } from "react";
+import {
+  useGetRoom,
+  useUpdateRoomState,
   useRecordCardHistory,
   getGetRoomQueryKey
 } from "@workspace/api-client-react";
 import { cards, Card } from "@/data/cardData";
+
+// ---------------------------------------------------------------------------
+// Pure helpers (outside hook — no closure captures)
+// ---------------------------------------------------------------------------
+
+function computeFilteredDeck(mode: string, level: number, filter: string): Card[] {
+  return cards.filter(card => {
+    if (card.mode !== mode) return false;
+    if (mode !== "after_dark" && (card.is_hidden || card.is_adult)) return false;
+    if (mode === "classic") return card.level === level;
+    if (mode === "long_game") {
+      if (
+        filter !== "all" &&
+        card.relationship_context !== filter &&
+        card.relationship_context !== "all"
+      ) return false;
+      return true;
+    }
+    return true; // after_dark
+  });
+}
+
+function buildShuffledDeck(deck: Card[]): string[] {
+  const ids = deck.map(c => c.id);
+  for (let i = ids.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [ids[i], ids[j]] = [ids[j], ids[i]];
+  }
+  return ids;
+}
+
+// ---------------------------------------------------------------------------
+// Hook
+// ---------------------------------------------------------------------------
 
 export function useGameLogic(roomCode: string) {
   const { data: room, isLoading } = useGetRoom(roomCode, {
@@ -19,192 +53,215 @@ export function useGameLogic(roomCode: string) {
   const { mutate: updateRoom } = useUpdateRoomState();
   const { mutate: recordCard } = useRecordCardHistory();
 
-  const activeMode = room?.activeMode || "classic";
-  const activeLevel = room?.activeLevel || 1;
-  const activeRelationshipFilter = room?.activeRelationshipFilter || "all";
-  const currentCardIndex = room?.currentCardIndex || 0;
-  const shuffledDeckOrder = room?.shuffledDeckOrder || [];
-  const currentCardId = room?.currentCardId || null;
+  // Keep mutate stable across re-renders so callbacks below never go stale
+  const updateRoomRef = useRef(updateRoom);
+  const recordCardRef = useRef(recordCard);
+  useEffect(() => { updateRoomRef.current = updateRoom; });
+  useEffect(() => { recordCardRef.current = recordCard; });
 
-  // Filter cards based on current mode/level/filter
-  const filteredDeck = useMemo(() => {
-    return cards.filter(card => {
-      if (card.mode !== activeMode) return false;
+  // ── Server state ──────────────────────────────────────────────────────────
+  const serverMode        = room?.activeMode               ?? "classic";
+  const serverLevel       = room?.activeLevel              ?? 1;
+  const serverFilter      = room?.activeRelationshipFilter ?? "all";
+  const serverCardIndex   = room?.currentCardIndex         ?? 0;
+  const serverCardId      = room?.currentCardId            ?? null;
+  const serverDeckOrder   = room?.shuffledDeckOrder        ?? [];
 
-      // For classic and long_game, exclude hidden and adult cards
-      if (activeMode !== "after_dark" && (card.is_hidden || card.is_adult)) return false;
+  // ── Optimistic overrides ──────────────────────────────────────────────────
+  // Set immediately on every user action; cleared when the server confirms.
+  const [optMode,   setOptMode]   = useState<string | null>(null);
+  const [optLevel,  setOptLevel]  = useState<number | null>(null);
+  const [optFilter, setOptFilter] = useState<string | null>(null);
+  const [optIndex,  setOptIndex]  = useState<number | null>(null);
+  const [optCardId, setOptCardId] = useState<string | null>(null);
 
-      if (activeMode === "classic") {
-        return card.level === activeLevel;
-      }
-
-      if (activeMode === "long_game") {
-        if (
-          activeRelationshipFilter !== "all" &&
-          card.relationship_context !== activeRelationshipFilter &&
-          card.relationship_context !== "all"
-        ) {
-          return false;
-        }
-        return true;
-      }
-
-      // after_dark — include all cards in the mode
-      return true;
-    });
-  }, [activeMode, activeLevel, activeRelationshipFilter]);
-
-  const shuffleDeck = useCallback((deckToShuffle: Card[]) => {
-    const ids = deckToShuffle.map(c => c.id);
-    for (let i = ids.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [ids[i], ids[j]] = [ids[j], ids[i]];
-    }
-    return ids;
+  // Safety-net timeout so stale optimistic state never gets stuck
+  const clearOptTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scheduleOptClear = useCallback(() => {
+    if (clearOptTimer.current) clearTimeout(clearOptTimer.current);
+    clearOptTimer.current = setTimeout(() => {
+      setOptIndex(null);
+      setOptCardId(null);
+    }, 5000);
   }, []);
 
-  // Use a ref so the effect below never re-runs just because the mutation
-  // object changed reference (React Query mutates isPending/isSuccess on each call).
-  const updateRoomRef = useRef(updateRoom);
-  useEffect(() => { updateRoomRef.current = updateRoom; });
+  // Clear card optimistic once server confirms the write
+  useEffect(() => {
+    if (optIndex !== null && serverCardIndex === optIndex) {
+      setOptIndex(null);
+      setOptCardId(null);
+    }
+  }, [serverCardIndex, optIndex]);
 
-  const filteredDeckRef = useRef(filteredDeck);
-  useEffect(() => { filteredDeckRef.current = filteredDeck; });
+  // Clear mode/level/filter optimistic once server confirms
+  useEffect(() => {
+    if (optMode   !== null && serverMode   === optMode)   setOptMode(null);
+    if (optLevel  !== null && serverLevel  === optLevel)  setOptLevel(null);
+    if (optFilter !== null && serverFilter === optFilter) setOptFilter(null);
+  }, [serverMode, serverLevel, serverFilter, optMode, optLevel, optFilter]);
 
+  // ── Resolved values (optimistic wins) ────────────────────────────────────
+  const activeMode              = optMode   ?? serverMode;
+  const activeLevel             = optLevel  ?? serverLevel;
+  const activeRelationshipFilter = optFilter ?? serverFilter;
+  const currentCardIndex        = optIndex  ?? serverCardIndex;
+  const currentCardId           = optCardId ?? serverCardId;
+
+  // We always navigate using the server's deck order (the order is not
+  // optimistically changed, only the index within it is).
+  const shuffledDeckOrder = serverDeckOrder;
+
+  // ── One-time deck initialisation (server has empty deck) ─────────────────
+  // Mode/level/filter changes now send the new deck in one shot, so this
+  // only fires for a brand-new room or after a hard reset.
   const initializedRef = useRef<string>("");
 
   useEffect(() => {
     if (!room || !roomCode) return;
-    const stateKey = `${activeMode}-${activeLevel}-${activeRelationshipFilter}`;
-
-    // Only shuffle once per distinct (mode, level, filter) combination, and only
-    // when the server still has an empty deck (e.g. right after a mode change).
-    if (
-      shuffledDeckOrder.length === 0 &&
-      initializedRef.current !== stateKey &&
-      filteredDeckRef.current.length > 0
-    ) {
+    const stateKey = `${serverMode}-${serverLevel}-${serverFilter}`;
+    if (shuffledDeckOrder.length === 0 && initializedRef.current !== stateKey) {
+      const deck = computeFilteredDeck(serverMode, serverLevel, serverFilter);
+      if (deck.length === 0) return;
       initializedRef.current = stateKey;
-      const newOrder = shuffleDeck(filteredDeckRef.current);
-      const newCardId = newOrder[0] || null;
-
+      const newOrder = buildShuffledDeck(deck);
       updateRoomRef.current({
         code: roomCode,
-        data: {
-          shuffledDeckOrder: newOrder,
-          currentCardIndex: 0,
-          currentCardId: newCardId
-        }
+        data: { shuffledDeckOrder: newOrder, currentCardIndex: 0, currentCardId: newOrder[0] ?? null }
       });
     }
-  // shuffleDeck is stable (useCallback []). Only re-run when server state changes.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [room, roomCode, activeMode, activeLevel, activeRelationshipFilter, shuffledDeckOrder.length, shuffleDeck]);
+  }, [room, roomCode, serverMode, serverLevel, serverFilter, shuffledDeckOrder.length]);
 
+  // ── Derived card ──────────────────────────────────────────────────────────
   const currentCard = useMemo(() => {
     if (!currentCardId) return null;
-    return cards.find(c => c.id === currentCardId) || null;
+    return cards.find(c => c.id === currentCardId) ?? null;
   }, [currentCardId]);
 
+  // ── Actions ───────────────────────────────────────────────────────────────
+  // All actions:
+  //  1. Apply optimistic state immediately (instant UI response)
+  //  2. Fire PATCH in background (keeps server + other players in sync)
+
   const changeMode = (mode: string) => {
-    initializedRef.current = "";
+    const level  = optLevel  ?? serverLevel;
+    const filter = optFilter ?? serverFilter;
+    const deck   = computeFilteredDeck(mode, level, filter);
+    const order  = buildShuffledDeck(deck);
+    const firstId = order[0] ?? null;
+
+    // Optimistic
+    setOptMode(mode);
+    setOptIndex(0);
+    setOptCardId(firstId);
+    scheduleOptClear();
+
+    // Single PATCH — deck included so no second round-trip
+    initializedRef.current = `${mode}-${level}-${filter}`;
     updateRoomRef.current({
       code: roomCode,
-      data: {
-        activeMode: mode,
-        shuffledDeckOrder: [],
-        currentCardIndex: 0,
-        currentCardId: null
-      }
+      data: { activeMode: mode, shuffledDeckOrder: order, currentCardIndex: 0, currentCardId: firstId }
     });
   };
 
   const changeLevel = (level: number) => {
-    initializedRef.current = "";
+    const mode   = optMode   ?? serverMode;
+    const filter = optFilter ?? serverFilter;
+    const deck   = computeFilteredDeck(mode, level, filter);
+    const order  = buildShuffledDeck(deck);
+    const firstId = order[0] ?? null;
+
+    setOptLevel(level);
+    setOptIndex(0);
+    setOptCardId(firstId);
+    scheduleOptClear();
+
+    initializedRef.current = `${mode}-${level}-${filter}`;
     updateRoomRef.current({
       code: roomCode,
-      data: {
-        activeLevel: level,
-        shuffledDeckOrder: [],
-        currentCardIndex: 0,
-        currentCardId: null
-      }
+      data: { activeLevel: level, shuffledDeckOrder: order, currentCardIndex: 0, currentCardId: firstId }
     });
   };
 
   const changeRelationshipFilter = (filter: string) => {
-    initializedRef.current = "";
+    const mode  = optMode  ?? serverMode;
+    const level = optLevel ?? serverLevel;
+    const deck  = computeFilteredDeck(mode, level, filter);
+    const order = buildShuffledDeck(deck);
+    const firstId = order[0] ?? null;
+
+    setOptFilter(filter);
+    setOptIndex(0);
+    setOptCardId(firstId);
+    scheduleOptClear();
+
+    initializedRef.current = `${mode}-${level}-${filter}`;
     updateRoomRef.current({
       code: roomCode,
-      data: {
-        activeRelationshipFilter: filter,
-        shuffledDeckOrder: [],
-        currentCardIndex: 0,
-        currentCardId: null
-      }
+      data: { activeRelationshipFilter: filter, shuffledDeckOrder: order, currentCardIndex: 0, currentCardId: firstId }
     });
   };
 
   const nextCard = (playerName: string) => {
-    if (currentCardIndex + 1 >= shuffledDeckOrder.length) return;
-    const nextIndex = currentCardIndex + 1;
-    const nextId = shuffledDeckOrder[nextIndex];
+    const effectiveIndex = optIndex ?? serverCardIndex;
+    if (effectiveIndex + 1 >= shuffledDeckOrder.length) return;
+    const nextIndex = effectiveIndex + 1;
+    const nextId    = shuffledDeckOrder[nextIndex];
 
-    updateRoomRef.current({
-      code: roomCode,
-      data: {
-        currentCardIndex: nextIndex,
-        currentCardId: nextId
-      }
-    });
+    setOptIndex(nextIndex);
+    setOptCardId(nextId);
+    scheduleOptClear();
 
+    updateRoomRef.current({ code: roomCode, data: { currentCardIndex: nextIndex, currentCardId: nextId } });
     if (nextId) {
-      recordCard({
+      recordCardRef.current({
         code: roomCode,
-        data: {
-          cardId: nextId,
-          mode: activeMode,
-          level: activeLevel,
-          advancedByPlayerName: playerName
-        }
+        data: { cardId: nextId, mode: activeMode, level: activeLevel, advancedByPlayerName: playerName }
       });
     }
   };
 
   const prevCard = () => {
-    if (currentCardIndex <= 0) return;
-    const prevIndex = currentCardIndex - 1;
-    const prevId = shuffledDeckOrder[prevIndex];
+    const effectiveIndex = optIndex ?? serverCardIndex;
+    if (effectiveIndex <= 0) return;
+    const prevIndex = effectiveIndex - 1;
+    const prevId    = shuffledDeckOrder[prevIndex];
 
-    updateRoomRef.current({
-      code: roomCode,
-      data: {
-        currentCardIndex: prevIndex,
-        currentCardId: prevId
-      }
-    });
+    setOptIndex(prevIndex);
+    setOptCardId(prevId);
+    scheduleOptClear();
+
+    updateRoomRef.current({ code: roomCode, data: { currentCardIndex: prevIndex, currentCardId: prevId } });
   };
 
   const skipCard = () => {
-    if (currentCardIndex + 1 >= shuffledDeckOrder.length) return;
-    const nextIndex = currentCardIndex + 1;
-    const nextId = shuffledDeckOrder[nextIndex];
-    updateRoomRef.current({
-      code: roomCode,
-      data: { currentCardIndex: nextIndex, currentCardId: nextId }
-    });
+    const effectiveIndex = optIndex ?? serverCardIndex;
+    if (effectiveIndex + 1 >= shuffledDeckOrder.length) return;
+    const nextIndex = effectiveIndex + 1;
+    const nextId    = shuffledDeckOrder[nextIndex];
+
+    setOptIndex(nextIndex);
+    setOptCardId(nextId);
+    scheduleOptClear();
+
+    updateRoomRef.current({ code: roomCode, data: { currentCardIndex: nextIndex, currentCardId: nextId } });
   };
 
   const reshuffle = () => {
+    const mode   = optMode   ?? serverMode;
+    const level  = optLevel  ?? serverLevel;
+    const filter = optFilter ?? serverFilter;
+    const deck   = computeFilteredDeck(mode, level, filter);
+    const order  = buildShuffledDeck(deck);
+    const firstId = order[0] ?? null;
+
+    setOptIndex(0);
+    setOptCardId(firstId);
+    scheduleOptClear();
+
     initializedRef.current = "";
-    const newOrder = shuffleDeck(filteredDeckRef.current);
     updateRoomRef.current({
       code: roomCode,
-      data: {
-        shuffledDeckOrder: newOrder,
-        currentCardIndex: 0,
-        currentCardId: newOrder[0] || null
-      }
+      data: { shuffledDeckOrder: order, currentCardIndex: 0, currentCardId: firstId }
     });
   };
 
@@ -212,16 +269,13 @@ export function useGameLogic(roomCode: string) {
     updateRoomRef.current({ code: roomCode, data: { afterDarkUnlocked: unlocked } });
   }, [roomCode]);
 
-  const resetRoom = useCallback(() => {
+  const resetRoom = () => {
     const firstId = shuffledDeckOrder[0] ?? null;
-    updateRoomRef.current({
-      code: roomCode,
-      data: { currentCardIndex: 0, currentCardId: firstId }
-    });
-  // shuffledDeckOrder identity changes with every poll; use the length as a
-  // stable proxy — the first element won't change unless the deck is reshuffled.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [roomCode, shuffledDeckOrder[0]]);
+    setOptIndex(0);
+    setOptCardId(firstId);
+    scheduleOptClear();
+    updateRoomRef.current({ code: roomCode, data: { currentCardIndex: 0, currentCardId: firstId } });
+  };
 
   return {
     room,
@@ -232,7 +286,7 @@ export function useGameLogic(roomCode: string) {
     activeMode,
     activeLevel,
     activeRelationshipFilter,
-    afterDarkUnlocked: room?.afterDarkUnlocked || false,
+    afterDarkUnlocked: room?.afterDarkUnlocked ?? false,
     changeMode,
     changeLevel,
     changeRelationshipFilter,
