@@ -1,0 +1,118 @@
+Add a brief onboarding pop-up that appears when a user enters the game, whether they choose “Play on this device” or join/create a multiplayer room.
+
+Do not rebuild the app.
+Do not change the card dataset.
+Do not change the core game logic.
+Do not add authentication, payments, database logic, or realtime multiplayer.
+Only add onboarding/help copy and improve the existing Help card in Settings.
+
+Goal:
+When a user starts playing, show a short, polished intro modal that explains the available game modes and how to use them.
+
+Trigger behavior:
+- Show this modal when a user first enters the game screen from:
+  1. Play on this device
+  2. Join Room
+  3. Create Room
+- Do not show it every single time if the user has already seen it.
+- Store a local flag in localStorage:
+  hasSeenGameIntro = true
+- Add a “Show intro again” option in Settings or Help so users can reopen it.
+
+Intro modal title:
+“Choose the conversation you want to have”
+
+Intro modal body:
+Keep it concise and helpful. Use this structure:
+
+Classic
+“Start here. Classic has three levels:
+• Read the Room: light, playful, easy-entry questions
+• Beneath the Surface: more personal stories, values, and patterns
+• Say It Anyway: honest, reflective, more vulnerable prompts”
+
+The Long Game
+“For people who already know each other. Use this for couples, close friends, or people who have been on several dates and want better questions than the usual basics.”
+
+Mention the available Long Game filters:
+• Couples
+• Close Friends
+• Dating
+Optional: if the app also has “All,” explain that All mixes the three.
+
+After Dark
+“Hidden by default. Go to Settings to unlock After Dark for spicy, adults-only prompts. Anyone can skip any card, anytime.”
+
+Closing line:
+“Pick a mode, read the card out loud, and let the conversation do the work.”
+
+Buttons:
+- “Start Playing”
+- Secondary text link: “Don’t show again”
+
+Design:
+- Modal should match the app’s premium, warm, editorial design language.
+- On mobile, use a clean bottom sheet or centered modal that is easy to close.
+- Keep it short enough that it does not feel like a tutorial wall.
+- Use subtle section dividers or small icons if they fit the existing style.
+- Do not make it feel childish or corporate.
+
+Settings Help card:
+Update the Help card in Settings to include similarly useful instructions.
+
+Help card should include:
+
+How to play
+“Pick a mode, read the card out loud, answer honestly, and pass the device around if you are playing on one screen.”
+
+Playing on this device
+“Best for dates, small groups, dinners, road trips, or passing one phone around.”
+
+Multiplayer in the same room
+“Use a room code when multiple people want to open the same session on their own devices.”
+If realtime sync is not actually implemented, add:
+“Room-code syncing is experimental in this build.”
+
+Modes
+Classic:
+- Read the Room: light and playful
+- Beneath the Surface: personal and reflective
+- Say It Anyway: honest and vulnerable
+
+The Long Game:
+- Couples
+- Close Friends
+- Dating
+- All, if currently available
+
+After Dark:
+- Hidden until unlocked in Settings
+- Intended for consenting adults
+- Skip freely, no explanation needed
+
+Tips
+- Start with Classic if you are unsure.
+- Use The Long Game when you already know each other.
+- Use After Dark only when everyone is comfortable.
+- Skip any card that does not fit the room.
+- Good conversations do not need perfect answers.
+
+Privacy/testing note:
+“This is a personal project under testing. Do not enter sensitive personal information. Card responses are not recorded by the app.”
+Only include “responses are not recorded” if that is currently true.
+
+Technical requirements:
+- Store intro-dismissed state in localStorage.
+- Add a Settings action to reset/show the intro modal again.
+- Make modals accessible:
+  - Close button
+  - Escape closes modal on desktop
+  - Proper aria labels
+  - Focus should not get trapped awkwardly
+- Ensure the modal does not break mobile layout or safe-area spacing.
+
+After implementation, summarize:
+1. When the intro modal appears.
+2. How users can reopen it.
+3. What changed in the Settings Help card.
+4. Whether the copy accurately reflects the current multiplayer implementation.

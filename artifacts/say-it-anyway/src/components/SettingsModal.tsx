@@ -14,6 +14,7 @@ interface SettingsModalProps {
   onLockAfterDark: () => void;
   onResetRoom: () => void;
   onExitRoom: () => void;
+  onShowIntro: () => void;
   currentDeckSize: number;
   currentMode: string;
   currentLevel: number;
@@ -53,7 +54,7 @@ const CARD_STATS = [
 export default function SettingsModal({
   open, onOpenChange,
   roomCode, afterDarkUnlocked,
-  onUnlockAfterDark, onLockAfterDark, onResetRoom, onExitRoom,
+  onUnlockAfterDark, onLockAfterDark, onResetRoom, onExitRoom, onShowIntro,
   currentDeckSize, currentMode, currentLevel, currentFilter,
 }: SettingsModalProps) {
   const [secretCode,   setSecretCode]   = useState("");
@@ -119,6 +120,13 @@ export default function SettingsModal({
                 onClick={() => { setHowToPlayOpen(true); onOpenChange(false); }}
               >
                 <span className="text-base">🎴</span> How to Play
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                onClick={onShowIntro}
+              >
+                <span className="text-base">✦</span> Show intro again
               </Button>
               <Button
                 variant="ghost"

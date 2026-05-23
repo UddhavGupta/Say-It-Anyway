@@ -1,0 +1,252 @@
+Update the Build Notes / Changelog to reflect all major changes made so far, and make Build Notes more visible in the footer.
+
+Do not rebuild the app.
+Do not change the card dataset.
+Do not change game logic, mode logic, After Dark logic, navigation behavior, or state management unless needed to connect the Build Notes UI.
+Do not add new product features beyond updating Build Notes and footer visibility.
+
+Goal:
+Make the Build Notes feel like a polished product artifact that truthfully documents the iteration behind this personal project. It should demonstrate thoughtful product building, UX iteration, content architecture, responsive design, and deployment readiness without exaggerating what exists.
+
+Footer visibility:
+Currently Build Notes are too hidden. Make them more visible in the footer while keeping the footer tasteful and uncluttered.
+
+Footer should include:
+- © Uddhav Gupta 2026
+- Website icon/link: https://guptau.com
+- LinkedIn icon/link: https://www.linkedin.com/in/guptauddhav/
+- GitHub icon/link: https://github.com/uddhavgupta
+- A clearly visible text link: “Build Notes”
+- A small version label, for example: “v0.9”
+- Keep the personal project disclaimer present but subtle.
+
+Suggested footer layout:
+
+Desktop:
+Left:
+© Uddhav Gupta 2026 · v0.9 · Build Notes
+
+Center or secondary line:
+Personal project under testing. Not for commercialization or public distribution without prior permission.
+
+Right:
+Website · LinkedIn · GitHub icons
+
+Mobile:
+Use a compact stacked layout:
+Line 1:
+© Uddhav Gupta 2026 · v0.9
+
+Line 2:
+Build Notes
+
+Line 3:
+Website / LinkedIn / GitHub icons
+
+Line 4, smaller:
+Personal project under testing. Not for commercialization or public distribution without prior permission.
+
+Important:
+- Build Notes should be visibly clickable, not buried.
+- Use hover/focus states.
+- Keep it premium and subtle.
+- Do not let the footer dominate the game screen.
+- On mobile, the footer must not crowd the card controls or interfere with safe-area spacing.
+
+Build Notes modal:
+Update the Build Notes modal or bottom sheet with a thorough but clean changelog.
+
+Title:
+Build Notes
+
+Subtitle:
+“Personal project under active testing. Built iteratively to explore digital conversation games, structured content systems, mobile-first UX, and lightweight web app deployment.”
+
+Add a short intro:
+“Say It Anyway started as a simple digital prompt-card game and evolved through rapid playtesting, UX cleanup, content architecture, and mobile polish. These notes document the real build path and what changed over time.”
+
+Use this changelog structure:
+
+Version 0.1 — Core Prototype
+- Built the first working version of a digital prompt-card conversation game.
+- Created the initial game screen with a large centered prompt card.
+- Added basic card navigation: next, previous, shuffle, skip, and reset.
+- Established the core interaction model: read the card out loud, answer, and continue the conversation.
+- Used local state for the first playable version to keep the prototype fast and simple.
+
+Version 0.2 — Game Structure and Modes
+- Defined the main product architecture around multiple conversation contexts instead of one generic deck.
+- Added Classic mode for general conversation.
+- Added three Classic levels:
+  - Read the Room: light, playful, easy-entry prompts.
+  - Beneath the Surface: more personal stories, values, patterns, and self-awareness.
+  - Say It Anyway: honest, reflective, more vulnerable prompts.
+- Added The Long Game for couples, close friends, and people who already know each other.
+- Added The Long Game filters:
+  - All
+  - Couples
+  - Close Friends
+  - Dating
+- Added After Dark as a hidden adults-only mode with intentional unlock behavior.
+
+Version 0.3 — Structured Card Library
+- Replaced temporary sample prompts with a structured card library.
+- Added a card data model with:
+  - id
+  - mode
+  - level
+  - level name
+  - prompt
+  - tags
+  - intensity
+  - relationship context
+  - hidden/adult flags
+- Loaded a larger local prompt library instead of relying on hardcoded sample cards.
+- Kept the card library local for speed and simplicity.
+- Avoided database storage for card content so the app remains portable and easier to deploy.
+- Added filtering logic by mode, level, and relationship context.
+
+Version 0.4 — Content System Expansion
+- Expanded the game to support a full multi-deck content system.
+- Added Classic content across three levels.
+- Added The Long Game content for deeper relationship-specific play.
+- Added After Dark content for spicy, adults-only prompts.
+- Preserved hidden/adult metadata so sensitive modes can stay gated in the UI.
+- Added developer-facing card counts and deck visibility checks to verify the content system.
+
+Version 0.5 — Visual Identity and Design Language
+- Developed a premium, warm, editorial design direction.
+- Added distinct visual treatments by mode:
+  - Classic: warm, minimal, approachable.
+  - The Long Game: deeper, more reflective, mature.
+  - After Dark: darker, richer, more intimate.
+- Refined typography, spacing, card styling, rounded corners, shadows, and interaction states.
+- Improved the app’s feel so it reads as a polished product instead of a plain digital deck.
+- Added tasteful transitions and motion while keeping the experience focused on the card.
+
+Version 0.6 — Mobile-First UX
+- Refined the experience for phone-sized screens.
+- Improved tap targets, spacing, and layout hierarchy on mobile.
+- Made the card the dominant visual element during gameplay.
+- Adjusted controls so the app works better when someone is holding the phone and reading out loud.
+- Ensured the app works across mobile, tablet, and desktop layouts.
+- Reduced unnecessary visual clutter on the game screen.
+
+Version 0.7 — Personal Project Framing and Creator Footer
+- Added creator attribution:
+  - © Uddhav Gupta 2026
+- Added external links:
+  - Website
+  - LinkedIn
+  - GitHub
+- Added project framing language:
+  “Personal project under testing. Not for commercialization or public distribution without prior permission.”
+- Kept the footer subtle so it supports credibility without distracting from gameplay.
+- Added Build Notes as a way to document the product iteration.
+
+Version 0.8 — Icon and PWA Polish
+- Added favicon support for desktop browser tabs.
+- Added iOS home-screen icon support for saving the app from Safari.
+- Added web app metadata for a more polished app-like experience.
+- Updated icon direction away from a generic chat-bubble look toward a more distinctive prompt-card identity.
+- Improved the app’s saved-to-home-screen presentation.
+
+Version 0.9 — Clearer Entry Flow
+- Updated the home screen to make the primary path clearer.
+- Added an explicit “Play on this device” option for people using one phone, tablet, or laptop.
+- Clarified that players can read questions out loud and pass the device around.
+- Moved room-code functionality into a separate “Multiplayer in the same room” section.
+- Reduced confusion around whether a room code is required to start playing.
+- Preserved the existing room-code flow while making it secondary.
+
+Version 0.10 — Game Intro and Help System
+- Added a brief onboarding pop-up when a user enters the game.
+- Explained the available game modes:
+  - Classic
+  - The Long Game
+  - After Dark
+- Explained Classic’s three levels:
+  - Read the Room
+  - Beneath the Surface
+  - Say It Anyway
+- Explained The Long Game and its relationship filters:
+  - Couples
+  - Close Friends
+  - Dating
+  - All, if available
+- Clarified that After Dark is hidden by default and can be unlocked from Settings.
+- Added a local “do not show again” behavior so onboarding does not become annoying.
+- Added a way to reopen the intro from Settings or Help.
+- Improved the Settings Help card with clearer instructions for how to play, when to use each mode, and how to think about skipping cards.
+
+Version 0.11 — Performance and Stability Pass
+- Optimized the local card system to avoid unnecessary runtime parsing and repeated transformations.
+- Reduced unnecessary rerenders where possible.
+- Improved filtering and card lookup behavior.
+- Reviewed mobile performance and interaction smoothness.
+- Kept the app lightweight by avoiding unnecessary backend complexity.
+- Preserved the static-site-friendly architecture for easier deployment outside Replit.
+
+Version 0.12 — Build Notes Refresh
+- Expanded Build Notes into a more complete product changelog.
+- Made Build Notes more visible in the footer.
+- Added clearer versioning.
+- Documented the build path more thoroughly and truthfully.
+- Separated completed work from planned future work.
+- Improved the Build Notes modal so it better demonstrates product judgment, iteration, and build process.
+
+Add a “Current Architecture” section:
+- Frontend-first web app.
+- Card library stored locally in the project.
+- No user accounts required.
+- No payment flow.
+- No answer recording.
+- Modes and filters are handled client-side.
+- After Dark is hidden in the UI until unlocked.
+- Room-code functionality exists as part of the multiplayer section, but only describe it as realtime sync if realtime sync is actually implemented.
+
+Add a “What I intentionally did not add” section:
+- No user accounts.
+- No social feed.
+- No AI-generated live prompts.
+- No payments.
+- No heavy analytics.
+- No unnecessary database for card content.
+- No overbuilt multiplayer layer before the core experience was clear.
+- No commercial distribution language, because this remains a personal testing project.
+
+Add a “Planned / Next” section:
+Only include these as planned, not completed:
+- Improve real multiplayer syncing if needed after more testing.
+- Continue refining card quality based on playtests.
+- Improve first-card sequencing by mode.
+- Add better host/session controls only if real users need them.
+- Continue optimizing mobile performance.
+- Deploy outside Replit and maintain GitHub backup if not already done.
+
+Important truthfulness rules:
+- Do not claim realtime multiplayer is implemented unless it actually is.
+- Do not claim database-backed analytics or feedback exists unless it actually exists.
+- Do not claim the app records answers. It should not.
+- Do not claim commercial readiness.
+- Do not claim public launch.
+- Do not use inflated startup language.
+- Keep everything grounded in what was actually built.
+
+Build Notes design:
+- Make the modal feel polished and readable.
+- Use sections, version labels, and short bullets.
+- On mobile, the Build Notes should be scrollable and easy to close.
+- Use compact spacing but not cramped spacing.
+- Add a close button.
+- Escape should close the modal on desktop.
+- Build Notes link should be keyboard-accessible.
+- The footer Build Notes link should have an accessible label.
+
+After implementation, summarize:
+1. What changed in the footer.
+2. What changed in Build Notes.
+3. What version number is now shown.
+4. Where users can access Build Notes.
+5. Whether the Build Notes avoid claiming unbuilt features.
+6. Any files that were changed.

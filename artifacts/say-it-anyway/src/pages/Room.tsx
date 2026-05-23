@@ -10,6 +10,7 @@ import PlayerList from "@/components/PlayerList";
 import SettingsModal from "@/components/SettingsModal";
 import AfterDarkUnlockModal from "@/components/AfterDarkUnlockModal";
 import HowToPlayModal from "@/components/HowToPlayModal";
+import GameIntroModal, { INTRO_SEEN_KEY } from "@/components/GameIntroModal";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +28,8 @@ export default function Room() {
   const [unlockModalOpen, setUnlockModalOpen] = useState(false);
   const [howToPlayOpen,   setHowToPlayOpen]   = useState(false);
   const [codeCopied,      setCodeCopied]      = useState(false);
+  const [introOpen,       setIntroOpen]       = useState(false);
+  const introCheckedRef = useRef(false);
   const [playerId,        setPlayerId]        = useState<string | null>(null);
   const [playerName,      setPlayerName]      = useState<string>("");
 
@@ -76,6 +79,16 @@ export default function Room() {
   const handleModeChange   = useCallback((m: string) => selectorActionsRef.current.changeMode(m), []);
   const handleLevelChange  = useCallback((l: number) => selectorActionsRef.current.changeLevel(l), []);
   const handleFilterChange = useCallback((f: string) => selectorActionsRef.current.changeRelationshipFilter(f), []);
+
+  // ── Game intro — show once per device ───────────────────────────────────
+  useEffect(() => {
+    if (!isLoading && room && !introCheckedRef.current) {
+      introCheckedRef.current = true;
+      if (!localStorage.getItem(INTRO_SEEN_KEY)) {
+        setIntroOpen(true);
+      }
+    }
+  }, [isLoading, room]);
 
   // ── Keyboard shortcuts ──────────────────────────────────────────────────
   useEffect(() => {
@@ -242,6 +255,7 @@ export default function Room() {
         onLockAfterDark={() => { setAfterDark(false); if (activeMode === "after_dark") handleModeChange("classic"); }}
         onResetRoom={handleReset}
         onExitRoom={() => setLocation("/")}
+        onShowIntro={() => { setSettingsOpen(false); setIntroOpen(true); }}
         currentDeckSize={totalCards}
         currentMode={activeMode}
         currentLevel={activeLevel}
@@ -255,6 +269,12 @@ export default function Room() {
       />
 
       <HowToPlayModal open={howToPlayOpen} onOpenChange={setHowToPlayOpen} />
+
+      <GameIntroModal
+        open={introOpen}
+        onStart={() => { localStorage.setItem(INTRO_SEEN_KEY, "true"); setIntroOpen(false); }}
+        onDismiss={() => { localStorage.setItem(INTRO_SEEN_KEY, "true"); setIntroOpen(false); }}
+      />
     </div>
   );
 }
