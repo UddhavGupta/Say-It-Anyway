@@ -52,3 +52,5 @@ Thumbs.db
 # Replit-specific — not needed outside of Replit
 .cache/
 .local/
+.replit
+.replitignore
