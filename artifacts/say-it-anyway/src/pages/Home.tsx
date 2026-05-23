@@ -73,13 +73,10 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <div className="text-center mb-5 sm:mb-8">
-        <h1 className="text-4xl sm:text-6xl font-serif font-medium tracking-tight text-primary mb-1.5 sm:mb-2">
+        <h1 className="text-3xl sm:text-5xl font-serif font-medium tracking-tight text-primary mb-1.5 sm:mb-2">
           Say It Anyway
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground">A better way to skip the small talk.</p>
-        <p className="hidden sm:block text-sm text-muted-foreground/60 max-w-xs mx-auto leading-relaxed mt-1">
-          Play solo, pass the device around, or create a shared room.
-        </p>
       </div>
 
       {/* ── Two-panel layout ── */}
@@ -92,22 +89,6 @@ export default function Home() {
             <p className="text-xs text-muted-foreground/70 leading-relaxed">
               One person reads the question out loud. Pass the device around when you want someone else to pick the next card.
             </p>
-          </div>
-
-          <div className="space-y-1">
-            <label htmlFor="local-name" className="text-xs font-medium uppercase tracking-widest text-muted-foreground/70">
-              Your name <span className="normal-case font-normal tracking-normal text-muted-foreground/40">(optional)</span>
-            </label>
-            <input
-              id="local-name"
-              type="text"
-              autoComplete="off"
-              placeholder="Leave blank to start as Player"
-              value={localName}
-              onChange={e => setLocalName(e.target.value)}
-              onKeyDown={e => { if (e.key === "Enter") startLocal(); }}
-              className="w-full h-10 px-4 rounded-xl border border-input bg-background text-sm placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-ring/40 transition"
-            />
           </div>
 
           <button
