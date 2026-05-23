@@ -165,6 +165,29 @@ export default function SettingsModal({
                   <span className="ml-auto text-xs text-muted-foreground font-mono">{worthRevisitingCount}</span>
                 )}
               </Button>
+
+              <div className="flex items-start justify-between gap-3 pt-2 pb-0.5 pl-1 pr-0.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium">Private Mode</p>
+                  <p className="text-xs text-muted-foreground/60 mt-0.5 leading-relaxed">
+                    Disables saving recently played or Worth Revisiting cards.
+                  </p>
+                </div>
+                <button
+                  role="switch"
+                  aria-checked={privateMode}
+                  onClick={() => onTogglePrivateMode(!privateMode)}
+                  className={cn(
+                    "shrink-0 mt-0.5 w-10 h-6 rounded-full transition-colors duration-200 relative",
+                    privateMode ? "bg-primary" : "bg-muted-foreground/25",
+                  )}
+                >
+                  <span className={cn(
+                    "absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200",
+                    privateMode ? "translate-x-5" : "translate-x-1",
+                  )} />
+                </button>
+              </div>
             </div>
 
             {/* Turn Keeper */}
@@ -272,34 +295,7 @@ export default function SettingsModal({
 
             {/* Privacy */}
             <div className="py-3 border-b border-border">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">Privacy</p>
-
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Private Mode</p>
-                  <p className="text-xs text-muted-foreground/60 mt-0.5 leading-relaxed">
-                    Prevents this device from saving recently played or Worth Revisiting cards.
-                  </p>
-                </div>
-                <button
-                  role="switch"
-                  aria-checked={privateMode}
-                  onClick={() => onTogglePrivateMode(!privateMode)}
-                  className={cn(
-                    "shrink-0 mt-0.5 w-10 h-6 rounded-full transition-colors duration-200 relative",
-                    privateMode ? "bg-primary" : "bg-muted-foreground/25",
-                  )}
-                >
-                  <span className={cn(
-                    "absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200",
-                    privateMode ? "translate-x-5" : "translate-x-1",
-                  )} />
-                </button>
-              </div>
-
-              <p className="text-[11px] text-muted-foreground/50 leading-relaxed mb-3">
-                Your answers are not recorded. Saved prompts live only on this device.
-              </p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-2">Privacy</p>
 
               <div className="space-y-0.5">
                 {[
