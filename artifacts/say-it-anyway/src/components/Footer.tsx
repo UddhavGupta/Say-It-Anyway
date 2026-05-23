@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Globe, Github } from "lucide-react";
 import BuildNotesModal from "@/components/BuildNotesModal";
 
+const VERSION = "v0.12";
+
 const LINKS = [
   {
     href: "https://guptau.com",
@@ -29,25 +31,28 @@ const Footer = React.memo(function Footer() {
 
   return (
     <>
-      <footer className="w-full mt-auto pt-6 pb-5 px-4 sm:px-8">
-        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
-          {/* Left: copyright + disclaimer */}
-          <div className="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
-            <span className="text-xs text-muted-foreground/50">© Uddhav Gupta 2026</span>
-            <span className="text-[11px] text-muted-foreground/35 leading-tight max-w-xs sm:max-w-none">
-              Personal project under testing. Not for commercialization or public distribution without prior permission.
-            </span>
+      <footer className="w-full mt-auto pt-6 pb-5 px-4 sm:px-8" role="contentinfo">
+
+        {/* ── Desktop layout (sm+): single row ── */}
+        <div className="hidden sm:flex max-w-3xl mx-auto items-center justify-between gap-4">
+
+          {/* Left: copyright · version · Build Notes */}
+          <div className="flex items-center gap-2 text-xs text-muted-foreground/50 flex-wrap">
+            <span>© Uddhav Gupta 2026</span>
+            <span className="text-muted-foreground/25">·</span>
+            <span className="font-mono">{VERSION}</span>
+            <span className="text-muted-foreground/25">·</span>
             <button
               onClick={() => setBuildNotesOpen(true)}
               aria-label="Open build notes and changelog"
-              className="text-[11px] text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors underline underline-offset-2 decoration-muted-foreground/20 hover:decoration-muted-foreground/50 mt-0.5"
+              className="text-muted-foreground/60 hover:text-muted-foreground transition-colors underline underline-offset-2 decoration-muted-foreground/25 hover:decoration-muted-foreground/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
             >
               Build Notes
             </button>
           </div>
 
-          {/* Right: social links */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Right: social icons */}
+          <div className="flex items-center gap-2.5 shrink-0">
             {LINKS.map(({ href, label, icon }) => (
               <a
                 key={href}
@@ -55,13 +60,60 @@ const Footer = React.memo(function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="p-1.5 text-muted-foreground/40 hover:text-muted-foreground/80 transition-colors"
+                className="p-1.5 text-muted-foreground/40 hover:text-muted-foreground/75 transition-colors"
               >
                 {icon}
               </a>
             ))}
           </div>
         </div>
+
+        {/* Disclaimer — desktop, below the row */}
+        <p className="hidden sm:block max-w-3xl mx-auto text-[10px] text-muted-foreground/30 leading-relaxed mt-2">
+          Personal project under testing. Not for commercialization or public distribution without prior permission.
+        </p>
+
+        {/* ── Mobile layout: stacked ── */}
+        <div className="flex flex-col items-center gap-2 sm:hidden text-center">
+
+          {/* Line 1: copyright · version */}
+          <span className="text-xs text-muted-foreground/50">
+            © Uddhav Gupta 2026 <span className="text-muted-foreground/25 mx-1">·</span>
+            <span className="font-mono">{VERSION}</span>
+          </span>
+
+          {/* Line 2: Build Notes — clearly visible */}
+          <button
+            onClick={() => setBuildNotesOpen(true)}
+            aria-label="Open build notes and changelog"
+            className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-muted-foreground/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+          >
+            Build Notes
+          </button>
+
+          {/* Line 3: social icons */}
+          <div className="flex items-center gap-3">
+            {LINKS.map(({ href, label, icon }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="p-1.5 text-muted-foreground/40 hover:text-muted-foreground/75 transition-colors"
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
+
+          {/* Line 4: disclaimer — smallest */}
+          <p className="text-[10px] text-muted-foreground/30 leading-relaxed max-w-xs">
+            Personal project under testing. Not for commercialization or public distribution without prior permission.
+          </p>
+
+        </div>
+
       </footer>
 
       <BuildNotesModal open={buildNotesOpen} onOpenChange={setBuildNotesOpen} />
