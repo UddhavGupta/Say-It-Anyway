@@ -245,6 +245,27 @@ export default function SettingsModal({
               )}
             </div>
 
+            {/* After Dark */}
+            <div className="py-3 border-b border-border">
+              {afterDarkUnlocked ? (
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
+                  onClick={() => { onLockAfterDark(); onOpenChange(false); }}
+                >
+                  <span className="text-base">🔒</span> Lock After Dark
+                </Button>
+              ) : (
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
+                  onClick={() => { onOpenChange(false); onUnlockAfterDark(); }}
+                >
+                  <span className="text-base">🔞</span> Unlock After Dark
+                </Button>
+              )}
+            </div>
+
             {/* Game Actions */}
             <div className="space-y-1 py-3 border-b border-border">
               <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-2">Game</p>
@@ -342,27 +363,6 @@ export default function SettingsModal({
                   </button>
                 ))}
               </div>
-            </div>
-
-            {/* After Dark */}
-            <div className="py-3 border-b border-border">
-              {afterDarkUnlocked ? (
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
-                  onClick={() => { onLockAfterDark(); onOpenChange(false); }}
-                >
-                  <span className="text-base">🔒</span> Lock After Dark
-                </Button>
-              ) : (
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
-                  onClick={() => { onOpenChange(false); onUnlockAfterDark(); }}
-                >
-                  <span className="text-base">🔞</span> Unlock After Dark
-                </Button>
-              )}
             </div>
 
             {/* Card Stats */}
