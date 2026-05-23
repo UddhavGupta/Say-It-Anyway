@@ -173,7 +173,6 @@ const PLANNED = [
   "Improve first-card sequencing by mode.",
   "Add better host/session controls only if real users need them.",
   "Continue optimizing mobile performance.",
-  "Deploy outside Replit and maintain a GitHub backup.",
 ];
 
 interface InfoBlockProps {
