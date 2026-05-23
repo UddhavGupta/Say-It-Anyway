@@ -1,0 +1,123 @@
+Update the Home Screen entry flow to make single-device play explicit and intuitive.
+
+Do not rebuild the app.
+Do not change the card dataset.
+Do not change the core game screen, modes, levels, After Dark logic, footer, or styling system unless needed for this entry-flow update.
+Do not add real multiplayer yet.
+Do not add authentication, accounts, payments, or a database.
+
+Problem:
+The current home screen makes it unclear how one person can simply start the game, read questions out loud, and pass the device around. Room-code functionality is currently too prominent and makes the app feel like it requires multiplayer setup.
+
+Goal:
+Make the default path clear:
+“Play on this device” means one person starts the game, reads the prompt, and passes the phone/tablet/laptop around.
+
+Move all existing room-code functionality into a separate “Multiplayer in the same room” section.
+
+Home Screen structure:
+
+1. Hero section
+- App name: Say It Anyway
+- Tagline: A better way to skip the small talk.
+- Short subcopy:
+  “Play solo, pass the device around, or create a shared room.”
+
+2. Primary CTA section: Play on this device
+This should be the most visually prominent option.
+
+Card / section title:
+“Play on this device”
+
+Description:
+“One person reads the question out loud. Pass the device around when you want someone else to pick the next card.”
+
+Primary button:
+“Start Playing”
+
+Behavior:
+- Clicking Start Playing should take the user directly into the game.
+- Do not require a room code.
+- Do not require name entry unless the app currently depends on it. If name entry exists, make it optional or lightweight.
+- Use a local session.
+- Room code can be hidden or replaced by a simple label like “Local Session.”
+- Existing card navigation, modes, levels, The Long Game, and After Dark should work exactly as they already do.
+
+3. Secondary section: Multiplayer in the same room
+This should be clearly secondary and visually less prominent than “Play on this device.”
+
+Section title:
+“Multiplayer in the same room”
+
+Description:
+“Use a room code when multiple people want to open the same session on their own devices.”
+
+Inside this section, place the existing room-code functionality:
+- Enter room code input
+- Join Room button
+- Create Room button
+- Fixed test room code, if it already exists
+- Copy/share room code functionality, if it already exists
+
+Important copy clarification:
+If multiplayer is currently local/mock and not true realtime sync, make that clear with small helper text:
+“Room-code syncing is experimental in this build.”
+
+If true realtime sync is not implemented, do not imply that it is fully synced across devices.
+
+4. Visual hierarchy
+- “Play on this device” should feel like the main path.
+- “Multiplayer in the same room” should feel optional.
+- Keep everything premium, warm, minimal, and mobile-friendly.
+- Avoid making the home screen crowded.
+- Use two clean cards/sections rather than a long form.
+
+5. Mobile UX
+On mobile:
+- Primary CTA should be visible without scrolling if possible.
+- “Start Playing” should be large and thumb-friendly.
+- The multiplayer section can sit below the main CTA.
+- Room code input should not dominate the first screen.
+
+6. Desktop UX
+On desktop:
+- It is okay to show the two options side-by-side:
+  Left: Play on this device
+  Right: Multiplayer in the same room
+- The left card should be visually primary.
+- The right card should be secondary.
+
+7. State / routing behavior
+- Add a session mode state if needed:
+  sessionType: "local" | "multiplayer"
+- For local mode:
+  - No room code required
+  - Use local state
+  - Show “Local Session” instead of a room code if the room header expects something
+- For multiplayer mode:
+  - Preserve the current room-code flow
+
+8. Copy refinements
+Use clear, human copy:
+- “Start Playing”
+- “Play on this device”
+- “Pass the device around”
+- “Create a room”
+- “Join with code”
+Avoid confusing phrases like:
+- “single player” if it sounds like someone plays alone
+- “solo mode” if it implies the game is not social
+
+9. Testing
+After implementation, verify:
+- A user can start playing immediately without entering a room code.
+- The local game screen works normally.
+- Room-code join/create still exists, but only inside the multiplayer section.
+- The app does not imply true realtime multiplayer unless that is actually implemented.
+- The home screen feels more intuitive on mobile.
+
+After implementation, summarize:
+1. What changed on the home screen.
+2. How “Play on this device” works.
+3. Where the room-code flow now lives.
+4. Whether multiplayer is real or still experimental/mock in the current build.
