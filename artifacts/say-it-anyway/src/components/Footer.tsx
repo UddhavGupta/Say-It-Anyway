@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Globe, Github } from "lucide-react";
 import BuildNotesModal from "@/components/BuildNotesModal";
 
-const VERSION = "v14";
+const VERSION = "v15";
 
 const LINKS = [
   {

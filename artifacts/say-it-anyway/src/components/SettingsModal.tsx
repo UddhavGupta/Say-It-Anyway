@@ -32,6 +32,15 @@ interface SettingsModalProps {
   onClearWorthRevisiting: () => void;
   onClearSession: () => void;
   onClearAllData: () => void;
+  // Turn Keeper
+  tkEnabled: boolean;
+  tkCurrentPlayerName: string | null;
+  onEnableTk: () => void;
+  onOpenTkSetup: () => void;
+  onDisableTk: () => void;
+  onTkPassTurn: () => void;
+  onTkResetTurns: () => void;
+  onTkShuffleOrder: () => void;
 }
 
 const MODE_LABELS: Record<string, string> = {
@@ -80,6 +89,9 @@ export default function SettingsModal({
   worthRevisitingCount, recentlyPlayedCount,
   onOpenWorthRevisiting, onOpenRecentlyPlayed, onEndSession,
   onClearRecentlyPlayed, onClearWorthRevisiting, onClearSession, onClearAllData,
+  tkEnabled, tkCurrentPlayerName,
+  onEnableTk, onOpenTkSetup, onDisableTk,
+  onTkPassTurn, onTkResetTurns, onTkShuffleOrder,
 }: SettingsModalProps) {
   const [secretCode,    setSecretCode]    = useState("");
   const [copied,        setCopied]        = useState(false);
@@ -143,7 +155,6 @@ export default function SettingsModal({
             {/* Prompt Memory */}
             <div className="space-y-1 py-3 border-b border-border">
               <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-2">Prompt Memory</p>
-
               <Button
                 variant="ghost"
                 className="w-full justify-start gap-3 h-10 text-sm font-medium"
@@ -155,7 +166,6 @@ export default function SettingsModal({
                   <span className="ml-auto text-xs text-muted-foreground font-mono">{recentlyPlayedCount}</span>
                 )}
               </Button>
-
               <Button
                 variant="ghost"
                 className="w-full justify-start gap-3 h-10 text-sm font-medium"
@@ -167,6 +177,69 @@ export default function SettingsModal({
                   <span className="ml-auto text-xs text-muted-foreground font-mono">{worthRevisitingCount}</span>
                 )}
               </Button>
+            </div>
+
+            {/* Turn Keeper */}
+            <div className="py-3 border-b border-border">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-2">Turn Keeper</p>
+
+              {tkEnabled ? (
+                <div className="space-y-1">
+                  {tkCurrentPlayerName && (
+                    <div className="flex items-center gap-2 px-3 py-2 bg-muted/60 rounded-lg mb-2">
+                      <span className="text-sm">👤</span>
+                      <span className="text-sm text-foreground/70">{tkCurrentPlayerName}'s turn</span>
+                    </div>
+                  )}
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                    onClick={() => { onTkPassTurn(); onOpenChange(false); }}
+                  >
+                    <span className="text-base">⏭</span> Pass Turn
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                    onClick={() => { onTkResetTurns(); onOpenChange(false); }}
+                  >
+                    <span className="text-base">↺</span> Reset Turns
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                    onClick={() => { onTkShuffleOrder(); onOpenChange(false); }}
+                  >
+                    <span className="text-base">⤮</span> Shuffle Order
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                    onClick={onOpenTkSetup}
+                  >
+                    <span className="text-base">✎</span> Edit Player Order
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
+                    onClick={() => { onDisableTk(); onOpenChange(false); }}
+                  >
+                    <span className="text-base">✕</span> Turn off Turn Keeper
+                  </Button>
+                  <p className="text-[10px] text-muted-foreground/35 pl-1 pt-1 leading-relaxed">
+                    Turn Keeper tracks whose turn it is, not what anyone says.
+                    Stored locally on this device.
+                  </p>
+                </div>
+              ) : (
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                  onClick={onEnableTk}
+                >
+                  <span className="text-base">👥</span> Set up Turn Keeper
+                </Button>
+              )}
             </div>
 
             {/* Game Actions */}
@@ -213,7 +286,6 @@ export default function SettingsModal({
             <div className="py-3 border-b border-border">
               <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">Privacy</p>
 
-              {/* Private Mode toggle */}
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex-1">
                   <p className="text-sm font-medium">Private Mode</p>
@@ -241,7 +313,6 @@ export default function SettingsModal({
                 Your answers are not recorded. Saved prompts live only on this device.
               </p>
 
-              {/* Clear data */}
               <div className="space-y-0.5">
                 {[
                   {

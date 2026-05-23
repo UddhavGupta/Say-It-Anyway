@@ -109,6 +109,25 @@ export default function HowToPlayModal({ open, onOpenChange }: HowToPlayModalPro
 
           <div className="border-t border-border/40" />
 
+          <Section title="Turn Keeper">
+            <p>
+              Turn Keeper helps multiplayer groups track who reads the next card. You can set
+              the order manually or let the app randomize it.
+            </p>
+            <p className="mt-1.5">
+              Use <span className="font-medium text-foreground/70">Skip Card</span> when you want
+              a different question but the same person should keep their turn.
+              Use <span className="font-medium text-foreground/70">Next Card</span> when the group
+              is done and you want to move to the next person.
+            </p>
+            <p className="mt-1.5 text-muted-foreground/50 italic">
+              Turn Keeper is stored locally on this device only.
+              Turn Keeper tracks whose turn it is, not what anyone says.
+            </p>
+          </Section>
+
+          <div className="border-t border-border/40" />
+
           <Section title="Tips">
             <ul className="space-y-1.5 ml-1">
               {[

@@ -3,6 +3,7 @@ import { useParams, useLocation } from "wouter";
 import { useGameLogic } from "@/hooks/useGameLogic";
 import { usePlayerSync } from "@/hooks/usePlayerSync";
 import { useSessionMemory, PlayedCard, SavedCard } from "@/hooks/useSessionMemory";
+import { useTurnKeeper } from "@/hooks/useTurnKeeper";
 import { PLAYER_ID_KEY, PLAYER_NAME_KEY } from "@/lib/constants";
 import { cardById } from "@/data/cardData";
 import type { Card as CardType } from "@/data/cardData";
@@ -17,6 +18,8 @@ import GameIntroModal, { INTRO_SEEN_KEY } from "@/components/GameIntroModal";
 import RecentlyPlayedDrawer from "@/components/RecentlyPlayedDrawer";
 import WorthRevisitingDrawer from "@/components/WorthRevisitingDrawer";
 import EndSessionModal, { SessionStats } from "@/components/EndSessionModal";
+import TurnKeeperSetupModal from "@/components/TurnKeeperSetupModal";
+import TurnKeeperPanel, { TurnKeeperTip } from "@/components/TurnKeeperPanel";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
@@ -39,6 +42,8 @@ export default function Room() {
   const [recentlyPlayedOpen, setRecentlyPlayedOpen] = useState(false);
   const [worthRevisOpen,     setWorthRevisOpen]     = useState(false);
   const [endSessionOpen,     setEndSessionOpen]     = useState(false);
+  const [tkSetupOpen,        setTkSetupOpen]        = useState(false);
+  const [tkIsEdit,           setTkIsEdit]           = useState(false);
   const [codeCopied,         setCodeCopied]         = useState(false);
   const introCheckedRef = useRef(false);
 
@@ -74,6 +79,11 @@ export default function Room() {
     togglePrivateMode, clearRecentlyPlayed, clearWorthRevisiting, clearSession, clearAllData,
   } = useSessionMemory();
 
+  // ── Turn Keeper ──────────────────────────────────────────────────────────
+  const turnKeeper = useTurnKeeper(code || "", privateMode);
+  const turnKeeperRef = useRef(turnKeeper);
+  useEffect(() => { turnKeeperRef.current = turnKeeper; });
+
   // ── Replay state ─────────────────────────────────────────────────────────
   const [replayCard, setReplayCard] = useState<CardType | null>(null);
   const replayCardRef = useRef<CardType | null>(null);
@@ -88,8 +98,6 @@ export default function Room() {
   }, []);
 
   // ── Stable refs for latest values ────────────────────────────────────────
-  // Keeps useCallback wrappers with [] deps working correctly.
-
   const cardActionsRef = useRef({
     nextCard, prevCard, skipCard, reshuffle, resetRoom, playerName,
   });
@@ -102,7 +110,6 @@ export default function Room() {
     selectorActionsRef.current = { changeMode, changeLevel, changeRelationshipFilter };
   });
 
-  // activeMode ref so card-tracking effect always reads the current mode
   const activeModeRef = useRef(activeMode);
   useEffect(() => { activeModeRef.current = activeMode; }, [activeMode]);
 
@@ -111,17 +118,37 @@ export default function Room() {
     memoryRef.current = { saveForLater, markNotForThisRoom, trackCard, trackMode, currentCard };
   });
 
+  const playerNameRef = useRef(playerName);
+  useEffect(() => { playerNameRef.current = playerName; }, [playerName]);
+
   // ── Selector callbacks ───────────────────────────────────────────────────
   const handleModeChange   = useCallback((m: string) => selectorActionsRef.current.changeMode(m), []);
   const handleLevelChange  = useCallback((l: number) => selectorActionsRef.current.changeLevel(l), []);
   const handleFilterChange = useCallback((f: string) => selectorActionsRef.current.changeRelationshipFilter(f), []);
 
-  // ── Card navigation (also clears replay) ────────────────────────────────
+  // ── Replay helpers ───────────────────────────────────────────────────────
   const clearReplay = () => { setReplayCard(null); replayCardRef.current = null; };
 
+  // ── Turn Keeper offer (shown once per session for multiplayer rooms) ──────
+  const offerTKSetup = useCallback(() => {
+    const pName = playerNameRef.current;
+    if (!pName || pName === "Player") return;          // local solo play
+    if (turnKeeperRef.current.enabled) return;          // already set up
+    const key = `sia_tk_offered_${code ?? ""}`;
+    if (sessionStorage.getItem(key)) return;            // already offered
+    sessionStorage.setItem(key, "1");
+    setTkSetupOpen(true);
+    setTkIsEdit(false);
+  }, [code]);
+
+  // ── Card navigation (clears replay; Next also advances turn) ─────────────
   const handleNext = useCallback(() => {
+    const wasReplaying = !!replayCardRef.current;
     clearReplay();
     cardActionsRef.current.nextCard(cardActionsRef.current.playerName);
+    if (!wasReplaying && turnKeeperRef.current.enabled) {
+      turnKeeperRef.current.advanceTurn();
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePrev = useCallback(() => {
@@ -129,6 +156,7 @@ export default function Room() {
     cardActionsRef.current.prevCard();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Skip: changes card but does NOT advance turn
   const handleSkip = useCallback(() => {
     clearReplay();
     cardActionsRef.current.skipCard();
@@ -172,17 +200,15 @@ export default function Room() {
     showToast("Removed from this session.");
   }, [showToast]);
 
-  // Replay from Recently Played drawer
   const handleReplayFromRecent = useCallback((played: PlayedCard) => {
     const card = cardById.get(played.cardId);
-    if (!card) { showToast("Card not available in current deck."); return; }
+    if (!card) { showToast("Card not available."); return; }
     memoryRef.current.trackCard({ ...played, playedAt: Date.now() });
     setReplayCard(card);
     replayCardRef.current = card;
     setRecentlyPlayedOpen(false);
   }, [showToast]);
 
-  // Replay from Worth Revisiting drawer
   const handleReplayFromWorth = useCallback((saved: SavedCard) => {
     const card = cardById.get(saved.cardId);
     if (!card) { showToast("Card not available."); return; }
@@ -191,7 +217,6 @@ export default function Room() {
     setWorthRevisOpen(false);
   }, [showToast]);
 
-  // Ask Again Later from Recently Played drawer
   const handleAskAgainLaterFromHistory = useCallback((played: PlayedCard) => {
     const status = memoryRef.current.saveForLater({
       cardId: played.cardId,
@@ -206,7 +231,6 @@ export default function Room() {
     else showToast("Saved to Worth Revisiting.");
   }, [showToast]);
 
-  // Not for this room from Recently Played drawer (just marks, no skip)
   const handleNotForThisRoomFromHistory = useCallback((played: PlayedCard) => {
     memoryRef.current.markNotForThisRoom(played.cardId);
     showToast("Removed from this session.");
@@ -252,13 +276,18 @@ export default function Room() {
     memoryRef.current.trackMode(mode);
   }, [currentCard?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── Game intro ───────────────────────────────────────────────────────────
+  // ── Game intro + Turn Keeper offer ───────────────────────────────────────
   useEffect(() => {
     if (!isLoading && room && !introCheckedRef.current) {
       introCheckedRef.current = true;
-      if (!localStorage.getItem(INTRO_SEEN_KEY)) setIntroOpen(true);
+      if (!localStorage.getItem(INTRO_SEEN_KEY)) {
+        setIntroOpen(true);
+        // TK offer will fire when intro is dismissed
+      } else {
+        offerTKSetup();
+      }
     }
-  }, [isLoading, room]);
+  }, [isLoading, room, offerTKSetup]);
 
   // ── Keyboard shortcuts ───────────────────────────────────────────────────
   useEffect(() => {
@@ -275,6 +304,7 @@ export default function Room() {
         setRecentlyPlayedOpen(false);
         setWorthRevisOpen(false);
         setEndSessionOpen(false);
+        setTkSetupOpen(false);
       }
     };
     window.addEventListener("keydown", handler);
@@ -290,12 +320,13 @@ export default function Room() {
     return () => { document.body.className = base; };
   }, [activeMode]);
 
-  // ── Derived values for render ────────────────────────────────────────────
-  const effectiveCard      = replayCard ?? currentCard;
-  const isReplaying        = !!replayCard;
+  // ── Derived values ───────────────────────────────────────────────────────
+  const effectiveCard       = replayCard ?? currentCard;
+  const isReplaying         = !!replayCard;
   const isInWorthRevisiting = effectiveCard
     ? worthRevisiting.some(c => c.cardId === effectiveCard.id)
     : false;
+
   const savedCardIds = useMemo(
     () => new Set(worthRevisiting.map(c => c.cardId)),
     [worthRevisiting],
@@ -312,6 +343,17 @@ export default function Room() {
     const played = new Set(recentlyPlayed.map(c => c.cardId));
     return worthRevisiting.filter(c => played.has(c.cardId));
   }, [recentlyPlayed, worthRevisiting]);
+
+  // Pre-populate TK setup with known player names
+  const initialTkPlayerNames = useMemo(() => {
+    const fromSync = players
+      ? (players as Array<{ displayName?: string }>)
+          .map(p => p.displayName ?? "")
+          .filter(Boolean)
+      : [];
+    if (fromSync.length > 0) return fromSync;
+    return playerName && playerName !== "Player" ? [playerName] : [];
+  }, [players, playerName]);
 
   const copyRoomCode = () => {
     navigator.clipboard.writeText(code || "");
@@ -382,7 +424,7 @@ export default function Room() {
       <main className="flex-1 flex flex-col max-w-3xl mx-auto w-full z-10">
 
         {/* Mode + Level selectors */}
-        <div className="mb-6 space-y-4">
+        <div className="mb-4 space-y-4">
           <ModeSelector
             activeMode={activeMode}
             afterDarkUnlocked={afterDarkUnlocked}
@@ -418,6 +460,23 @@ export default function Room() {
           )}
         </div>
 
+        {/* Turn Keeper panel */}
+        {turnKeeper.enabled && turnKeeper.currentPlayer && (
+          <div className="mb-4">
+            <TurnKeeperPanel
+              currentPlayer={turnKeeper.currentPlayer}
+              nextPlayer={turnKeeper.nextPlayer}
+              players={turnKeeper.players}
+              turnOrder={turnKeeper.turnOrder}
+              currentTurnIndex={turnKeeper.currentTurnIndex}
+              onPassTurn={turnKeeper.passTurn}
+              onResetTurns={turnKeeper.resetTurns}
+              onShuffleOrder={turnKeeper.shuffleOrder}
+              onEdit={() => { setTkIsEdit(true); setTkSetupOpen(true); }}
+            />
+          </div>
+        )}
+
         {/* Card area */}
         <div className="flex-1 flex flex-col justify-center">
           <PromptCard
@@ -439,6 +498,13 @@ export default function Room() {
             isReplaying={isReplaying}
           />
         </div>
+
+        {/* Turn Keeper tip — one-time, shown below the card */}
+        {turnKeeper.enabled && !turnKeeper.hasSeenTip && (
+          <div className="mt-4">
+            <TurnKeeperTip onDismiss={turnKeeper.dismissTip} />
+          </div>
+        )}
 
         {/* Players */}
         <div className="mt-8">
@@ -483,6 +549,14 @@ export default function Room() {
         onClearWorthRevisiting={clearWorthRevisiting}
         onClearSession={handleClearSession}
         onClearAllData={handleClearAllData}
+        tkEnabled={turnKeeper.enabled}
+        tkCurrentPlayerName={turnKeeper.currentPlayer?.name ?? null}
+        onEnableTk={() => { setSettingsOpen(false); setTkIsEdit(false); setTkSetupOpen(true); }}
+        onOpenTkSetup={() => { setSettingsOpen(false); setTkIsEdit(true); setTkSetupOpen(true); }}
+        onDisableTk={turnKeeper.disableTurnKeeper}
+        onTkPassTurn={turnKeeper.passTurn}
+        onTkResetTurns={turnKeeper.resetTurns}
+        onTkShuffleOrder={turnKeeper.shuffleOrder}
       />
 
       <AfterDarkUnlockModal
@@ -495,8 +569,16 @@ export default function Room() {
 
       <GameIntroModal
         open={introOpen}
-        onStart={() => { localStorage.setItem(INTRO_SEEN_KEY, "true"); setIntroOpen(false); }}
-        onDismiss={() => { localStorage.setItem(INTRO_SEEN_KEY, "true"); setIntroOpen(false); }}
+        onStart={() => {
+          localStorage.setItem(INTRO_SEEN_KEY, "true");
+          setIntroOpen(false);
+          offerTKSetup();
+        }}
+        onDismiss={() => {
+          localStorage.setItem(INTRO_SEEN_KEY, "true");
+          setIntroOpen(false);
+          offerTKSetup();
+        }}
       />
 
       <RecentlyPlayedDrawer
@@ -526,6 +608,16 @@ export default function Room() {
         onNewSession={handleNewSession}
         onReturn={() => setEndSessionOpen(false)}
         onClearSession={handleClearSession}
+      />
+
+      <TurnKeeperSetupModal
+        open={tkSetupOpen}
+        onOpenChange={setTkSetupOpen}
+        onSetup={turnKeeper.setupTurnKeeper}
+        onSkip={() => setTkSetupOpen(false)}
+        initialPlayerNames={tkIsEdit ? turnKeeper.players.map(p => p.name) : initialTkPlayerNames}
+        isEdit={tkIsEdit}
+        initialMode={tkIsEdit ? turnKeeper.mode : "manual"}
       />
     </div>
   );

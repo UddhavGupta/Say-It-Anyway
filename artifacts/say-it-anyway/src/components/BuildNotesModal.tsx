@@ -144,6 +144,23 @@ const RELEASES: Release[] = [
     ],
   },
   {
+    version: "v15",
+    title: "Multiplayer Turn Keeper",
+    items: [
+      "Added Turn Keeper to help multiplayer rooms track who should read or ask the next card.",
+      "Added an upfront Turn Keeper setup offer when entering a multiplayer room — users can set an order, randomize it, or skip.",
+      "Let users choose between manually setting the player order or auto-assigning a randomized order.",
+      "Added player order controls: edit order, shuffle order, reset turns, and pass turn — available from the in-game panel and Settings.",
+      "Added a compact in-game Turn Keeper panel showing the current player and next player, expandable to reveal the full order.",
+      "Clarified the difference between Skip Card and Next Card when Turn Keeper is enabled.",
+      "Skip Card changes the card without advancing the turn. Next Card changes the card and advances to the next player.",
+      "Added a one-time tip explaining the Skip vs Next distinction when Turn Keeper is first enabled.",
+      "Added Turn Keeper instructions to How to Play.",
+      "Preserved the product's privacy boundary: Turn Keeper tracks whose turn it is, not what anyone says.",
+      "Turn Keeper is local and session-based on this device — it is not synced across multiple devices.",
+    ],
+  },
+  {
     version: "v14",
     title: "Prompt Memory and Privacy Controls",
     items: [
