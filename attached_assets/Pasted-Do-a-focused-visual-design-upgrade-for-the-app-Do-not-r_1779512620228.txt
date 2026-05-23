@@ -1,0 +1,263 @@
+Do a focused visual design upgrade for the app.
+
+Do not rebuild the app.
+Do not change the card dataset.
+Do not change game logic, navigation logic, After Dark unlock logic, room-code logic, onboarding logic, or Settings behavior.
+Do not add major new features.
+This is a design and visual polish pass only.
+
+Goal:
+Make the app feel more aesthetic, premium, tactile, and visually distinctive. It should feel like a premium digital conversation card deck, not a generic web app, chat app, SaaS UI, or dating app.
+
+Design north star:
+“A premium conversation card deck translated into a mobile-first web app.”
+
+Overall aesthetic:
+- Warm
+- Editorial
+- Intimate
+- Minimal but visually rich
+- Tactile
+- Slightly cinematic
+- Premium card-stock feel
+- Dinner-party / date-night energy
+- Not childish
+- Not corporate
+- Not neon
+- Not generic chat UI
+- Not overly sexual or cheesy
+
+Preserve performance:
+- Do not add heavy animations that make mobile lag worse.
+- Avoid excessive backdrop-filter, blur, giant shadows, or layout-heavy animations.
+- Prefer lightweight CSS gradients, subtle texture overlays, opacity, and transform animations.
+- Respect prefers-reduced-motion.
+
+1. Upgrade the main prompt card
+
+Make the prompt card feel like the hero object of the product.
+
+Add:
+- A subtle stacked-card effect behind the active card.
+- A faint oversized quotation mark watermark or abstract card motif inside the card.
+- A small premium mode/level badge at the top.
+- Better tag pills, subtle and refined.
+- More elegant spacing and typography.
+- A slightly more tactile paper/card-stock look.
+- Soft but not heavy shadow.
+- Slight hover/press state on desktop/mobile.
+- A clean card transition on Next/Previous using opacity and transform.
+
+The card should feel physical, not flat.
+
+2. Mode-specific visual themes
+
+Create or refine theme tokens for each mode.
+
+Classic theme:
+- Warm off-white
+- Soft charcoal
+- Muted clay
+- Gentle beige
+- Paper texture feel
+- Calm and approachable
+
+The Long Game theme:
+- Deep navy
+- Parchment
+- Muted gold
+- Soft espresso
+- More mature, reflective, and intimate
+
+After Dark theme:
+- Black cherry
+- Warm charcoal
+- Deep burgundy
+- Muted rose-gold accents
+- Sexy and premium, not tacky or explicit
+
+When switching modes, the background, card accents, badges, and subtle decorative elements should shift to match the mode.
+
+3. Add subtle background atmosphere
+
+Replace flat backgrounds with lightweight atmospheric treatments:
+- Very subtle radial gradients
+- Soft vignette
+- Optional faint paper grain/noise texture using CSS only if lightweight
+- Subtle ambient glow behind the card
+- No loud patterns
+- No distracting illustrations
+
+The background should create depth while keeping the card readable.
+
+4. Improve the home screen visual hierarchy
+
+Make the home screen more visually compelling and intuitive.
+
+Hero area:
+- App name: Say It Anyway
+- Tagline: A better way to skip the small talk.
+- Add a tasteful hero visual: a small stack of prompt cards, not a chat bubble.
+- The hero visual should use the same design language as the game card.
+
+Entry options:
+Primary card:
+“Play on this device”
+Description:
+“One person reads the question out loud. Pass the device around.”
+
+Button:
+“Start Playing”
+
+Secondary card:
+“Multiplayer in the same room”
+Description:
+“Use a room code when multiple people want to open the same session on their own devices.”
+
+Move room-code inputs/buttons clearly into the secondary card.
+
+On mobile:
+- The primary play option should be visually dominant.
+- The multiplayer section should sit below it.
+- Avoid crowding the first screen.
+
+On desktop:
+- Two option cards can sit side by side.
+- The “Play on this device” card should remain visually primary.
+
+5. Improve mode and level selectors
+
+Make selectors feel more premium and self-explanatory.
+
+For Classic:
+- Avoid relying only on L1/L2/L3.
+- Show compact but clear names:
+  - Read the Room
+  - Beneath the Surface
+  - Say It Anyway
+
+For The Long Game:
+- Make filters feel like refined chips:
+  - All
+  - Couples
+  - Close Friends
+  - Dating
+
+For After Dark:
+- Use a distinct but tasteful visual treatment after unlock.
+
+Selector styling:
+- Rounded pills or segmented controls
+- Clear active state
+- Subtle icon or micro-mark if available
+- No loud borders
+- No cramped text on mobile
+
+6. Add refined iconography
+
+Add small, tasteful icons where they improve comprehension.
+
+Potential icons:
+- Classic: stacked cards or sparkle
+- Read the Room: eye or aperture
+- Beneath the Surface: layers or depth lines
+- Say It Anyway: quotation mark
+- The Long Game: compass, knot, or linked cards
+- After Dark: moon, flame, or black-cherry card
+
+Use lucide-react if already installed.
+Do not import huge icon libraries unnecessarily.
+Icons should be subtle and secondary to text.
+
+Avoid:
+- Generic chat bubbles
+- Three-dot typing indicators
+- Hearts that feel cheesy
+- Dating-app-like symbols
+- Anything cartoonish
+
+7. Typography polish
+
+Use a stronger typography hierarchy:
+- Elegant display or serif-style treatment for card prompts and major headings.
+- Clean sans-serif for body text, buttons, labels, and controls.
+- Increase prompt line-height for readability.
+- Make prompt text large enough to feel cinematic on mobile.
+- Avoid tiny explanatory text.
+- Prevent layout shifts from font loading.
+
+If using external fonts, load efficiently and use font-display: swap.
+
+8. Better visual elements in modals
+
+Improve onboarding, Help, Build Notes, After Dark unlock, and Settings modals:
+- Better section spacing
+- Subtle dividers
+- Small icons or badges where useful
+- More polished headings
+- Consistent close button
+- Scrollable on mobile
+- No wall-of-text feeling
+
+Do not rewrite all copy unless necessary. Focus on presentation and readability.
+
+9. Button and control polish
+
+Refine controls:
+- Main CTA buttons should feel premium and tactile.
+- Secondary buttons should be quieter.
+- Icon buttons should have clear hit areas.
+- Add subtle pressed/hover/focus states.
+- Keep mobile tap targets large.
+- Avoid too many equally prominent buttons.
+
+10. Footer polish
+
+Keep the footer visible but elegant:
+- © Uddhav Gupta 2026
+- v0.12
+- Build Notes
+- Website / LinkedIn / GitHub icons
+- Small personal project disclaimer
+
+Make Build Notes visible, but do not let the footer dominate the screen.
+On mobile, keep it compact and airy.
+
+11. Empty states and locked states
+
+Make these states more visually polished:
+- After Dark locked
+- No cards available
+- End of deck
+- Invalid room code
+- Loading
+- Help / intro states
+
+Use the same card/deck visual language.
+
+12. App icon alignment
+
+Make sure the favicon and iOS home-screen icon align with the new visual identity:
+- Stacked cream cards on black-cherry or charcoal background
+- Elegant quotation mark or subtle spark
+- No generic chat bubble
+- No tiny text
+- Favicon should be simplified and legible at small sizes
+
+Testing:
+After implementation, verify:
+- Mobile layout still works.
+- App is not more laggy.
+- Card text remains readable.
+- Buttons remain easy to tap.
+- Themes are distinct but cohesive.
+- The app still deploys as before.
+- No logic has been broken.
+
+After implementation, summarize:
+1. What visual design changes were made.
+2. What changed on the home screen.
+3. What changed on the card design.
+4. What changed across Classic, The Long Game, and After Dark themes.
+5. Whether any performance risks were introduced.
+6. Which files changed.
