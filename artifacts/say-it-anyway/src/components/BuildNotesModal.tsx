@@ -143,6 +143,22 @@ const RELEASES: Release[] = [
       "Improved the Build Notes modal for readability and product clarity.",
     ],
   },
+  {
+    version: "v0.13",
+    title: "Visual Design and Aesthetic Upgrade",
+    items: [
+      "Clarified the design north star: a premium digital conversation-card deck, not a generic web utility.",
+      "Made the prompt card feel more like the hero object of the product — added a stacked-card effect (two decorative cards behind the active card), a faint oversized quotation mark watermark inside the card, and a refined mode/level badge.",
+      "Refined mode-specific themes: Classic is warmer and lighter; The Long Game is deeper, more mature, and more reflective; After Dark is darker and richer while staying tasteful.",
+      "Added subtle atmospheric radial gradients to the page background that shift tone per mode — amber for Classic, cool parchment for The Long Game, dark cherry for After Dark.",
+      "Improved the home screen with a small decorative card-stack above the title, reinforcing the prompt-card visual identity.",
+      "Added small tasteful icons to mode selectors — Sparkles for Classic, Compass for The Long Game, Moon for After Dark.",
+      "Refined level selector so full names (Read the Room, Beneath the Surface, Say It Anyway) are shown at all screen sizes instead of abbreviated labels.",
+      "Quieted tag pills and secondary metadata so the prompt text remains the dominant focus.",
+      "Added subtle press/active scale states to navigation controls.",
+      "Kept all design changes lightweight: no backdrop-filter, no heavy blur, no layout-shifting animations.",
+    ],
+  },
 ];
 
 const ARCHITECTURE = [
@@ -161,18 +177,17 @@ const NOT_ADDED = [
   "No social feed.",
   "No AI-generated live prompts.",
   "No payments.",
+  "No answer recording — responses stay between players.",
   "No heavy analytics.",
-  "No database for card content.",
+  "No unnecessary database for card content.",
   "No overbuilt multiplayer layer before the core experience was clear.",
-  "No commercial distribution — this remains a personal testing project.",
 ];
 
 const PLANNED = [
-  "Improve real multiplayer syncing if needed after more testing.",
   "Continue refining card quality based on playtests.",
   "Improve first-card sequencing by mode.",
-  "Add better host/session controls only if real users need them.",
   "Continue optimizing mobile performance.",
+  "Add real multiplayer syncing only if playtesting shows it is necessary.",
 ];
 
 interface InfoBlockProps {

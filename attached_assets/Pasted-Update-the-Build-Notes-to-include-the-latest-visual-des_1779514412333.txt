@@ -1,0 +1,77 @@
+Update the Build Notes to include the latest visual design and aesthetic polish work.
+
+Do not rebuild the app.
+Do not change game logic, card data, modes, filters, After Dark behavior, onboarding behavior, room-code behavior, or state management.
+Only update Build Notes, version labels, and any footer version display if needed.
+
+Goal:
+Make the Build Notes accurately reflect the latest design/aesthetic upgrade and keep them truthful, thorough, and product-minded.
+
+Update the displayed version number to v0.13 unless the app already uses a later version number.
+
+Add this new section to Build Notes:
+
+Version 0.13 — Visual Design and Aesthetic Upgrade
+- Refined the app’s design direction around a clearer north star: a premium digital conversation-card deck.
+- Made the prompt card feel more like the hero object of the product.
+- Added or refined tactile card styling, including more intentional spacing, softer shadows, rounded corners, and a more physical card-deck feel.
+- Improved the visual hierarchy so the prompt remains the main focus while metadata, tags, controls, and footer elements stay secondary.
+- Refined mode-specific themes:
+  - Classic: warmer, lighter, more approachable.
+  - The Long Game: deeper, more mature, more reflective.
+  - After Dark: darker, richer, more intimate, while staying tasteful.
+- Added more atmospheric visual elements through subtle gradients, card layering, soft glows, or texture where appropriate.
+- Improved home screen presentation so the app feels more like a designed product and less like a form-based web utility.
+- Improved the “Play on this device” and “Multiplayer in the same room” visual hierarchy.
+- Refined mode and level selectors so Classic, The Long Game, and After Dark are easier to understand.
+- Improved iconography and visual markers where helpful, while avoiding generic chat-app imagery.
+- Continued moving the visual identity away from chat bubbles and toward stacked cards, quotation marks, and premium prompt-card motifs.
+- Improved modal presentation for onboarding, Help, Settings, After Dark unlock, and Build Notes where applicable.
+- Kept the design mobile-first, with special attention to readability, tap targets, and safe-area spacing.
+- Preserved the lightweight static-site-friendly architecture while improving visual polish.
+
+Truthfulness guardrails:
+- Only include the bullets that are actually true based on the current implementation.
+- If a visual element was not actually added, either remove that bullet or rewrite it as “refined” rather than “added.”
+- Do not claim animation, texture, iconography, or theme changes unless they exist in the current code.
+- Do not claim performance improved unless performance work was actually done.
+- Do not claim realtime multiplayer exists unless it actually exists.
+- Do not claim public/commercial launch readiness.
+
+Update the “Current Architecture” section if needed:
+- Frontend-first web app.
+- Card library stored locally in the project.
+- No user accounts.
+- No payment flow.
+- No answer recording.
+- Modes, filters, and card selection handled client-side.
+- After Dark hidden in the UI until unlocked.
+- Built to remain portable.
+
+Update the “What I intentionally did not add” section if needed:
+- No user accounts.
+- No social feed.
+- No AI-generated live prompts.
+- No payments.
+- No answer recording.
+- No heavy analytics.
+- No unnecessary database for card content.
+- No overbuilt multiplayer layer before the core experience was clear.
+
+Update the “Planned / Next” section:
+Keep this section concise. Include only genuinely plausible next steps:
+- Continue refining card quality based on playtests.
+- Improve first-card sequencing by mode.
+- Continue optimizing mobile performance.
+- Add real multiplayer syncing only if playtesting shows it is necessary.
+
+Footer:
+- If the footer displays a version number, update it to v0.13.
+- Keep Build Notes visible in the footer.
+- Do not make the footer visually heavier.
+
+After implementation, summarize:
+1. What changed in Build Notes.
+2. What version number is now displayed.
+3. Whether any bullets were removed or softened for truthfulness.
+4. Which files changed.
