@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import HowToPlayModal from "@/components/HowToPlayModal";
+import ConfirmModal from "@/components/ConfirmModal";
 
 interface SettingsModalProps {
   open: boolean;
@@ -19,6 +20,18 @@ interface SettingsModalProps {
   currentMode: string;
   currentLevel: number;
   currentFilter: string;
+  // Memory / privacy
+  privateMode: boolean;
+  onTogglePrivateMode: (enabled: boolean) => void;
+  worthRevisitingCount: number;
+  recentlyPlayedCount: number;
+  onOpenWorthRevisiting: () => void;
+  onOpenRecentlyPlayed: () => void;
+  onEndSession: () => void;
+  onClearRecentlyPlayed: () => void;
+  onClearWorthRevisiting: () => void;
+  onClearSession: () => void;
+  onClearAllData: () => void;
 }
 
 const MODE_LABELS: Record<string, string> = {
@@ -28,10 +41,10 @@ const MODE_LABELS: Record<string, string> = {
 };
 
 const FILTER_LABELS: Record<string, string> = {
-  all:          "All Questions",
-  couples:      "Couples",
+  all:           "All Questions",
+  couples:       "Couples",
   close_friends: "Close Friends",
-  dating:       "Dating",
+  dating:        "Dating",
 };
 
 const LEVEL_LABELS: Record<number, string> = {
@@ -51,16 +64,28 @@ const CARD_STATS = [
   { label: "After Dark",    count: 200 },
 ];
 
+interface ConfirmState {
+  title: string;
+  description: string;
+  label: string;
+  action: () => void;
+}
+
 export default function SettingsModal({
   open, onOpenChange,
   roomCode, afterDarkUnlocked,
   onUnlockAfterDark, onLockAfterDark, onResetRoom, onExitRoom, onShowIntro,
   currentDeckSize, currentMode, currentLevel, currentFilter,
+  privateMode, onTogglePrivateMode,
+  worthRevisitingCount, recentlyPlayedCount,
+  onOpenWorthRevisiting, onOpenRecentlyPlayed, onEndSession,
+  onClearRecentlyPlayed, onClearWorthRevisiting, onClearSession, onClearAllData,
 }: SettingsModalProps) {
-  const [secretCode,   setSecretCode]   = useState("");
-  const [copied,       setCopied]       = useState(false);
-  const [statsOpen,    setStatsOpen]    = useState(false);
+  const [secretCode,    setSecretCode]    = useState("");
+  const [copied,        setCopied]        = useState(false);
+  const [statsOpen,     setStatsOpen]     = useState(false);
   const [howToPlayOpen, setHowToPlayOpen] = useState(false);
+  const [confirm,       setConfirm]       = useState<ConfirmState | null>(null);
 
   const copyRoomCode = () => {
     navigator.clipboard.writeText(roomCode);
@@ -78,6 +103,8 @@ export default function SettingsModal({
     }
   };
 
+  const askConfirm = (cfg: ConfirmState) => setConfirm(cfg);
+
   const sessionLabel =
     currentMode === "classic"
       ? `${MODE_LABELS[currentMode]} · ${LEVEL_LABELS[currentLevel]}`
@@ -88,15 +115,16 @@ export default function SettingsModal({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="font-serif text-2xl font-medium">Room Settings</DialogTitle>
+        <DialogContent className="sm:max-w-sm max-h-[88dvh] flex flex-col overflow-hidden p-0">
+
+          <DialogHeader className="px-5 pt-5 pb-3 border-b border-border shrink-0">
+            <DialogTitle className="font-serif text-2xl font-medium">Settings</DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-1 py-2">
+          <div className="overflow-y-auto flex-1 px-5 py-3 space-y-0">
 
             {/* Room Code */}
-            <div className="space-y-2 pb-4 border-b border-border">
+            <div className="space-y-2 py-3 border-b border-border">
               <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Room Code</p>
               <div className="flex gap-2">
                 <div className="flex-1 px-3 py-2 bg-muted rounded-lg font-mono text-center tracking-[0.3em] text-lg font-medium">
@@ -112,8 +140,38 @@ export default function SettingsModal({
               </div>
             </div>
 
-            {/* Actions */}
-            <div className="space-y-2 py-4 border-b border-border">
+            {/* Prompt Memory */}
+            <div className="space-y-1 py-3 border-b border-border">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-2">Prompt Memory</p>
+
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                onClick={() => { onOpenRecentlyPlayed(); onOpenChange(false); }}
+              >
+                <span className="text-base">🕐</span>
+                Recently Played
+                {recentlyPlayedCount > 0 && (
+                  <span className="ml-auto text-xs text-muted-foreground font-mono">{recentlyPlayedCount}</span>
+                )}
+              </Button>
+
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                onClick={() => { onOpenWorthRevisiting(); onOpenChange(false); }}
+              >
+                <span className="text-base">🔖</span>
+                Worth Revisiting
+                {worthRevisitingCount > 0 && (
+                  <span className="ml-auto text-xs text-muted-foreground font-mono">{worthRevisitingCount}</span>
+                )}
+              </Button>
+            </div>
+
+            {/* Game Actions */}
+            <div className="space-y-1 py-3 border-b border-border">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-2">Game</p>
               <Button
                 variant="ghost"
                 className="w-full justify-start gap-3 h-10 text-sm font-medium"
@@ -137,6 +195,13 @@ export default function SettingsModal({
               </Button>
               <Button
                 variant="ghost"
+                className="w-full justify-start gap-3 h-10 text-sm font-medium"
+                onClick={() => { onOpenChange(false); onEndSession(); }}
+              >
+                <span className="text-base">■</span> End Session
+              </Button>
+              <Button
+                variant="ghost"
                 className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
                 onClick={() => { onOpenChange(false); onExitRoom(); }}
               >
@@ -144,8 +209,96 @@ export default function SettingsModal({
               </Button>
             </div>
 
+            {/* Privacy */}
+            <div className="py-3 border-b border-border">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">Privacy</p>
+
+              {/* Private Mode toggle */}
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex-1">
+                  <p className="text-sm font-medium">Private Mode</p>
+                  <p className="text-xs text-muted-foreground/60 mt-0.5 leading-relaxed">
+                    Prevents this device from saving recently played or Worth Revisiting cards.
+                  </p>
+                </div>
+                <button
+                  role="switch"
+                  aria-checked={privateMode}
+                  onClick={() => onTogglePrivateMode(!privateMode)}
+                  className={cn(
+                    "shrink-0 mt-0.5 w-10 h-6 rounded-full transition-colors duration-200 relative",
+                    privateMode ? "bg-primary" : "bg-muted-foreground/25",
+                  )}
+                >
+                  <span className={cn(
+                    "absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200",
+                    privateMode ? "translate-x-5" : "translate-x-1",
+                  )} />
+                </button>
+              </div>
+
+              <p className="text-[11px] text-muted-foreground/50 leading-relaxed mb-3">
+                Your answers are not recorded. Saved prompts live only on this device.
+              </p>
+
+              {/* Clear data */}
+              <div className="space-y-0.5">
+                {[
+                  {
+                    label: "Clear Recently Played",
+                    disabled: recentlyPlayedCount === 0,
+                    confirm: {
+                      title: "Clear Recently Played",
+                      description: "This removes prompt history from this session. It won't affect the card library.",
+                      label: "Clear",
+                      action: onClearRecentlyPlayed,
+                    },
+                  },
+                  {
+                    label: "Clear Worth Revisiting",
+                    disabled: worthRevisitingCount === 0,
+                    confirm: {
+                      title: "Clear Worth Revisiting",
+                      description: "This removes saved prompts from this device. It won't affect the card library.",
+                      label: "Clear",
+                      action: onClearWorthRevisiting,
+                    },
+                  },
+                  {
+                    label: "Clear Session Data",
+                    disabled: false,
+                    confirm: {
+                      title: "Clear Session Data",
+                      description: "This clears recently played, saved prompts, and current session activity from this device.",
+                      label: "Clear",
+                      action: onClearSession,
+                    },
+                  },
+                  {
+                    label: "Clear All Local App Data",
+                    disabled: false,
+                    confirm: {
+                      title: "Clear All Local Data",
+                      description: "This clears all saved prompts, history, preferences, and the After Dark unlock on this device. It won't affect the card library.",
+                      label: "Clear Everything",
+                      action: onClearAllData,
+                    },
+                  },
+                ].map(item => (
+                  <button
+                    key={item.label}
+                    disabled={item.disabled}
+                    onClick={() => askConfirm(item.confirm)}
+                    className="w-full text-left text-xs py-1.5 text-muted-foreground/50 hover:text-muted-foreground transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* After Dark */}
-            <div className="py-4 border-b border-border">
+            <div className="py-3 border-b border-border">
               {afterDarkUnlocked ? (
                 <Button
                   variant="ghost"
@@ -167,7 +320,7 @@ export default function SettingsModal({
               )}
             </div>
 
-            {/* Stats — collapsed */}
+            {/* Card Stats */}
             <div className="py-3 border-b border-border">
               <button
                 onClick={() => setStatsOpen(v => !v)}
@@ -179,8 +332,6 @@ export default function SettingsModal({
 
               {statsOpen && (
                 <div className="mt-3 space-y-3 text-xs text-muted-foreground">
-
-                  {/* Performance / session info */}
                   <div>
                     <div className="font-medium text-foreground/60 mb-1 uppercase tracking-widest text-[10px]">Session</div>
                     <div className="ml-3 space-y-0.5">
@@ -199,7 +350,6 @@ export default function SettingsModal({
                     </div>
                   </div>
 
-                  {/* Full card counts */}
                   <div>
                     <div className="font-medium text-foreground/60 mb-1 uppercase tracking-widest text-[10px]">All Cards</div>
                     <div className="space-y-1">
@@ -223,13 +373,12 @@ export default function SettingsModal({
                       ))}
                     </div>
                   </div>
-
                 </div>
               )}
             </div>
 
             {/* About */}
-            <div className="pt-3">
+            <div className="py-3">
               <p className="text-xs text-muted-foreground/50 leading-relaxed">
                 Made for better conversations.<br />
                 Personal project under testing. Not for commercial use or public distribution without prior permission.
@@ -241,6 +390,18 @@ export default function SettingsModal({
       </Dialog>
 
       <HowToPlayModal open={howToPlayOpen} onOpenChange={setHowToPlayOpen} />
+
+      {confirm && (
+        <ConfirmModal
+          open={!!confirm}
+          onOpenChange={v => { if (!v) setConfirm(null); }}
+          title={confirm.title}
+          description={confirm.description}
+          confirmLabel={confirm.label}
+          onConfirm={confirm.action}
+          destructive
+        />
+      )}
     </>
   );
 }

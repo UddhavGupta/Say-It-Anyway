@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useParams, useLocation } from "wouter";
 import { useGameLogic } from "@/hooks/useGameLogic";
 import { usePlayerSync } from "@/hooks/usePlayerSync";
+import { useSessionMemory, PlayedCard, SavedCard } from "@/hooks/useSessionMemory";
 import { PLAYER_ID_KEY, PLAYER_NAME_KEY } from "@/lib/constants";
+import { cardById } from "@/data/cardData";
+import type { Card as CardType } from "@/data/cardData";
 import PromptCard from "@/components/PromptCard";
 import ModeSelector from "@/components/ModeSelector";
 import LevelSelector from "@/components/LevelSelector";
@@ -11,6 +14,9 @@ import SettingsModal from "@/components/SettingsModal";
 import AfterDarkUnlockModal from "@/components/AfterDarkUnlockModal";
 import HowToPlayModal from "@/components/HowToPlayModal";
 import GameIntroModal, { INTRO_SEEN_KEY } from "@/components/GameIntroModal";
+import RecentlyPlayedDrawer from "@/components/RecentlyPlayedDrawer";
+import WorthRevisitingDrawer from "@/components/WorthRevisitingDrawer";
+import EndSessionModal, { SessionStats } from "@/components/EndSessionModal";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
@@ -24,14 +30,21 @@ const FILTER_LABELS: Record<string, string> = {
 export default function Room() {
   const { code } = useParams<{ code: string }>();
   const [, setLocation] = useLocation();
-  const [settingsOpen,    setSettingsOpen]    = useState(false);
-  const [unlockModalOpen, setUnlockModalOpen] = useState(false);
-  const [howToPlayOpen,   setHowToPlayOpen]   = useState(false);
-  const [codeCopied,      setCodeCopied]      = useState(false);
-  const [introOpen,       setIntroOpen]       = useState(false);
+
+  // ── Modal visibility ─────────────────────────────────────────────────────
+  const [settingsOpen,       setSettingsOpen]       = useState(false);
+  const [unlockModalOpen,    setUnlockModalOpen]    = useState(false);
+  const [howToPlayOpen,      setHowToPlayOpen]      = useState(false);
+  const [introOpen,          setIntroOpen]          = useState(false);
+  const [recentlyPlayedOpen, setRecentlyPlayedOpen] = useState(false);
+  const [worthRevisOpen,     setWorthRevisOpen]     = useState(false);
+  const [endSessionOpen,     setEndSessionOpen]     = useState(false);
+  const [codeCopied,         setCodeCopied]         = useState(false);
   const introCheckedRef = useRef(false);
-  const [playerId,        setPlayerId]        = useState<string | null>(null);
-  const [playerName,      setPlayerName]      = useState<string>("");
+
+  // ── Player identity ──────────────────────────────────────────────────────
+  const [playerId,   setPlayerId]   = useState<string | null>(null);
+  const [playerName, setPlayerName] = useState<string>("");
 
   useEffect(() => {
     const id   = localStorage.getItem(PLAYER_ID_KEY);
@@ -41,6 +54,7 @@ export default function Room() {
     setPlayerName(name);
   }, [setLocation]);
 
+  // ── Game logic ───────────────────────────────────────────────────────────
   const {
     room, isLoading,
     currentCard, currentCardIndex, totalCards,
@@ -53,11 +67,29 @@ export default function Room() {
 
   const { players } = usePlayerSync(code || "", playerId);
 
-  // ── Stable card-action callbacks ────────────────────────────────────────
-  // Always hold the latest function references in a ref so useCallback([])
-  // wrappers can call the current version without being recreated every render.
-  // This lets React.memo on PromptCard/ModeSelector/LevelSelector skip
-  // re-renders on every 2-second poll.
+  // ── Session memory ───────────────────────────────────────────────────────
+  const {
+    privateMode, recentlyPlayed, worthRevisiting, notForThisRoom, sessionModesUsed,
+    trackCard, trackMode, saveForLater, removeFromWorthRevisiting, markNotForThisRoom,
+    togglePrivateMode, clearRecentlyPlayed, clearWorthRevisiting, clearSession, clearAllData,
+  } = useSessionMemory();
+
+  // ── Replay state ─────────────────────────────────────────────────────────
+  const [replayCard, setReplayCard] = useState<CardType | null>(null);
+  const replayCardRef = useRef<CardType | null>(null);
+
+  // ── Toast ────────────────────────────────────────────────────────────────
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const showToast = useCallback((msg: string) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    setToast(msg);
+    toastTimerRef.current = setTimeout(() => setToast(null), 2500);
+  }, []);
+
+  // ── Stable refs for latest values ────────────────────────────────────────
+  // Keeps useCallback wrappers with [] deps working correctly.
+
   const cardActionsRef = useRef({
     nextCard, prevCard, skipCard, reshuffle, resetRoom, playerName,
   });
@@ -65,50 +97,191 @@ export default function Room() {
     cardActionsRef.current = { nextCard, prevCard, skipCard, reshuffle, resetRoom, playerName };
   });
 
-  const handleNext      = useCallback(() => cardActionsRef.current.nextCard(cardActionsRef.current.playerName), []);
-  const handlePrev      = useCallback(() => cardActionsRef.current.prevCard(), []);
-  const handleSkip      = useCallback(() => cardActionsRef.current.skipCard(), []);
-  const handleReshuffle = useCallback(() => cardActionsRef.current.reshuffle(), []);
-  const handleReset     = useCallback(() => cardActionsRef.current.resetRoom(), []);
-
   const selectorActionsRef = useRef({ changeMode, changeLevel, changeRelationshipFilter });
   useEffect(() => {
     selectorActionsRef.current = { changeMode, changeLevel, changeRelationshipFilter };
   });
 
+  // activeMode ref so card-tracking effect always reads the current mode
+  const activeModeRef = useRef(activeMode);
+  useEffect(() => { activeModeRef.current = activeMode; }, [activeMode]);
+
+  const memoryRef = useRef({ saveForLater, markNotForThisRoom, trackCard, trackMode, currentCard });
+  useEffect(() => {
+    memoryRef.current = { saveForLater, markNotForThisRoom, trackCard, trackMode, currentCard };
+  });
+
+  // ── Selector callbacks ───────────────────────────────────────────────────
   const handleModeChange   = useCallback((m: string) => selectorActionsRef.current.changeMode(m), []);
   const handleLevelChange  = useCallback((l: number) => selectorActionsRef.current.changeLevel(l), []);
   const handleFilterChange = useCallback((f: string) => selectorActionsRef.current.changeRelationshipFilter(f), []);
 
-  // ── Game intro — show once per device ───────────────────────────────────
+  // ── Card navigation (also clears replay) ────────────────────────────────
+  const clearReplay = () => { setReplayCard(null); replayCardRef.current = null; };
+
+  const handleNext = useCallback(() => {
+    clearReplay();
+    cardActionsRef.current.nextCard(cardActionsRef.current.playerName);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handlePrev = useCallback(() => {
+    clearReplay();
+    cardActionsRef.current.prevCard();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleSkip = useCallback(() => {
+    clearReplay();
+    cardActionsRef.current.skipCard();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleReshuffle = useCallback(() => {
+    clearReplay();
+    cardActionsRef.current.reshuffle();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleReset = useCallback(() => {
+    clearReplay();
+    cardActionsRef.current.resetRoom();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Memory action callbacks ──────────────────────────────────────────────
+
+  const handleAskAgainLater = useCallback(() => {
+    const card = replayCardRef.current ?? memoryRef.current.currentCard;
+    if (!card) return;
+    const status = memoryRef.current.saveForLater({
+      cardId: card.id,
+      prompt: card.prompt,
+      mode: activeModeRef.current,
+      levelName: card.level_name ?? "",
+      relationshipContext: card.relationship_context ?? "",
+      savedAt: Date.now(),
+    });
+    if (status === "private_mode") showToast("Private Mode is on. Saved prompts are disabled.");
+    else if (status === "already_saved") showToast("Already in Worth Revisiting.");
+    else showToast("Saved to Worth Revisiting.");
+  }, [showToast]);
+
+  const handleNotForThisRoom = useCallback(() => {
+    const card = memoryRef.current.currentCard;
+    if (!card) return;
+    memoryRef.current.markNotForThisRoom(card.id);
+    setReplayCard(null);
+    replayCardRef.current = null;
+    cardActionsRef.current.skipCard();
+    showToast("Removed from this session.");
+  }, [showToast]);
+
+  // Replay from Recently Played drawer
+  const handleReplayFromRecent = useCallback((played: PlayedCard) => {
+    const card = cardById.get(played.cardId);
+    if (!card) { showToast("Card not available in current deck."); return; }
+    memoryRef.current.trackCard({ ...played, playedAt: Date.now() });
+    setReplayCard(card);
+    replayCardRef.current = card;
+    setRecentlyPlayedOpen(false);
+  }, [showToast]);
+
+  // Replay from Worth Revisiting drawer
+  const handleReplayFromWorth = useCallback((saved: SavedCard) => {
+    const card = cardById.get(saved.cardId);
+    if (!card) { showToast("Card not available."); return; }
+    setReplayCard(card);
+    replayCardRef.current = card;
+    setWorthRevisOpen(false);
+  }, [showToast]);
+
+  // Ask Again Later from Recently Played drawer
+  const handleAskAgainLaterFromHistory = useCallback((played: PlayedCard) => {
+    const status = memoryRef.current.saveForLater({
+      cardId: played.cardId,
+      prompt: played.prompt,
+      mode: played.mode,
+      levelName: played.levelName,
+      relationshipContext: played.relationshipContext,
+      savedAt: Date.now(),
+    });
+    if (status === "private_mode") showToast("Private Mode is on. Saved prompts are disabled.");
+    else if (status === "already_saved") showToast("Already in Worth Revisiting.");
+    else showToast("Saved to Worth Revisiting.");
+  }, [showToast]);
+
+  // Not for this room from Recently Played drawer (just marks, no skip)
+  const handleNotForThisRoomFromHistory = useCallback((played: PlayedCard) => {
+    memoryRef.current.markNotForThisRoom(played.cardId);
+    showToast("Removed from this session.");
+  }, [showToast]);
+
+  // ── Clear actions ────────────────────────────────────────────────────────
+  const handleClearSession = useCallback(() => {
+    clearSession();
+    setReplayCard(null);
+    replayCardRef.current = null;
+  }, [clearSession]);
+
+  const handleClearAllData = useCallback(() => {
+    clearAllData();
+    setReplayCard(null);
+    replayCardRef.current = null;
+    localStorage.removeItem(INTRO_SEEN_KEY);
+    showToast("All local data cleared.");
+  }, [clearAllData, showToast]);
+
+  const handleNewSession = useCallback(() => {
+    clearSession();
+    setReplayCard(null);
+    replayCardRef.current = null;
+    cardActionsRef.current.reshuffle();
+  }, [clearSession]);
+
+  // ── Track card changes ───────────────────────────────────────────────────
+  const prevTrackedCardIdRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!currentCard) return;
+    if (currentCard.id === prevTrackedCardIdRef.current) return;
+    prevTrackedCardIdRef.current = currentCard.id;
+    const mode = activeModeRef.current;
+    memoryRef.current.trackCard({
+      cardId: currentCard.id,
+      prompt: currentCard.prompt,
+      mode,
+      levelName: currentCard.level_name ?? "",
+      relationshipContext: currentCard.relationship_context ?? "",
+      playedAt: Date.now(),
+    });
+    memoryRef.current.trackMode(mode);
+  }, [currentCard?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Game intro ───────────────────────────────────────────────────────────
   useEffect(() => {
     if (!isLoading && room && !introCheckedRef.current) {
       introCheckedRef.current = true;
-      if (!localStorage.getItem(INTRO_SEEN_KEY)) {
-        setIntroOpen(true);
-      }
+      if (!localStorage.getItem(INTRO_SEEN_KEY)) setIntroOpen(true);
     }
   }, [isLoading, room]);
 
-  // ── Keyboard shortcuts ──────────────────────────────────────────────────
+  // ── Keyboard shortcuts ───────────────────────────────────────────────────
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") return;
-      if (e.key === "ArrowRight") cardActionsRef.current.nextCard(cardActionsRef.current.playerName);
-      if (e.key === "ArrowLeft")  cardActionsRef.current.prevCard();
-      if (e.key === "s" || e.key === "S") cardActionsRef.current.reshuffle();
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft")  handlePrev();
+      if (e.key === "s" || e.key === "S") handleReshuffle();
       if (e.key === "Escape") {
         setSettingsOpen(false);
         setUnlockModalOpen(false);
         setHowToPlayOpen(false);
+        setRecentlyPlayedOpen(false);
+        setWorthRevisOpen(false);
+        setEndSessionOpen(false);
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, []);
+  }, [handleNext, handlePrev, handleReshuffle]);
 
-  // ── Theme class on body ─────────────────────────────────────────────────
+  // ── Theme class on body ──────────────────────────────────────────────────
   useEffect(() => {
     const base = "font-sans antialiased bg-background text-foreground";
     if      (activeMode === "after_dark") document.body.className = `theme-after-dark ${base}`;
@@ -117,12 +290,36 @@ export default function Room() {
     return () => { document.body.className = base; };
   }, [activeMode]);
 
+  // ── Derived values for render ────────────────────────────────────────────
+  const effectiveCard      = replayCard ?? currentCard;
+  const isReplaying        = !!replayCard;
+  const isInWorthRevisiting = effectiveCard
+    ? worthRevisiting.some(c => c.cardId === effectiveCard.id)
+    : false;
+  const savedCardIds = useMemo(
+    () => new Set(worthRevisiting.map(c => c.cardId)),
+    [worthRevisiting],
+  );
+
+  const sessionStats = useMemo<SessionStats>(() => ({
+    cardsPlayed:          recentlyPlayed.length,
+    modesUsed:            Array.from(sessionModesUsed),
+    worthRevisitingCount: worthRevisiting.length,
+    notForThisRoomCount:  notForThisRoom.size,
+  }), [recentlyPlayed.length, sessionModesUsed, worthRevisiting.length, notForThisRoom.size]);
+
+  const worthRevisitingThisSession = useMemo(() => {
+    const played = new Set(recentlyPlayed.map(c => c.cardId));
+    return worthRevisiting.filter(c => played.has(c.cardId));
+  }, [recentlyPlayed, worthRevisiting]);
+
   const copyRoomCode = () => {
     navigator.clipboard.writeText(code || "");
     setCodeCopied(true);
     setTimeout(() => setCodeCopied(false), 2000);
   };
 
+  // ── Loading state ────────────────────────────────────────────────────────
   if (isLoading || !room) {
     return (
       <div className="min-h-[100dvh] flex items-center justify-center">
@@ -224,7 +421,7 @@ export default function Room() {
         {/* Card area */}
         <div className="flex-1 flex flex-col justify-center">
           <PromptCard
-            card={currentCard}
+            card={effectiveCard}
             totalCards={totalCards}
             currentIndex={currentCardIndex}
             onNext={handleNext}
@@ -234,6 +431,12 @@ export default function Room() {
             onReset={handleReset}
             isEnd={isEnd}
             mode={activeMode}
+            onAskAgainLater={handleAskAgainLater}
+            onNotForThisRoom={handleNotForThisRoom}
+            onOpenRecentlyPlayed={() => setRecentlyPlayedOpen(true)}
+            recentlyPlayedCount={recentlyPlayed.length}
+            isInWorthRevisiting={isInWorthRevisiting}
+            isReplaying={isReplaying}
           />
         </div>
 
@@ -244,6 +447,15 @@ export default function Room() {
 
         <Footer />
       </main>
+
+      {/* ── Toast ── */}
+      {toast && (
+        <div className="fixed bottom-28 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
+          <div className="px-4 py-2 rounded-full bg-foreground/90 text-background text-xs font-medium shadow-lg">
+            {toast}
+          </div>
+        </div>
+      )}
 
       {/* ── Modals ── */}
       <SettingsModal
@@ -260,6 +472,17 @@ export default function Room() {
         currentMode={activeMode}
         currentLevel={activeLevel}
         currentFilter={activeRelationshipFilter}
+        privateMode={privateMode}
+        onTogglePrivateMode={togglePrivateMode}
+        worthRevisitingCount={worthRevisiting.length}
+        recentlyPlayedCount={recentlyPlayed.length}
+        onOpenWorthRevisiting={() => { setSettingsOpen(false); setWorthRevisOpen(true); }}
+        onOpenRecentlyPlayed={() => { setSettingsOpen(false); setRecentlyPlayedOpen(true); }}
+        onEndSession={() => setEndSessionOpen(true)}
+        onClearRecentlyPlayed={clearRecentlyPlayed}
+        onClearWorthRevisiting={clearWorthRevisiting}
+        onClearSession={handleClearSession}
+        onClearAllData={handleClearAllData}
       />
 
       <AfterDarkUnlockModal
@@ -274,6 +497,35 @@ export default function Room() {
         open={introOpen}
         onStart={() => { localStorage.setItem(INTRO_SEEN_KEY, "true"); setIntroOpen(false); }}
         onDismiss={() => { localStorage.setItem(INTRO_SEEN_KEY, "true"); setIntroOpen(false); }}
+      />
+
+      <RecentlyPlayedDrawer
+        open={recentlyPlayedOpen}
+        onOpenChange={setRecentlyPlayedOpen}
+        items={recentlyPlayed}
+        savedCardIds={savedCardIds}
+        onReplay={handleReplayFromRecent}
+        onAskAgainLater={handleAskAgainLaterFromHistory}
+        onNotForThisRoom={handleNotForThisRoomFromHistory}
+      />
+
+      <WorthRevisitingDrawer
+        open={worthRevisOpen}
+        onOpenChange={setWorthRevisOpen}
+        items={worthRevisiting}
+        privateMode={privateMode}
+        onReplay={handleReplayFromWorth}
+        onRemove={removeFromWorthRevisiting}
+      />
+
+      <EndSessionModal
+        open={endSessionOpen}
+        onOpenChange={setEndSessionOpen}
+        stats={sessionStats}
+        worthRevisitingThisSession={worthRevisitingThisSession}
+        onNewSession={handleNewSession}
+        onReturn={() => setEndSessionOpen(false)}
+        onClearSession={handleClearSession}
       />
     </div>
   );

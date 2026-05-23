@@ -1,0 +1,307 @@
+Add multiplayer Turn Keeper functionality and update Build Notes to v15.
+
+Do not rebuild the app.
+Do not change the card dataset.
+Do not add authentication, payments, accounts, analytics, or database logic unless the app already has multiplayer state infrastructure.
+Do not record user answers.
+Do not break existing local play, room-code flow, Recently Played, Worth Revisiting, Private Mode, After Dark unlock, onboarding, Settings, Help, or Build Notes.
+
+Goal:
+In multiplayer rooms, help players track whose turn it is to read/ask the next question. Users should be able to choose the turn order themselves or let the app auto-assign an order. The app should also guide users to use “Skip Card” instead of “Next” when they want to skip a question without advancing turns incorrectly.
+
+Feature name:
+Turn Keeper
+
+Important scope:
+- This feature is primarily for multiplayer rooms.
+- If the app has local “Play on this device” mode, Turn Keeper can be available there too, but it should not clutter the local play experience.
+- If true realtime multiplayer is not implemented, make the UI copy truthful. Do not claim realtime sync unless it actually exists.
+- If the current multiplayer room state is local/mock only, implement Turn Keeper locally but structure it so it can later be synced.
+
+1. Turn Keeper onboarding in multiplayer setup
+
+When users create or join a multiplayer room, add an optional Turn Keeper setup step.
+
+Prompt:
+“Track whose turn it is?”
+
+Description:
+“Turn Keeper helps your group know who should read the next card.”
+
+Options:
+- Set order manually
+- Auto-assign order
+- Skip for now
+
+If users choose “Set order manually”:
+- Let them enter player names in order.
+- Allow adding, removing, and reordering names.
+- Use drag-and-drop if simple and already supported. Otherwise use up/down controls.
+- Save the chosen order.
+
+If users choose “Auto-assign order”:
+- Let them enter player names.
+- Randomize the order automatically.
+- Show the generated order before starting.
+- Add a “Shuffle again” button.
+- Add a “Use this order” button.
+
+If users choose “Skip for now”:
+- Continue to the game without Turn Keeper enabled.
+- Allow enabling Turn Keeper later from Settings.
+
+2. Turn Keeper state
+
+Add local/session state for:
+
+turnKeeperEnabled: boolean
+players: Array<{ id: string; name: string }>
+turnOrder: string[] // player IDs in order
+currentTurnIndex: number
+turnOrderMode: "manual" | "auto"
+advanceTurnOnNext: boolean
+
+Default:
+- turnKeeperEnabled: false unless user opts in
+- currentTurnIndex: 0
+- advanceTurnOnNext: true
+
+Persist locally for the current room/session as appropriate.
+If room/session state already persists, include Turn Keeper fields in the same local state pattern.
+Do not store any answers.
+
+3. Turn display during gameplay
+
+When Turn Keeper is enabled and there are players:
+
+Show a compact Turn Keeper panel near the card or room header:
+
+Current:
+“Uddhav’s turn to ask”
+
+Next:
+“Next: Sonal”
+
+Also show a small turn order chip row if space allows:
+Uddhav → Sonal → Max → Gabi
+
+Current player chip should be subtly highlighted.
+
+On mobile:
+- Keep this compact.
+- Do not crowd the card.
+- Consider a collapsible “Turn” chip:
+  “Uddhav’s turn”
+  tapping expands to show full order.
+
+On desktop:
+- It can be a small side panel or top card.
+
+4. Turn advancement behavior
+
+When Turn Keeper is enabled:
+- Tapping “Next Card” should advance to the next card and advance the turn to the next player.
+- Tapping “Previous Card” should not necessarily rewind the turn unless the current implementation already tracks turn history. Keep it simple:
+  - Previous Card changes the card only.
+  - Do not move the turn backward unless explicitly implemented cleanly.
+- Tapping “Replay Card” should not advance the turn.
+- Tapping “Ask Again Later” should not advance the turn.
+- Tapping “Not for this room” should move to another card but should not advance the turn unless the app treats it as skipping the current person’s turn. Prefer not advancing turn for this action.
+
+Add explicit controls:
+- Next Turn
+- Pass Turn
+- Reset Turn Order
+- Edit Turn Order
+- Shuffle Turn Order
+
+Pass Turn:
+- Advances to next player without changing the card.
+
+Next Turn:
+- Same as Pass Turn, clear label for users.
+
+Reset Turn Order:
+- Sets currentTurnIndex back to 0.
+
+Shuffle Turn Order:
+- Randomizes the order again.
+- Avoid putting the same current player first if possible.
+- Ask for confirmation if needed.
+
+Edit Turn Order:
+- Opens the player/order editor.
+
+5. Guide users to use Skip Card correctly
+
+Problem:
+Users may hit “Next” when they mean “skip this question.” But with Turn Keeper enabled, “Next” advances both the card and the turn. That can mess up turn flow.
+
+Add helper copy when Turn Keeper is enabled.
+
+Near the controls, add subtle guidance:
+“Use Skip Card to skip a question. Use Next Card when this turn is done.”
+
+Or shorter:
+“Skipping the question? Tap Skip Card. Done answering? Tap Next.”
+
+Also consider a one-time tooltip the first time Turn Keeper is enabled:
+“Tip: With Turn Keeper on, Next advances the turn. Use Skip Card if you just want a different question.”
+
+Store this tooltip-dismissed flag locally:
+hasSeenTurnKeeperTip = true
+
+Button behavior:
+- “Skip Card” should change the card but keep the same current player.
+- “Next Card” should change the card and advance to the next player.
+- This distinction should be consistent and clearly explained.
+
+If Skip Card currently behaves exactly like Next Card, update it:
+- Skip Card: show a new card from the current deck, do not advance turn, and mark the skipped card as skipped/recently skipped if that system exists.
+- Next Card: show the next card and advance turn if Turn Keeper is enabled.
+
+6. Multiplayer room language
+
+In multiplayer rooms, add this helpful copy near setup or Help:
+
+“Turn Keeper is useful when everyone has their own device or when one person is hosting from one screen.”
+
+If realtime sync is not implemented, do not claim everyone will automatically see turn updates across devices.
+Use truthful copy:
+“Turn Keeper is stored in this session on this device.”
+or
+“Turn Keeper syncs across the room.”
+Only use the second if sync actually exists.
+
+7. Settings and Help updates
+
+Update Settings with a Turn Keeper section:
+- Enable / disable Turn Keeper
+- Edit players
+- Choose manual or auto order
+- Shuffle order
+- Reset turns
+- Show / hide tip again
+
+Update Help card:
+Add a section:
+
+Turn Keeper
+“Turn Keeper helps multiplayer groups track who reads the next card. You can set the order manually or let the app randomize it.”
+
+Add:
+“Use Skip Card when you want a different question but the same person should keep their turn. Use Next Card when the group is done and you want to move to the next person.”
+
+8. Privacy
+
+Do not record answers.
+Do not tie answers to players.
+Only store player names for turn order.
+Add or preserve privacy copy:
+“Turn Keeper tracks whose turn it is, not what anyone says.”
+
+If Private Mode is on:
+- Turn Keeper can still work in-memory during the active session.
+- Avoid persisting player roster/order to localStorage if Private Mode is designed to prevent local persistence.
+- If needed, show:
+“Private Mode is on. Turn order will reset when this session ends.”
+
+9. Design requirements
+
+Keep the UI premium, warm, minimal, and consistent with the existing app.
+Do not make it feel like a scoreboard.
+Do not over-gamify.
+Turn Keeper should feel like a quiet facilitator.
+
+Use:
+- small chips
+- subtle arrows
+- compact panels
+- clean modals/bottom sheets
+- clear mobile tap targets
+
+Avoid:
+- loud colors
+- bulky tables
+- childish game-board UI
+- cluttering the prompt card
+
+10. Build Notes update
+
+Update Build Notes and footer version to v15.
+
+Important:
+The project uses whole-number version naming now.
+Use v15, not v0.15.
+
+Add a new Build Notes section:
+
+Version v15 — Multiplayer Turn Keeper
+- Added Turn Keeper to help multiplayer rooms track who should read or ask the next card.
+- Added an upfront Turn Keeper setup flow for multiplayer sessions.
+- Let users choose between manually setting the player order or auto-assigning a randomized order.
+- Added player order controls, including edit order, shuffle order, reset turns, and pass/next turn.
+- Added a compact in-game turn display showing the current player and next player.
+- Clarified the difference between Skip Card and Next Card when Turn Keeper is enabled.
+- Updated Skip Card behavior so users can skip a question without advancing the turn.
+- Added guidance telling players to use Skip Card for a new question and Next Card when the current turn is complete.
+- Added Turn Keeper instructions to Settings / Help.
+- Preserved the product’s privacy boundary: Turn Keeper tracks whose turn it is, not what anyone says.
+- Kept the feature lightweight and local/session-based unless existing realtime multiplayer sync already supports shared state.
+
+Truthfulness guardrails:
+- Only include bullets that are actually implemented.
+- Do not claim Turn Keeper syncs across multiple devices unless it actually does.
+- If Turn Keeper is local-only, say local/session-based.
+- Do not claim answers are recorded. They should not be.
+- Do not claim cloud sync, user accounts, or database storage unless those actually exist.
+
+Update Current Architecture if needed:
+- Frontend-first web app.
+- Card library stored locally in the project.
+- Prompt memory stored locally on the device where applicable.
+- Turn Keeper stores player order and current turn locally/session-wise unless realtime room sync exists.
+- No answer recording.
+- No user accounts.
+- No payment flow.
+- Modes, filters, and card selection handled client-side.
+- After Dark hidden in the UI until unlocked.
+
+Update “What I intentionally did not add” if needed:
+- No answer recording.
+- No user accounts.
+- No social feed.
+- No heavy analytics.
+- No unnecessary database for card content.
+- No overbuilt scoreboard mechanics.
+
+Footer:
+- Update displayed version to v15.
+- Keep Build Notes visible.
+- Do not make the footer heavier.
+
+Testing:
+After implementation, verify:
+1. Multiplayer users can choose Turn Keeper setup up front.
+2. Users can manually set the order.
+3. Users can auto-assign/randomize the order.
+4. Current and next player display correctly.
+5. Next Card advances both the card and the turn when Turn Keeper is enabled.
+6. Skip Card changes the card without advancing the turn.
+7. Pass Turn advances the turn without changing the card.
+8. Turn Keeper can be edited/reset/shuffled from Settings.
+9. Private Mode behavior is consistent with the app’s privacy model.
+10. No answers are recorded.
+11. Build Notes show v15, not v0.15.
+12. Footer shows v15.
+
+After implementation, summarize:
+1. Which files changed.
+2. How Turn Keeper setup works.
+3. How manual order works.
+4. How auto-assigned order works.
+5. How Skip Card differs from Next Card.
+6. How Turn Keeper behaves in Private Mode.
+7. Whether Turn Keeper is local-only or synced across devices.
+8. What Build Notes were updated.
+9. Whether the version now displays as v15.

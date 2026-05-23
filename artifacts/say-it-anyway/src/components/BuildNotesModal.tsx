@@ -144,6 +144,24 @@ const RELEASES: Release[] = [
     ],
   },
   {
+    version: "v14",
+    title: "Prompt Memory and Privacy Controls",
+    items: [
+      "Added Recently Played so users can find a prompt from the current session when someone says 'Wait, what was that question again?'",
+      "Added Replay Card so any recent prompt can be brought back to the main card view without resetting the deck.",
+      "Added Ask Again Later, saving selected prompts into a Worth Revisiting section accessible from the card and from Settings.",
+      "Framed saved cards around revisiting meaningful questions rather than recording answers — the app remembers prompts, not answers.",
+      "Added Not for this room so users can remove a card from the current session without deleting or permanently hiding it.",
+      "Added an End Session Summary showing cards played, modes used, saved prompts, and session-level activity.",
+      "Added local privacy controls for clearing Recently Played, Worth Revisiting, current session data, or all local app data.",
+      "Added Private Mode to prevent prompt history and saved prompts from being stored on the device.",
+      "Set Recently Played to be session-based by default — it clears when the session ends or page reloads.",
+      "Worth Revisiting persists locally on the device unless Private Mode is on.",
+      "Added clearer privacy copy explaining that the app remembers prompts, not answers.",
+      "Preserved the frontend-first, local-data architecture without adding accounts, payments, analytics, or database storage.",
+    ],
+  },
+  {
     version: "v13",
     title: "Visual Design and Aesthetic Upgrade",
     items: [

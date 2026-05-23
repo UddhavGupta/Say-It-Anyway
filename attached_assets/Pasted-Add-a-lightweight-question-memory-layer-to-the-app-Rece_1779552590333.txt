@@ -1,0 +1,302 @@
+Add a lightweight question memory layer to the app: Recently Played, Worth Revisiting, Replay Card, Not for this room, End Session Summary, Clear Session, Private Mode, and session-expiring history.
+
+Do not rebuild the app.
+Do not change the card dataset.
+Do not add authentication, payments, accounts, database logic, realtime multiplayer, analytics, or answer recording.
+Do not record or store user answers.
+This feature should only track prompt/card metadata locally.
+
+Goal:
+Help users revisit useful prompts, recover recently played cards, and manage local privacy without making the app feel like a social platform or CRM.
+
+Core principle:
+The app remembers the questions, not the answers.
+
+Add this sentence somewhere appropriate in Settings / Help / Privacy:
+“Say It Anyway can remember prompts you played or saved, but it does not record your answers.”
+
+Feature 1: Recently Played
+
+Add a “Recently Played” drawer or modal accessible from the game screen.
+
+Purpose:
+Let users find a card they just saw when someone says, “Wait, what was that question again?”
+
+Behavior:
+- Track the last 10 to 15 cards played in the current session.
+- Store card ID, prompt, mode, levelName, relationshipContext, and timestamp.
+- Do not store answers.
+- Do not store names tied to answers.
+- Recently Played should be session-based by default.
+- Recently Played should clear when the user ends the session unless Private Mode/local storage settings specify otherwise.
+
+UI:
+- Add a small, subtle history icon or “Recently Played” button near the card controls.
+- The drawer/modal should show cards in reverse chronological order.
+- Each item should show:
+  - Prompt text
+  - Mode / level
+  - Small timestamp or “just now / earlier”
+  - Replay button
+  - Ask Again Later button
+  - Not for this room button
+
+Feature 2: Replay Card
+
+Inside Recently Played, add a “Replay” action.
+
+Behavior:
+- Tapping Replay brings that card back to the main card view.
+- Do not duplicate it weirdly in history if possible. If it is replayed, it can move to the top of Recently Played.
+- Replay should not reset the whole deck.
+- Replay should feel like returning to a question, not starting a new session.
+
+Feature 3: Ask Again Later / Worth Revisiting
+
+Add an “Ask Again Later” action on the main card and inside Recently Played.
+
+Purpose:
+This is better than generic “save card.” Saved prompts should live in a section called “Worth Revisiting.”
+
+Behavior:
+- Tapping Ask Again Later saves the card to localStorage unless Private Mode is on.
+- Saved card data should include:
+  - card ID
+  - prompt
+  - mode
+  - levelName
+  - relationshipContext
+  - savedAt timestamp
+- Do not store answers.
+- Prevent duplicate saves. If already saved, show “Already in Worth Revisiting” or allow “Remove.”
+- Add a “Worth Revisiting” drawer/section accessible from Settings and/or the game screen.
+
+Worth Revisiting UI:
+- Show saved prompts.
+- Each saved card should include:
+  - Prompt
+  - Mode / level
+  - Saved date
+  - Play Now / Replay
+  - Remove
+- Add “Clear Worth Revisiting” in Settings.
+
+Feature 4: Not for this room
+
+Add a subtle action called “Not for this room.”
+
+Purpose:
+Sometimes a card is good but wrong for the current group. This should remove it from the current session without globally hiding or deleting it.
+
+Behavior:
+- Tapping “Not for this room” removes the current card from the active session/deck order.
+- It should not delete the card from the app.
+- It should not permanently hide the card for future sessions.
+- Store these card IDs only for the current session.
+- If the user resets or starts a new session, these cards can return.
+- Add the action in a subtle overflow/menu, not as a loud primary button.
+- After tapping it, immediately move to the next available card.
+- Show a small toast:
+  “Removed from this session.”
+
+Feature 5: End Session Summary
+
+Add an “End Session” action, likely in Settings or as a secondary control.
+
+When the user ends a session, show a polished summary screen/modal.
+
+Summary should include:
+- Number of cards played this session
+- Modes used
+- Number of cards added to Worth Revisiting
+- Number of cards marked Not for this room
+- Recently Played count
+- A privacy reassurance:
+  “No answers were recorded.”
+
+Then show:
+- Worth Revisiting cards from this session, if any
+- Button: Start New Session
+- Button: Return to Game
+- Button: Clear Session Data
+
+Do not make this too gamified.
+It should feel calm, reflective, and useful.
+
+Feature 6: Clear Session / Local Data Controls
+
+Add clear privacy controls in Settings.
+
+Include:
+- Clear Recently Played
+- Clear Worth Revisiting
+- Clear current session
+- Clear all local app data
+
+Behavior:
+- Clear Recently Played removes current recent history.
+- Clear Worth Revisiting removes saved prompt cards.
+- Clear current session resets card progress, recently played, and “Not for this room” cards.
+- Clear all local app data clears:
+  - recently played
+  - Worth Revisiting
+  - session progress
+  - intro modal seen flag, if appropriate
+  - After Dark unlock, if appropriate
+  - any local game preferences, if appropriate
+
+Before destructive actions:
+- Show a confirmation modal.
+- Use clear copy.
+- Do not make it scary.
+- Example:
+  “This clears prompts saved on this device. It will not affect the card library.”
+
+Feature 7: Private Mode
+
+Add a Settings toggle called “Private Mode.”
+
+Description:
+“When Private Mode is on, this device will not save Recently Played cards or Worth Revisiting cards.”
+
+Behavior:
+- Private Mode should be stored locally.
+- When Private Mode is on:
+  - Do not persist Recently Played to localStorage.
+  - Do not persist Worth Revisiting to localStorage.
+  - Do not persist skipped/history-style data.
+  - Keep in-memory session behavior only if needed for the current active screen.
+- If a user tries to tap Ask Again Later while Private Mode is on, show a tasteful message:
+  “Private Mode is on. Saved prompts are disabled.”
+  Include optional button:
+  “Turn off Private Mode”
+- Recently Played can exist temporarily in memory during the active session if needed, but should clear when the session ends or page reloads.
+- Make clear that answers are never recorded either way.
+
+Feature 8: History expires after session
+
+Set this default behavior:
+- Recently Played is session-only by default.
+- Recently Played clears when the session ends.
+- Worth Revisiting persists locally unless Private Mode is on.
+- “Not for this room” only applies to the current session.
+- If the user refreshes mid-session, preserve only what is already part of existing local session behavior.
+- Do not create unnecessary long-term history.
+
+Recommended storage model:
+Use localStorage for:
+- worthRevisitingCards
+- privateModeEnabled
+- local preferences
+- optional current session metadata if already used
+
+Use in-memory state for:
+- recentlyPlayed in Private Mode
+- notForThisRoom card IDs
+- temporary session summary
+
+If currently storing Recently Played persistently, change it so it clears when the session ends.
+
+Design requirements:
+- Keep the app premium, warm, minimal, and editorial.
+- Do not clutter the main card.
+- Ask Again Later can be a subtle icon/button.
+- Recently Played and Worth Revisiting should use drawers, modals, or bottom sheets.
+- On mobile, these should feel clean and easy to close.
+- Use clear empty states:
+  - “No recently played cards yet.”
+  - “Nothing saved for later yet.”
+  - “Private Mode is on. Saved prompts are disabled.”
+- Keep all tap targets mobile-friendly.
+- Use accessible labels for icon buttons.
+
+Privacy / copy requirements:
+In Settings or Help, add:
+“Your answers are not recorded.”
+“Saved prompts live only on this device.”
+“Private Mode prevents this device from saving prompt history or saved cards.”
+
+Do not claim cloud sync.
+Do not claim encryption.
+Do not claim database storage.
+Do not claim account-level privacy.
+Keep claims limited to what is actually true.
+
+Build Notes update:
+Update Build Notes and footer version to v14.
+
+Important:
+The project has changed naming convention from decimal versions to whole-number versions.
+Use v14, not v0.14.
+
+Add a new Build Notes section:
+
+Version v14 — Prompt Memory and Privacy Controls
+- Added Recently Played so users can revisit prompts from the current session.
+- Added Replay Card so a recent prompt can be brought back without resetting the deck.
+- Added Ask Again Later, saving selected prompts into a Worth Revisiting section.
+- Framed saved cards around revisiting meaningful questions rather than recording answers.
+- Added Not for this room so users can remove a card from the current session without deleting or permanently hiding it.
+- Added an End Session Summary showing cards played, modes used, saved prompts, and session-level activity.
+- Added local privacy controls for clearing Recently Played, Worth Revisiting, current session data, or all local app data.
+- Added Private Mode to prevent prompt history and saved prompts from being stored on the device.
+- Set Recently Played to be session-based by default, while Worth Revisiting persists locally unless Private Mode is on.
+- Added clearer privacy copy explaining that the app remembers prompts, not answers.
+- Preserved the frontend-first, local-data architecture without adding accounts, payments, analytics, or database storage.
+
+Truthfulness guardrails:
+- Only include bullets that are actually implemented.
+- Do not claim answers are recorded. They should not be.
+- Do not claim cloud sync, account sync, database storage, or encryption unless those actually exist.
+- Do not claim realtime multiplayer unless it actually exists.
+- If any feature is only partially implemented, either mark it as partial or move it to Planned / Next.
+
+Update Current Architecture if needed:
+- Frontend-first web app.
+- Card library stored locally in the project.
+- Prompt memory stored locally on the device where applicable.
+- Recently Played is session-based by default.
+- Worth Revisiting persists locally unless Private Mode is on.
+- No user accounts.
+- No payment flow.
+- No answer recording.
+- Modes, filters, and card selection handled client-side.
+- After Dark hidden in the UI until unlocked.
+
+Update “What I intentionally did not add” if needed:
+- No answer recording.
+- No user accounts.
+- No social feed.
+- No AI-generated live prompts.
+- No payments.
+- No cloud-based prompt history.
+- No heavy analytics.
+- No unnecessary database for card content.
+
+Footer:
+- Update displayed version to v14.
+- Keep Build Notes visible.
+- Do not make the footer visually heavier.
+
+Testing:
+After implementation, verify:
+1. Recently Played updates when cards are shown.
+2. Recently Played clears when ending a session.
+3. Ask Again Later saves to Worth Revisiting when Private Mode is off.
+4. Ask Again Later does not save when Private Mode is on.
+5. Replay Card brings a previous prompt back.
+6. Not for this room removes a card only from the current session.
+7. Clear Session and Clear All Local Data work as expected.
+8. No user answers are recorded anywhere.
+9. Build Notes show v14, not v0.14.
+10. The footer shows v14.
+
+After implementation, summarize:
+1. Which files changed.
+2. How Recently Played works.
+3. How Worth Revisiting works.
+4. How Private Mode changes storage behavior.
+5. What local data can be cleared.
+6. Whether any answers are recorded.
+7. What Build Notes were updated.
+8. Whether the version now displays as v14.
