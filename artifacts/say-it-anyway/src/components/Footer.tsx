@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Globe, Github } from "lucide-react";
+import BuildNotesModal from "@/components/BuildNotesModal";
 
 const LINKS = [
   {
@@ -24,31 +25,47 @@ const LINKS = [
 ] as const;
 
 const Footer = React.memo(function Footer() {
+  const [buildNotesOpen, setBuildNotesOpen] = useState(false);
+
   return (
-    <footer className="w-full mt-auto pt-6 pb-5 px-4 sm:px-8">
-      <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
-        <div className="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
-          <span className="text-xs text-muted-foreground/50">© Uddhav Gupta 2026</span>
-          <span className="text-[11px] text-muted-foreground/35 leading-tight max-w-xs sm:max-w-none">
-            Personal project under testing. Not for commercialization or public distribution without prior permission.
-          </span>
-        </div>
-        <div className="flex items-center gap-3 shrink-0">
-          {LINKS.map(({ href, label, icon }) => (
-            <a
-              key={href}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="p-1.5 text-muted-foreground/40 hover:text-muted-foreground/80 transition-colors"
+    <>
+      <footer className="w-full mt-auto pt-6 pb-5 px-4 sm:px-8">
+        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+          {/* Left: copyright + disclaimer */}
+          <div className="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
+            <span className="text-xs text-muted-foreground/50">© Uddhav Gupta 2026</span>
+            <span className="text-[11px] text-muted-foreground/35 leading-tight max-w-xs sm:max-w-none">
+              Personal project under testing. Not for commercialization or public distribution without prior permission.
+            </span>
+            <button
+              onClick={() => setBuildNotesOpen(true)}
+              aria-label="Open build notes and changelog"
+              className="text-[11px] text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors underline underline-offset-2 decoration-muted-foreground/20 hover:decoration-muted-foreground/50 mt-0.5"
             >
-              {icon}
-            </a>
-          ))}
+              Build Notes
+            </button>
+          </div>
+
+          {/* Right: social links */}
+          <div className="flex items-center gap-3 shrink-0">
+            {LINKS.map(({ href, label, icon }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="p-1.5 text-muted-foreground/40 hover:text-muted-foreground/80 transition-colors"
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+      <BuildNotesModal open={buildNotesOpen} onOpenChange={setBuildNotesOpen} />
+    </>
   );
 });
 

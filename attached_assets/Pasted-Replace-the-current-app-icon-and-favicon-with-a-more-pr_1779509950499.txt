@@ -1,0 +1,90 @@
+Replace the current app icon and favicon with a more premium, distinctive visual identity.
+
+Do not change the app UI, layout, routing, card logic, or metadata structure except where needed to update icon references.
+
+Problem:
+The current icon looks too much like a generic messaging/chat app. It uses a speech bubble with three dots, which feels common and not distinctive enough for this product.
+
+Goal:
+Create a more premium icon system for “Say It Anyway” that feels like an intimate digital prompt-card game, not a messaging app.
+
+Design direction:
+Use the app’s existing brand language:
+- premium
+- editorial
+- intimate
+- modern
+- warm
+- slightly cinematic
+- not childish
+- not corporate
+- not generic chat app
+- not overly sexual
+
+Preferred icon concept:
+A dark rounded-square background in warm charcoal, black cherry, or deep burgundy.
+
+Inside the icon:
+- A small stack of 2 to 3 prompt cards
+- Cards should be warm off-white or parchment
+- The top card should include either:
+  - one elegant quotation mark
+  - a small rose-gold spark
+  - or a subtle abstract conversation mark
+
+Avoid:
+- Chat bubbles
+- Three-dot typing indicators
+- Full words
+- Tiny text
+- Hearts that feel cheesy
+- Anything that looks like iMessage, Slack, Discord, or a dating app
+- Overly complex illustration
+
+Color palette:
+- Background: #1f1a17, #120f10, #2a161f, or #3a1d2a
+- Card: #f7f0e8 or #fff8ef
+- Accent: #a64d6d, #c48b73, or muted rose gold
+- Optional shadow: soft, subtle, not heavy
+
+Create separate assets:
+1. iOS / PWA home screen icon:
+- Should be richer and more detailed
+- 512x512 and 1024x1024 source if possible
+- Rounded-square safe area
+- Must look good on an iPhone home screen
+- Should be legible beside apps like Replit, GitHub, Lovable, etc.
+
+2. Favicon:
+- Should be simpler than the app icon
+- Use the same visual language
+- Prefer a single card + quotation mark or simplified stacked-card mark
+- Must be legible at 16x16 and 32x32
+
+Generate/update these files in the public directory:
+- /favicon.ico
+- /favicon.svg
+- /apple-touch-icon.png
+- /icon-192.png
+- /icon-512.png
+- /maskable-icon-512.png
+
+Update all relevant HTML head tags and manifest references:
+- favicon
+- svg favicon
+- apple-touch-icon
+- manifest icons
+- theme color if needed
+
+Make sure:
+- The iOS home screen icon no longer looks like a generic chat bubble app.
+- The favicon is visually related but simplified.
+- No tiny text is used.
+- The icon works in both light and dark iOS wallpapers.
+- The maskable icon has proper safe padding.
+
+After making the change, summarize:
+1. What icon concept you used.
+2. Which files were created or changed.
+3. Where the favicon and apple-touch-icon are referenced.
+4. How I can test it on iPhone Safari by saving to home screen.
