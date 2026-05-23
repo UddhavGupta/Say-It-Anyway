@@ -241,6 +241,7 @@ export default function Room() {
         onUnlockAfterDark={() => setUnlockModalOpen(true)}
         onLockAfterDark={() => { setAfterDark(false); if (activeMode === "after_dark") handleModeChange("classic"); }}
         onResetRoom={handleReset}
+        onExitRoom={() => setLocation("/")}
         currentDeckSize={totalCards}
         currentMode={activeMode}
         currentLevel={activeLevel}

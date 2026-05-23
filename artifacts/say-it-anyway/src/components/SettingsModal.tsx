@@ -13,6 +13,7 @@ interface SettingsModalProps {
   onUnlockAfterDark: () => void;
   onLockAfterDark: () => void;
   onResetRoom: () => void;
+  onExitRoom: () => void;
   currentDeckSize: number;
   currentMode: string;
   currentLevel: number;
@@ -52,7 +53,7 @@ const CARD_STATS = [
 export default function SettingsModal({
   open, onOpenChange,
   roomCode, afterDarkUnlocked,
-  onUnlockAfterDark, onLockAfterDark, onResetRoom,
+  onUnlockAfterDark, onLockAfterDark, onResetRoom, onExitRoom,
   currentDeckSize, currentMode, currentLevel, currentFilter,
 }: SettingsModalProps) {
   const [secretCode,   setSecretCode]   = useState("");
@@ -125,6 +126,13 @@ export default function SettingsModal({
                 onClick={() => { onResetRoom(); onOpenChange(false); }}
               >
                 <span className="text-base">↺</span> Reset Deck to Start
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-3 h-10 text-sm font-medium text-muted-foreground"
+                onClick={() => { onOpenChange(false); onExitRoom(); }}
+              >
+                <span className="text-base">←</span> Exit Room
               </Button>
             </div>
 
