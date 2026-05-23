@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import HowToPlayModal from "@/components/HowToPlayModal";
 import ConfirmModal from "@/components/ConfirmModal";
@@ -173,20 +174,11 @@ export default function SettingsModal({
                     Disables saving recently played or Worth Revisiting cards.
                   </p>
                 </div>
-                <button
-                  role="switch"
-                  aria-checked={privateMode}
-                  onClick={() => onTogglePrivateMode(!privateMode)}
-                  className={cn(
-                    "shrink-0 mt-0.5 w-10 h-6 rounded-full transition-colors duration-200 relative",
-                    privateMode ? "bg-primary" : "bg-muted-foreground/25",
-                  )}
-                >
-                  <span className={cn(
-                    "absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200",
-                    privateMode ? "translate-x-5" : "translate-x-1",
-                  )} />
-                </button>
+                <Switch
+                  checked={privateMode}
+                  onCheckedChange={onTogglePrivateMode}
+                  className="shrink-0 mt-0.5"
+                />
               </div>
             </div>
 
