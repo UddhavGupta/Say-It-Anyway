@@ -66,11 +66,12 @@ export function useSessionMemory() {
   // ── Tracking ──────────────────────────────────────────────────────────────
 
   const trackCard = useCallback((card: PlayedCard) => {
+    if (privateMode) return;
     setRecentlyPlayed(prev => {
       const filtered = prev.filter(c => c.cardId !== card.cardId);
       return [card, ...filtered].slice(0, 15);
     });
-  }, []);
+  }, [privateMode]);
 
   const trackMode = useCallback((mode: string) => {
     setSessionModesUsed(prev => {
