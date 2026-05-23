@@ -9,7 +9,8 @@ import { cn } from "@/lib/utils";
 export default function Home() {
   const [mpName,     setMpName]     = useState("");
   const [roomCode,   setRoomCode]   = useState("");
-  const [installTab, setInstallTab] = useState<"ios" | "android">("ios");
+  const [installTab,  setInstallTab]  = useState<"ios" | "android">("ios");
+  const [installOpen, setInstallOpen] = useState(false);
 
   const [, setLocation] = useLocation();
   const { toast } = useToast();
@@ -182,54 +183,65 @@ export default function Home() {
 
       {/* ── Home screen tip ── */}
       <div className="w-full max-w-2xl mt-5 mb-1">
-        <div className="rounded-2xl border border-border/40 bg-secondary/20 px-5 py-4">
-          <p className="text-sm font-medium text-foreground/70 mb-0.5">Play it anytime, without the URL.</p>
-          <p className="text-xs text-muted-foreground/55 leading-relaxed mb-3">
-            Add Say It Anyway to your home screen — it opens like an app, no browser bar in the way.
-          </p>
+        <div className="rounded-2xl border border-border/40 bg-secondary/20 px-5 py-3">
+          <button
+            onClick={() => setInstallOpen(v => !v)}
+            className="w-full flex items-center justify-between gap-2 text-left"
+          >
+            <span className="text-sm font-medium text-foreground/70">Play it anytime, without the URL.</span>
+            <span className={cn("text-muted-foreground/50 transition-transform duration-200 text-xs shrink-0", installOpen ? "rotate-180" : "")}>▾</span>
+          </button>
 
-          {/* Tab switcher */}
-          <div className="inline-flex bg-background rounded-lg border border-border/50 p-0.5 mb-4 text-xs">
-            {(["ios", "android"] as const).map(tab => (
-              <button
-                key={tab}
-                onClick={() => setInstallTab(tab)}
-                className={cn(
-                  "px-3 py-1.5 rounded-md font-medium transition-all",
-                  installTab === tab
-                    ? "bg-foreground text-background shadow-sm"
-                    : "text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {tab === "ios" ? "iPhone / iPad" : "Android"}
-              </button>
-            ))}
-          </div>
+          {installOpen && (
+            <div className="mt-3 pt-3 border-t border-border/40">
+              <p className="text-xs text-muted-foreground/55 leading-relaxed mb-3">
+                Add Say It Anyway to your home screen — it opens like an app, no browser bar in the way.
+              </p>
 
-          {/* Steps */}
-          <ol className="space-y-2.5">
-            {(installTab === "ios"
-              ? [
-                  <>Open this page in <strong className="text-foreground/70">Safari</strong> — the built-in iPhone browser</>,
-                  <>Tap the <strong className="text-foreground/70">Share</strong> button at the bottom — the box with an arrow pointing up</>,
-                  <>Scroll the sheet and tap <strong className="text-foreground/70">"Add to Home Screen"</strong></>,
-                  <>Tap <strong className="text-foreground/70">Add</strong> — the icon appears on your home screen like an app</>,
-                ]
-              : [
-                  <>Open this page in <strong className="text-foreground/70">Chrome</strong></>,
-                  <>Tap the <strong className="text-foreground/70">⋮</strong> menu in the top-right corner</>,
-                  <>Tap <strong className="text-foreground/70">"Add to Home Screen"</strong> or <strong className="text-foreground/70">"Install app"</strong></>,
-                  <>Tap <strong className="text-foreground/70">Add</strong> — the icon appears on your home screen like an app</>,
-                ]
-            ).map((step, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-foreground/8 flex items-center justify-center text-[10px] font-semibold text-foreground/40 mt-0.5">
-                  {i + 1}
-                </span>
-                <span className="text-xs text-foreground/55 leading-relaxed">{step}</span>
-              </li>
-            ))}
-          </ol>
+              {/* Tab switcher */}
+              <div className="inline-flex bg-background rounded-lg border border-border/50 p-0.5 mb-4 text-xs">
+                {(["ios", "android"] as const).map(tab => (
+                  <button
+                    key={tab}
+                    onClick={() => setInstallTab(tab)}
+                    className={cn(
+                      "px-3 py-1.5 rounded-md font-medium transition-all",
+                      installTab === tab
+                        ? "bg-foreground text-background shadow-sm"
+                        : "text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {tab === "ios" ? "iPhone / iPad" : "Android"}
+                  </button>
+                ))}
+              </div>
+
+              {/* Steps */}
+              <ol className="space-y-2.5">
+                {(installTab === "ios"
+                  ? [
+                      <>Open this page in <strong className="text-foreground/70">Safari</strong> — the built-in iPhone browser</>,
+                      <>Tap the <strong className="text-foreground/70">Share</strong> button at the bottom — the box with an arrow pointing up</>,
+                      <>Scroll the sheet and tap <strong className="text-foreground/70">"Add to Home Screen"</strong></>,
+                      <>Tap <strong className="text-foreground/70">Add</strong> — the icon appears on your home screen like an app</>,
+                    ]
+                  : [
+                      <>Open this page in <strong className="text-foreground/70">Chrome</strong></>,
+                      <>Tap the <strong className="text-foreground/70">⋮</strong> menu in the top-right corner</>,
+                      <>Tap <strong className="text-foreground/70">"Add to Home Screen"</strong> or <strong className="text-foreground/70">"Install app"</strong></>,
+                      <>Tap <strong className="text-foreground/70">Add</strong> — the icon appears on your home screen like an app</>,
+                    ]
+                ).map((step, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="shrink-0 w-5 h-5 rounded-full bg-foreground/8 flex items-center justify-center text-[10px] font-semibold text-foreground/40 mt-0.5">
+                      {i + 1}
+                    </span>
+                    <span className="text-xs text-foreground/55 leading-relaxed">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </div>
       </div>
 
