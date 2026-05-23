@@ -17,7 +17,7 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
-    version: "v0.1",
+    version: "v1",
     title: "Core Prototype",
     items: [
       "Built the first working version of a digital prompt-card conversation game.",
@@ -28,7 +28,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.2",
+    version: "v2",
     title: "Game Structure and Modes",
     items: [
       "Defined the main product architecture around multiple conversation contexts instead of one generic deck.",
@@ -39,7 +39,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.3",
+    version: "v3",
     title: "Structured Card Library",
     items: [
       "Replaced temporary sample prompts with a structured card library.",
@@ -49,7 +49,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.4",
+    version: "v4",
     title: "Content System Expansion",
     items: [
       "Expanded the game to support a full multi-deck content system.",
@@ -61,7 +61,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.5",
+    version: "v5",
     title: "Visual Identity and Design Language",
     items: [
       "Developed a premium, warm, editorial design direction.",
@@ -71,7 +71,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.6",
+    version: "v6",
     title: "Mobile-First UX",
     items: [
       "Refined the experience for phone-sized screens.",
@@ -82,7 +82,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.7",
+    version: "v7",
     title: "Creator Footer and Project Framing",
     items: [
       "Added creator attribution: © Uddhav Gupta 2026.",
@@ -92,7 +92,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.8",
+    version: "v8",
     title: "Icon and PWA Polish",
     items: [
       "Added favicon support for desktop browser tabs.",
@@ -102,7 +102,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.9",
+    version: "v9",
     title: "Clearer Entry Flow",
     items: [
       "Updated the home screen to make the primary path clearer.",
@@ -113,7 +113,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.10",
+    version: "v10",
     title: "Game Intro and Help System",
     items: [
       "Added a brief onboarding modal when a user first enters the game.",
@@ -124,7 +124,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.11",
+    version: "v11",
     title: "Performance and Stability Pass",
     items: [
       "Optimized local card loading and filtering to avoid unnecessary runtime parsing.",
@@ -134,7 +134,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.12",
+    version: "v12",
     title: "Build Notes Refresh",
     items: [
       "Expanded Build Notes into a more complete product changelog.",
@@ -144,7 +144,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    version: "v0.13",
+    version: "v13",
     title: "Visual Design and Aesthetic Upgrade",
     items: [
       "Clarified the design north star: a premium digital conversation-card deck, not a generic web utility.",
