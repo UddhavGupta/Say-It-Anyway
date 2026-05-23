@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, useLocation } from "wouter";
 import { useGameLogic } from "@/hooks/useGameLogic";
 import { usePlayerSync } from "@/hooks/usePlayerSync";
@@ -14,24 +14,24 @@ import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
 const FILTER_LABELS: Record<string, string> = {
-  all: "All Questions",
-  couples: "Couples",
+  all:           "All Questions",
+  couples:       "Couples",
   close_friends: "Close Friends",
-  dating: "Dating",
+  dating:        "Dating",
 };
 
 export default function Room() {
   const { code } = useParams<{ code: string }>();
   const [, setLocation] = useLocation();
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsOpen,    setSettingsOpen]    = useState(false);
   const [unlockModalOpen, setUnlockModalOpen] = useState(false);
-  const [howToPlayOpen, setHowToPlayOpen] = useState(false);
-  const [codeCopied, setCodeCopied] = useState(false);
-  const [playerId, setPlayerId] = useState<string | null>(null);
-  const [playerName, setPlayerName] = useState<string>("");
+  const [howToPlayOpen,   setHowToPlayOpen]   = useState(false);
+  const [codeCopied,      setCodeCopied]      = useState(false);
+  const [playerId,        setPlayerId]        = useState<string | null>(null);
+  const [playerName,      setPlayerName]      = useState<string>("");
 
   useEffect(() => {
-    const id = localStorage.getItem(PLAYER_ID_KEY);
+    const id   = localStorage.getItem(PLAYER_ID_KEY);
     const name = localStorage.getItem(PLAYER_NAME_KEY);
     if (!id || !name) { setLocation("/"); return; }
     setPlayerId(id);
@@ -50,18 +50,41 @@ export default function Room() {
 
   const { players } = usePlayerSync(code || "", playerId);
 
-  // Keep game actions in a ref so keyboard handler stays stable
-  const actionsRef = useRef({ nextCard, prevCard, skipCard, reshuffle, playerName });
-  useEffect(() => { actionsRef.current = { nextCard, prevCard, skipCard, reshuffle, playerName }; });
+  // ── Stable card-action callbacks ────────────────────────────────────────
+  // Always hold the latest function references in a ref so useCallback([])
+  // wrappers can call the current version without being recreated every render.
+  // This lets React.memo on PromptCard/ModeSelector/LevelSelector skip
+  // re-renders on every 2-second poll.
+  const cardActionsRef = useRef({
+    nextCard, prevCard, skipCard, reshuffle, resetRoom, playerName,
+  });
+  useEffect(() => {
+    cardActionsRef.current = { nextCard, prevCard, skipCard, reshuffle, resetRoom, playerName };
+  });
 
-  // Keyboard shortcuts
+  const handleNext      = useCallback(() => cardActionsRef.current.nextCard(cardActionsRef.current.playerName), []);
+  const handlePrev      = useCallback(() => cardActionsRef.current.prevCard(), []);
+  const handleSkip      = useCallback(() => cardActionsRef.current.skipCard(), []);
+  const handleReshuffle = useCallback(() => cardActionsRef.current.reshuffle(), []);
+  const handleReset     = useCallback(() => cardActionsRef.current.resetRoom(), []);
+
+  const selectorActionsRef = useRef({ changeMode, changeLevel, changeRelationshipFilter });
+  useEffect(() => {
+    selectorActionsRef.current = { changeMode, changeLevel, changeRelationshipFilter };
+  });
+
+  const handleModeChange   = useCallback((m: string) => selectorActionsRef.current.changeMode(m), []);
+  const handleLevelChange  = useCallback((l: number) => selectorActionsRef.current.changeLevel(l), []);
+  const handleFilterChange = useCallback((f: string) => selectorActionsRef.current.changeRelationshipFilter(f), []);
+
+  // ── Keyboard shortcuts ──────────────────────────────────────────────────
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") return;
-      if (e.key === "ArrowRight") actionsRef.current.nextCard(actionsRef.current.playerName);
-      if (e.key === "ArrowLeft") actionsRef.current.prevCard();
-      if (e.key === "s" || e.key === "S") actionsRef.current.reshuffle();
+      if (e.key === "ArrowRight") cardActionsRef.current.nextCard(cardActionsRef.current.playerName);
+      if (e.key === "ArrowLeft")  cardActionsRef.current.prevCard();
+      if (e.key === "s" || e.key === "S") cardActionsRef.current.reshuffle();
       if (e.key === "Escape") {
         setSettingsOpen(false);
         setUnlockModalOpen(false);
@@ -72,12 +95,12 @@ export default function Room() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  // Body theme class
+  // ── Theme class on body ─────────────────────────────────────────────────
   useEffect(() => {
     const base = "font-sans antialiased bg-background text-foreground";
-    if (activeMode === "after_dark") document.body.className = `theme-after-dark ${base}`;
-    else if (activeMode === "long_game") document.body.className = `theme-long-game ${base}`;
-    else document.body.className = base;
+    if      (activeMode === "after_dark") document.body.className = `theme-after-dark ${base}`;
+    else if (activeMode === "long_game")  document.body.className = `theme-long-game ${base}`;
+    else                                  document.body.className = base;
     return () => { document.body.className = base; };
   }, [activeMode]);
 
@@ -98,19 +121,18 @@ export default function Room() {
   const isEnd = totalCards > 0 && currentCardIndex >= totalCards;
 
   return (
-    <div className="min-h-[100dvh] flex flex-col px-4 md:px-8 pb-12 relative overflow-hidden transition-colors duration-700">
+    <div className="min-h-[100dvh] flex flex-col px-4 md:px-8 pb-12 relative overflow-hidden">
 
       {/* ── Top bar ── */}
       <header className="flex items-center justify-between py-4 mb-2 z-10">
         <div className="font-serif font-medium text-xl tracking-tight shrink-0">Say It Anyway</div>
 
-        {/* Room code — centered on wider screens, right on mobile */}
         <button
           onClick={copyRoomCode}
           className={cn(
-            "group flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono tracking-widest uppercase transition-all duration-200",
+            "group flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono tracking-widest uppercase transition-colors duration-150",
             "border border-border/50 hover:border-border",
-            codeCopied ? "text-green-600 border-green-300" : "text-muted-foreground hover:text-foreground"
+            codeCopied ? "text-green-600 border-green-300" : "text-muted-foreground hover:text-foreground",
           )}
           aria-label="Copy room code"
         >
@@ -122,7 +144,6 @@ export default function Room() {
         </button>
 
         <div className="flex items-center gap-1.5">
-          {/* How to Play */}
           <button
             onClick={() => setHowToPlayOpen(true)}
             className="p-2 text-muted-foreground/60 hover:text-muted-foreground transition-colors rounded-lg"
@@ -134,7 +155,6 @@ export default function Room() {
               <path d="M12 17h.01"/>
             </svg>
           </button>
-          {/* Settings */}
           <button
             onClick={() => setSettingsOpen(true)}
             className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-lg"
@@ -156,11 +176,11 @@ export default function Room() {
           <ModeSelector
             activeMode={activeMode}
             afterDarkUnlocked={afterDarkUnlocked}
-            onModeChange={changeMode}
+            onModeChange={handleModeChange}
           />
 
           {activeMode === "classic" && (
-            <LevelSelector activeLevel={activeLevel} onLevelChange={changeLevel} />
+            <LevelSelector activeLevel={activeLevel} onLevelChange={handleLevelChange} />
           )}
 
           {activeMode === "long_game" && (
@@ -172,12 +192,12 @@ export default function Room() {
                 {["all", "couples", "close_friends", "dating"].map(filter => (
                   <button
                     key={filter}
-                    onClick={() => changeRelationshipFilter(filter)}
+                    onClick={() => handleFilterChange(filter)}
                     className={cn(
-                      "whitespace-nowrap px-3.5 py-1.5 text-xs sm:text-sm rounded-full border transition-all duration-300",
+                      "whitespace-nowrap px-3.5 py-1.5 text-xs sm:text-sm rounded-full border transition-colors duration-150",
                       activeRelationshipFilter === filter
-                        ? "border-primary bg-primary/8 text-primary font-medium"
-                        : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                        ? "border-primary bg-primary/10 text-primary font-medium"
+                        : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground",
                     )}
                   >
                     {FILTER_LABELS[filter] ?? filter}
@@ -194,11 +214,11 @@ export default function Room() {
             card={currentCard}
             totalCards={totalCards}
             currentIndex={currentCardIndex}
-            onNext={() => nextCard(playerName)}
-            onPrev={prevCard}
-            onSkip={skipCard}
-            onReshuffle={reshuffle}
-            onReset={resetRoom}
+            onNext={handleNext}
+            onPrev={handlePrev}
+            onSkip={handleSkip}
+            onReshuffle={handleReshuffle}
+            onReset={handleReset}
             isEnd={isEnd}
             mode={activeMode}
           />
@@ -219,8 +239,12 @@ export default function Room() {
         roomCode={code || ""}
         afterDarkUnlocked={afterDarkUnlocked}
         onUnlockAfterDark={() => setUnlockModalOpen(true)}
-        onLockAfterDark={() => { setAfterDark(false); if (activeMode === "after_dark") changeMode("classic"); }}
-        onResetRoom={resetRoom}
+        onLockAfterDark={() => { setAfterDark(false); if (activeMode === "after_dark") handleModeChange("classic"); }}
+        onResetRoom={handleReset}
+        currentDeckSize={totalCards}
+        currentMode={activeMode}
+        currentLevel={activeLevel}
+        currentFilter={activeRelationshipFilter}
       />
 
       <AfterDarkUnlockModal

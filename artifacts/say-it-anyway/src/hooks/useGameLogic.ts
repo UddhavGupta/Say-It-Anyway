@@ -5,7 +5,7 @@ import {
   useRecordCardHistory,
   getGetRoomQueryKey
 } from "@workspace/api-client-react";
-import { cards, Card } from "@/data/cardData";
+import { cards, cardById, Card } from "@/data/cardData";
 
 // ---------------------------------------------------------------------------
 // Pure helpers (outside hook — no closure captures)
@@ -132,9 +132,10 @@ export function useGameLogic(roomCode: string) {
   }, [room, roomCode, serverMode, serverLevel, serverFilter, shuffledDeckOrder.length]);
 
   // ── Derived card ──────────────────────────────────────────────────────────
+  // O(1) lookup via pre-built Map instead of O(n) cards.find()
   const currentCard = useMemo(() => {
     if (!currentCardId) return null;
-    return cards.find(c => c.id === currentCardId) ?? null;
+    return cardById.get(currentCardId) ?? null;
   }, [currentCardId]);
 
   // ── Actions ───────────────────────────────────────────────────────────────

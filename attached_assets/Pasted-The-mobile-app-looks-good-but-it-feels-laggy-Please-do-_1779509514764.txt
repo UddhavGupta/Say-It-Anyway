@@ -1,0 +1,78 @@
+The mobile app looks good, but it feels laggy. Please do a focused performance optimization pass.
+
+Do not rebuild the app.
+Do not change the product concept.
+Do not remove the current design language.
+Do not change the card content.
+Do not add multiplayer, authentication, payments, or a database yet.
+
+Goal:
+Make the app feel fast and smooth on mobile Safari and mobile Chrome, especially iPhone.
+
+Please inspect the current implementation and optimize the following:
+
+1. Card data loading
+- Make sure the 850-card dataset is not being parsed from CSV at runtime on every page load if avoidable.
+- Convert the card dataset into a static TypeScript or JSON module that is imported directly.
+- Do not repeatedly transform tags, booleans, levels, or modes during render.
+- All card normalization should happen once, not inside React render cycles.
+
+2. Filtering and lookup performance
+- Memoize filtered card lists using useMemo where appropriate.
+- Build a card lookup map by ID once.
+- Avoid filtering the full 850-card array unnecessarily on every click.
+- Avoid reshuffling the full dataset unless the selected mode, level, or relationship filter changes.
+- Next, Previous, Skip, and Reset should operate on the current precomputed deck order.
+
+3. Rendering performance
+- Use React.memo for components that do not need to rerender frequently:
+  - PromptCard
+  - Footer
+  - ModeSelector
+  - LevelSelector
+  - RelationshipFilter
+  - RoomHeader
+  - RoomControls
+- Ensure changing cards does not rerender the entire app unnecessarily.
+- Keep state as local and minimal as possible.
+
+4. Animation and visual performance
+- Reduce expensive mobile CSS effects if they are causing lag.
+- Be careful with large box-shadows, backdrop-filter, blur, and heavy transitions on mobile.
+- Keep transitions subtle and GPU-friendly.
+- Prefer opacity and transform transitions over layout-affecting animations.
+- Add prefers-reduced-motion support.
+
+5. Fonts
+- Make sure fonts are loaded efficiently.
+- Avoid causing layout shifts after font load.
+- Use font-display: swap if custom fonts are imported.
+
+6. Local storage
+- Do not write to localStorage on every render.
+- Only persist necessary state when it actually changes.
+- Debounce or minimize persistence if needed.
+
+7. Mobile Safari
+- Check for layout jank caused by 100vh on iOS.
+- Use safer mobile viewport units such as 100dvh where appropriate.
+- Make sure footer and controls do not trigger reflow/jank while scrolling.
+
+8. Bundle hygiene
+- Remove unused imports, unused icon libraries, unused components, and dead code.
+- Do not import entire libraries if only a few icons/functions are needed.
+
+9. Add lightweight performance notes
+- In the developer/admin stats panel, add a small “Performance” section showing:
+  - Total cards loaded
+  - Current deck size
+  - Current mode
+  - Current level/filter
+  - Whether card data is static/local
+
+10. After optimizing, summarize:
+- What caused the lag, if identifiable
+- What files were changed
+- What optimizations were made
+- Any remaining performance risks
+- Whether the app is ready for multiplayer/session sync next

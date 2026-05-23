@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import HowToPlayModal from "@/components/HowToPlayModal";
 
@@ -14,32 +13,51 @@ interface SettingsModalProps {
   onUnlockAfterDark: () => void;
   onLockAfterDark: () => void;
   onResetRoom: () => void;
+  currentDeckSize: number;
+  currentMode: string;
+  currentLevel: number;
+  currentFilter: string;
 }
 
+const MODE_LABELS: Record<string, string> = {
+  classic:    "Classic",
+  long_game:  "The Long Game",
+  after_dark: "After Dark",
+};
+
+const FILTER_LABELS: Record<string, string> = {
+  all:          "All Questions",
+  couples:      "Couples",
+  close_friends: "Close Friends",
+  dating:       "Dating",
+};
+
+const LEVEL_LABELS: Record<number, string> = {
+  1: "Read the Room",
+  2: "Beneath the Surface",
+  3: "Say It Anyway",
+};
+
 const CARD_STATS = [
-  { label: "Total", count: 850 },
+  { label: "Total cards", count: 850 },
   { label: "Classic", count: 450, children: [
-    { label: "Read the Room", count: 150 },
+    { label: "Read the Room",       count: 150 },
     { label: "Beneath the Surface", count: 150 },
-    { label: "Say It Anyway", count: 150 },
+    { label: "Say It Anyway",       count: 150 },
   ]},
   { label: "The Long Game", count: 200 },
-  { label: "After Dark", count: 200 },
+  { label: "After Dark",    count: 200 },
 ];
 
 export default function SettingsModal({
-  open,
-  onOpenChange,
-  roomCode,
-  afterDarkUnlocked,
-  onUnlockAfterDark,
-  onLockAfterDark,
-  onResetRoom,
+  open, onOpenChange,
+  roomCode, afterDarkUnlocked,
+  onUnlockAfterDark, onLockAfterDark, onResetRoom,
+  currentDeckSize, currentMode, currentLevel, currentFilter,
 }: SettingsModalProps) {
-  const { toast } = useToast();
-  const [secretCode, setSecretCode] = useState("");
-  const [copied, setCopied] = useState(false);
-  const [statsOpen, setStatsOpen] = useState(false);
+  const [secretCode,   setSecretCode]   = useState("");
+  const [copied,       setCopied]       = useState(false);
+  const [statsOpen,    setStatsOpen]    = useState(false);
   const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
   const copyRoomCode = () => {
@@ -57,6 +75,13 @@ export default function SettingsModal({
       onOpenChange(false);
     }
   };
+
+  const sessionLabel =
+    currentMode === "classic"
+      ? `${MODE_LABELS[currentMode]} · ${LEVEL_LABELS[currentLevel]}`
+      : currentMode === "long_game"
+        ? `${MODE_LABELS[currentMode]} · ${FILTER_LABELS[currentFilter] ?? currentFilter}`
+        : MODE_LABELS[currentMode] ?? currentMode;
 
   return (
     <>
@@ -126,35 +151,63 @@ export default function SettingsModal({
               )}
             </div>
 
-            {/* Dev Stats — collapsed */}
+            {/* Stats — collapsed */}
             <div className="py-3 border-b border-border">
               <button
                 onClick={() => setStatsOpen(v => !v)}
                 className="w-full flex items-center justify-between text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
               >
                 <span className="uppercase tracking-widest font-medium">Card Stats</span>
-                <span className={cn("transition-transform duration-200", statsOpen ? "rotate-180" : "")}>▾</span>
+                <span className={cn("transition-transform duration-150", statsOpen ? "rotate-180" : "")}>▾</span>
               </button>
+
               {statsOpen && (
-                <div className="mt-3 space-y-1.5 text-xs text-muted-foreground">
-                  {CARD_STATS.map(stat => (
-                    <div key={stat.label}>
-                      <div className="flex justify-between font-medium text-foreground/70">
-                        <span>{stat.label}</span>
-                        <span className="font-mono">{stat.count}</span>
+                <div className="mt-3 space-y-3 text-xs text-muted-foreground">
+
+                  {/* Performance / session info */}
+                  <div>
+                    <div className="font-medium text-foreground/60 mb-1 uppercase tracking-widest text-[10px]">Session</div>
+                    <div className="ml-3 space-y-0.5">
+                      <div className="flex justify-between">
+                        <span>Current deck</span>
+                        <span className="font-mono">{currentDeckSize} cards</span>
                       </div>
-                      {"children" in stat && stat.children && (
-                        <div className="ml-3 mt-0.5 space-y-0.5">
-                          {stat.children.map(child => (
-                            <div key={child.label} className="flex justify-between">
-                              <span>{child.label}</span>
-                              <span className="font-mono">{child.count}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                      <div className="flex justify-between">
+                        <span>Mode</span>
+                        <span className="font-mono">{sessionLabel}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Card data</span>
+                        <span className="font-mono">static / local</span>
+                      </div>
                     </div>
-                  ))}
+                  </div>
+
+                  {/* Full card counts */}
+                  <div>
+                    <div className="font-medium text-foreground/60 mb-1 uppercase tracking-widest text-[10px]">All Cards</div>
+                    <div className="space-y-1">
+                      {CARD_STATS.map(stat => (
+                        <div key={stat.label}>
+                          <div className="flex justify-between font-medium text-foreground/70">
+                            <span>{stat.label}</span>
+                            <span className="font-mono">{stat.count}</span>
+                          </div>
+                          {"children" in stat && stat.children && (
+                            <div className="ml-3 mt-0.5 space-y-0.5">
+                              {stat.children.map(child => (
+                                <div key={child.label} className="flex justify-between">
+                                  <span>{child.label}</span>
+                                  <span className="font-mono">{child.count}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               )}
             </div>

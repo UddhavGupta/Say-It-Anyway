@@ -1,0 +1,93 @@
+Add a polished changelog / build notes section that truthfully shows the iteration behind this project.
+
+Do not rebuild the app.
+Do not change card logic.
+Do not change the main game UX.
+Do not make the changelog visually loud.
+Do not claim any features exist unless they are actually implemented.
+
+Goal:
+I want the app to include a tasteful “Build Notes” or “Changelog” section that shows this is an actively iterated personal project and demonstrates product/building skill.
+
+Placement:
+- Add a small “Build Notes” or “Changelog” link in the footer.
+- Clicking it should open a clean modal or bottom sheet.
+- On desktop, it can be a centered modal.
+- On mobile, it can be a bottom sheet or full-screen modal.
+- Do not put the full changelog directly on every game screen.
+- Keep the footer itself minimal.
+
+Tone:
+- Clear, truthful, product-minded.
+- Should sound like a real builder’s changelog, not fake corporate release notes.
+- Avoid exaggerated claims.
+- Avoid saying things like “AI-powered” unless the app actually uses AI in production.
+- Avoid claiming multiplayer/realtime sync unless implemented.
+- It is okay to include a “Planned / Next” section, clearly labeled as planned.
+
+Changelog title:
+“Build Notes”
+
+Subtitle:
+“Personal project under active testing. Built iteratively to explore digital conversation games, responsive UX, structured content systems, and lightweight web app deployment.”
+
+Include these sections:
+
+Version 0.1 — Local Prototype
+- Built the first frontend prototype of a digital prompt-card conversation game.
+- Created the core room flow with name entry, room code entry, and local session handling.
+- Added basic card navigation: next, previous, skip, shuffle, and reset.
+
+Version 0.2 — Structured Card System
+- Added a structured card data model with IDs, modes, levels, tags, intensity, relationship context, and adult/hidden flags.
+- Loaded a larger local card library instead of relying on temporary sample prompts.
+- Added filtering logic for Classic levels and relationship-specific decks.
+
+Version 0.3 — Game Modes
+- Added Classic mode with three levels: Read the Room, Beneath the Surface, and Say It Anyway.
+- Added The Long Game for couples, close friends, and people who already know each other.
+- Added a hidden After Dark mode with an intentional unlock flow and consent-framed copy.
+
+Version 0.4 — Responsive Mobile UX
+- Refined the app for mobile, tablet, and desktop use.
+- Improved thumb-friendly controls, centered card layout, and compact mobile navigation.
+- Added distinct visual treatments for Classic, The Long Game, and After Dark.
+
+Version 0.5 — Visual Identity and PWA Polish
+- Added favicon and mobile home-screen icon support.
+- Added web app metadata for a more polished saved-to-home-screen experience.
+- Refined typography, spacing, shadows, rounded corners, and mode-specific themes.
+
+Version 0.6 — Creator Footer and Project Framing
+- Added creator attribution, personal links, and project usage disclaimer.
+- Added website, LinkedIn, and GitHub links.
+- Clarified that the app is a personal project under testing and not intended for commercialization or public distribution without prior permission.
+
+Version 0.7 — Performance Pass
+- Optimized local card loading and filtering.
+- Reduced unnecessary rerenders.
+- Improved mobile responsiveness and interaction smoothness.
+- Added developer-facing stats for card counts and current deck state.
+
+Planned / Next
+- Add optional realtime room syncing so multiple devices can stay on the same card.
+- Store only lightweight room state in the backend while keeping the card library local.
+- Add better host controls for resetting rooms, locking After Dark, and managing session flow.
+- Continue refining card quality based on real playtesting.
+
+UI requirements:
+- The changelog should match the app’s premium design language.
+- Use tasteful typography, subtle dividers, and compact spacing.
+- On mobile, make it easy to read but not overwhelming.
+- Add a close button.
+- Make the footer link accessible with aria-label.
+- Make sure the modal is keyboard-accessible and dismissible with Escape on desktop.
+
+Also add a short note at the bottom:
+“Built by Uddhav Gupta as a personal product experiment.”
+
+After implementation, summarize:
+1. Which files were changed.
+2. Where the changelog is accessible.
+3. Whether all changelog items are currently truthful.
+4. Any items that were moved to Planned because they are not implemented yet.

@@ -13127,3 +13127,6 @@ export const getClassicCardsByLevel = (level: number) => cards.filter(c => c.mod
 export const getLongGameCards = (relationshipFilter?: string) => { const base = cards.filter(c => c.mode === 'long_game' && !c.is_hidden && !c.is_adult); if (!relationshipFilter || relationshipFilter === 'all') return base; return base.filter(c => c.relationship_context === relationshipFilter || c.relationship_context === 'all'); };
 export const getAfterDarkCards = () => cards.filter(c => c.mode === 'after_dark');
 export const shuffle = <T>(arr: T[]): T[] => { const copy = [...arr]; for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; } return copy; };
+
+/** O(1) card lookup — use instead of cards.find() */
+export const cardById = new Map<string, Card>(cards.map(c => [c.id, c]));
