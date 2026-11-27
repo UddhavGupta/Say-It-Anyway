@@ -10,7 +10,12 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// Small pool: on Vercel each function instance holds its own connections.
+// Use a pooled connection string (e.g. Neon's -pooler host) in production.
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  max: Number(process.env.PG_POOL_MAX ?? 3),
+});
 export const db = drizzle(pool, { schema });
 
 export * from "./schema";

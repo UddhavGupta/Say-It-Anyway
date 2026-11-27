@@ -54,3 +54,6 @@ Thumbs.db
 .local/
 .replit
 .replitignore
+
+# Vercel
+.vercel
